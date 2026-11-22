@@ -59,17 +59,17 @@ description: Les Chênes de l'Aven, chambres d'hôtes à Orgnac-l'Aven en Ardèc
   <h2 class="section-title reveal">Aux portes de trésors de l'Ardèche</h2>
   <div class="grid-3">
     <div class="card photo reveal">
-      <img src="/assets/img/photos/aven.jpg" alt="Aven d'Orgnac">
+      <img src="/assets/img/photos/web/aven-orgnac.jpg" alt="L'Aven d'Orgnac" loading="lazy">
       <h3>L'Aven d'Orgnac</h3>
       <p>Grotte classée Grand Site de France, à quelques minutes de la maison.</p>
     </div>
     <div class="card photo reveal">
-      <img src="/assets/img/photos/pont-arc.jpg" alt="Grotte Chauvet — Pont d'Arc">
+      <img src="/assets/img/photos/web/pont-darc.jpg" alt="Le Pont d'Arc et la grotte Chauvet" loading="lazy">
       <h3>Grotte Chauvet & Pont d'Arc</h3>
       <p>Les plus belles grottes ornées du monde et l'emblématique arche naturelle.</p>
     </div>
     <div class="card photo reveal">
-      <img src="/assets/img/photos/village.jpg" alt="Villages classés du Sud Ardèche">
+      <img src="/assets/img/photos/web/vogue-village.jpg" alt="Vogüé, village classé du Sud Ardèche" loading="lazy">
       <h3>Villages de caractère</h3>
       <p>Entre Gorges de l'Ardèche et vallée de la Cèze, de nombreux villages classés.</p>
     </div>
