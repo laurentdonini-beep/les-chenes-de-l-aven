@@ -17,6 +17,9 @@ description: Photos de la maison Les Chênes de l'Aven, de ses chambres, de la p
     <img src="/assets/img/photos/piece-commune.jpg" alt="La pièce commune" loading="lazy" class="reveal">
     <img src="/assets/img/photos/petit-dejeuner.jpg" alt="Le petit-déjeuner" loading="lazy" class="reveal">
     <img src="/assets/img/photos/spa.jpg" alt="Le spa" loading="lazy" class="reveal">
+    <img src="/assets/img/photos/spa-2.jpg" alt="Le spa — vue intérieure" loading="lazy" class="reveal">
+    <img src="/assets/img/photos/spa-3.jpg" alt="Le spa — luminothérapie" loading="lazy" class="reveal">
+    <img src="/assets/img/photos/spa-4.jpg" alt="Le spa — vu depuis la pièce" loading="lazy" class="reveal">
     <img src="/assets/img/photos/full/20200914_004626.jpg" alt="Ardèche — Le bonus photos" loading="lazy" class="reveal">
     <img src="/assets/img/photos/full/20191005_181031.jpg" alt="Ardèche — Le bonus photos" loading="lazy" class="reveal">
     <img src="/assets/img/photos/full/20191219_112610.jpg" alt="Ardèche — Le bonus photos" loading="lazy" class="reveal">
