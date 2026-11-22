@@ -285,8 +285,10 @@ window.addEventListener("load", layoutGalleries);
     monthsWrap.className = "cal-months";
     cal.appendChild(controls);
     cal.appendChild(monthsWrap);
-    function render() {
+    function render(dir) {
       monthsWrap.innerHTML = "";
+      monthsWrap.classList.remove("anim-next", "anim-prev");
+      if (dir) { void monthsWrap.offsetWidth; monthsWrap.classList.add(dir > 0 ? "anim-next" : "anim-prev"); }
       const base = new Date(today.getFullYear(), today.getMonth() + offset, 1);
       for (let i = 0; i < NB_MOIS; i++) {
         const d = new Date(base.getFullYear(), base.getMonth() + i, 1);
@@ -295,8 +297,8 @@ window.addEventListener("load", layoutGalleries);
       prev.disabled = offset <= 0;
       next.disabled = offset >= MAX_OFFSET;
     }
-    prev.addEventListener("click", () => { if (offset > 0) { offset--; render(); } });
-    next.addEventListener("click", () => { if (offset < MAX_OFFSET) { offset++; render(); } });
-    render();
+    prev.addEventListener("click", () => { if (offset > 0) { offset--; render(-1); } });
+    next.addEventListener("click", () => { if (offset < MAX_OFFSET) { offset++; render(1); } });
+    render(0);
   });
 })();

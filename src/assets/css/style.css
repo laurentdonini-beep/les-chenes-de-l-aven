@@ -512,3 +512,10 @@ main img.zoomable { cursor: zoom-in; }
 .room-dispo h2 { font-size: 1.2rem; margin-bottom: 0.5rem; }
 .room-dispo ul { margin: 0 0 0.6rem 1.1rem; color: var(--texte-doux); }
 .room-dispo p { color: var(--texte-doux); margin-bottom: 0.6rem; }
+.cal-months.anim-next { animation: calNext 0.28s ease; }
+.cal-months.anim-prev { animation: calPrev 0.28s ease; }
+@keyframes calNext { from { opacity: 0; transform: translateX(16px); } to { opacity: 1; transform: none; } }
+@keyframes calPrev { from { opacity: 0; transform: translateX(-16px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .cal-months.anim-next, .cal-months.anim-prev { animation: none; }
+}
