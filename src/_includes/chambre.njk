@@ -14,9 +14,29 @@ layout: base.njk
       </ul>
     </div>
   </div>
+  {% if photos and photos.length %}
+  <section class="room-gallery">
+    <h2>Photos de la chambre</h2>
+    <div class="gallery-grid">
+      {% for p in photos %}
+      <img src="{{ p }}" alt="{{ title }}" loading="lazy" class="reveal">
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
   <div class="room-body">
     <div class="room-content">
       {{ content | safe }}
+      <div class="room-infos">
+        <h2>Infos pratiques</h2>
+        <ul>
+          <li>Réservation à partir de 2 nuits minimum</li>
+          <li>Wi-Fi gratuit</li>
+          <li>Parking privatif</li>
+          <li>Taxe de séjour réglée sur place</li>
+          <li>Animaux non admis</li>
+        </ul>
+      </div>
     </div>
     <aside class="room-aside">
       <h2>Équipements</h2>
@@ -32,14 +52,4 @@ layout: base.njk
       <a href="/contact/?chambre={{ title | urlencode }}" class="btn btn-block">Demander cette chambre</a>
     </aside>
   </div>
-  {% if photos and photos.length %}
-  <section class="room-gallery">
-    <h2>Photos de la chambre</h2>
-    <div class="gallery-grid">
-      {% for p in photos %}
-      <img src="{{ p }}" alt="{{ title }}" loading="lazy" class="reveal">
-      {% endfor %}
-    </div>
-  </section>
-  {% endif %}
 </article>

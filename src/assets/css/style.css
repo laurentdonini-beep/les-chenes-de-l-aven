@@ -371,3 +371,19 @@ main img.zoomable { cursor: zoom-in; }
 .room-price { font-family: var(--font-display); font-size: 1.55rem; color: var(--vert); font-weight: 600; }
 .room-price span { font-size: 0.85rem; color: var(--texte-doux); font-family: var(--font-body); font-weight: 400; }
 .room-tarif-note { font-size: 0.88rem; color: var(--texte-doux); margin-top: 0.45rem; }
+
+/* Fiche chambre : moins d'espace vide + infos pratiques */
+.room-page { padding: 2.5rem 0 2rem; }
+.room-gallery { margin: 1.6rem 0 2rem; }
+.room-gallery h2 { margin-bottom: 1rem; }
+.room-infos {
+  margin-top: 1.6rem;
+  background: var(--sable);
+  border-radius: var(--radius);
+  padding: 1.3rem 1.6rem;
+}
+.room-infos h2 { font-size: 1.15rem; margin-bottom: 0.5rem; }
+.room-infos ul { list-style: none; }
+.room-infos li { padding: 0.3rem 0 0.3rem 1.5rem; position: relative; color: var(--texte-doux); }
+.room-infos li::before { content: "•"; position: absolute; left: 0.4rem; color: var(--terra); font-weight: 700; }
+.site-footer { margin-top: 2rem; }
