@@ -39,15 +39,10 @@ description: Contactez Les Chênes de l'Aven à Orgnac-l'Aven pour réserver vot
 
 <section class="section container" style="padding-top: 0.5rem;">
   <h2 class="section-title reveal">Demander une réservation</h2>
-  <div class="grid-3 steps reveal">
-    <div class="step"><span class="step-num">1</span><p>Envoyez le formulaire ci-dessous (ou un email) avec vos dates et la chambre souhaitée.</p></div>
-    <div class="step"><span class="step-num">2</span><p>Nous vous répondons par mail pour confirmer : 30 % d'acompte pour bloquer le séjour (min. 2 nuits).</p></div>
-    <div class="step"><span class="step-num">3</span><p>Le solde est réglé à l'arrivée, par chèque, espèces ou virement.</p></div>
-  </div>
+  <p class="center reveal" style="margin-top: -0.5rem;">Réponse sous 24–48 h · acompte 30 % pour bloquer le séjour (min. 2 nuits) · solde à l'arrivée.</p>
 
   <div class="form-wrap reveal">
     <div class="card">
-      <h2>Formulaire de demande</h2>
       <form id="contact-form" novalidate>
         <div class="form-row">
           <label>Nom *
