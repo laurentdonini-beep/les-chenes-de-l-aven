@@ -83,10 +83,10 @@ description: Contactez Les Chênes de l'Aven à Orgnac-l'Aven pour réserver vot
 <section class="section container" style="padding-top: 0.5rem;">
   <h2 class="section-title reveal">Plan d'accès</h2>
   <div class="map-wrap reveal">
-    <iframe title="Plan d'accès — Les Chênes de l'Aven" src="https://www.openstreetmap.org/export/embed.html?bbox=4.34%2C44.32%2C4.41%2C44.38&amp;layer=mapnik&amp;marker=44.3523%2C4.3729" loading="lazy"></iframe>
+    <iframe title="Plan d'accès — Les Chênes de l'Aven" src="https://www.openstreetmap.org/export/embed.html?bbox=4.40%2C44.29%2C4.46%2C44.33&amp;layer=mapnik&amp;marker=44.3106%2C4.4321" loading="lazy"></iframe>
   </div>
   <p class="center reveal" style="margin-top: 1rem;">
-    <a class="pill" href="https://www.openstreetmap.org/?mlat=44.3523&amp;mlon=4.3729#map=14/44.3523/4.3729" target="_blank" rel="noopener">Ouvrir dans OpenStreetMap</a>
-    <a class="pill" href="https://www.google.com/maps/dir/?api=1&amp;destination=44.3523,4.3729" target="_blank" rel="noopener">Itinéraire Google Maps</a>
+    <a class="pill" href="https://www.openstreetmap.org/?mlat=44.3106&amp;mlon=4.4321#map=14/44.3106/4.4321" target="_blank" rel="noopener">Ouvrir dans OpenStreetMap</a>
+    <a class="pill" href="https://www.google.com/maps/dir/?api=1&amp;destination=44.3106,4.4321" target="_blank" rel="noopener">Itinéraire Google Maps</a>
   </p>
 </section>
