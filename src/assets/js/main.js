@@ -223,8 +223,12 @@ window.addEventListener("load", layoutGalleries);
 (function () {
   const dataEl = document.getElementById("dispo-data");
   if (!dataEl) return;
-  let reservations = [];
-  try { reservations = JSON.parse(dataEl.textContent).reservations || []; } catch (e) { return; }
+  let reservations = [], saison = null;
+  try {
+    const parsed = JSON.parse(dataEl.textContent);
+    reservations = parsed.reservations || [];
+    saison = parsed.saison || null;
+  } catch (e) { return; }
   const byRoom = {};
   reservations.forEach((r) => {
     if (!r.chambre || !r.du || !r.au) return;
@@ -241,6 +245,11 @@ window.addEventListener("load", layoutGalleries);
       const b = new Date(r.au + "T23:59:59").getTime();
       return t >= a && t <= b;
     });
+  }
+  function md(d) { const p = String(d).slice(5, 10).split("-"); return Number(p[0]) * 100 + Number(p[1]); }
+  function closedOn(y, m, day) {
+    const v = (m + 1) * 100 + day;
+    return v < md(saison.debut) || v > md(saison.fin);
   }
   function monthBlock(room, y, m) {
     const monthDiv = document.createElement("div");
@@ -266,6 +275,7 @@ window.addEventListener("load", layoutGalleries);
       if (dt < today) cell.classList.add("past");
       if (dt.getTime() === today.getTime()) cell.classList.add("today");
       if (bookedOn(room, y, m, day)) cell.classList.add("booked");
+      if (saison && closedOn(y, m, day)) { cell.classList.add("closed"); cell.title = "Fermé (hors saison)"; }
       grid.appendChild(cell);
     }
     monthDiv.appendChild(grid);

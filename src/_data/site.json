@@ -12,6 +12,10 @@
   "telHref": "+33610853723",
   "email": "contact@leschenesdelaven.fr",
   "ouverture": "Ouvert de mi-juin à mi-septembre",
+  "saison": {
+    "debut": "2026-06-15",
+    "fin": "2026-09-15"
+  },
   "tarif1": "80 €",
   "tarif2": "90 €",
   "tarifNote": "Par nuit. Petit-déjeuner, linge de lit et de toilette inclus. Taxe de séjour en supplément, réglée sur place. Réservation à partir de 2 nuits.",

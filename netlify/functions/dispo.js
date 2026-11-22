@@ -50,6 +50,18 @@ exports.handler = async (event, context) => {
         sha: cur.sha,
         branch: "main"
       });
+      if (body.saison && body.saison.debut && body.saison.fin) {
+        const siteApi = `https://api.github.com/repos/${REPO}/contents/src/_data/site.json`;
+        const curSite = await gh("GET", siteApi + "?ref=main");
+        const site = JSON.parse(Buffer.from(curSite.content, "base64").toString("utf-8"));
+        site.saison = { debut: body.saison.debut, fin: body.saison.fin };
+        await gh("PUT", siteApi, {
+          message: "Mise à jour de la saison d'ouverture (backoffice /bo)",
+          content: Buffer.from(JSON.stringify(site, null, 2) + "\n").toString("base64"),
+          sha: curSite.sha,
+          branch: "main"
+        });
+      }
       return { statusCode: 200, headers, body: JSON.stringify({ ok: true }) };
     }
     return { statusCode: 405, headers, body: "" };

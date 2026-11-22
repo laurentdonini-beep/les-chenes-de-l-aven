@@ -2,7 +2,13 @@
   const IS_LOCAL = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
   let reservations = [];
   try { reservations = JSON.parse(document.getElementById("dispo-data").textContent).reservations || []; } catch (e) {}
+  let siteData = {};
+  try { siteData = JSON.parse(document.getElementById("site-data").textContent) || {}; } catch (e) {}
   let jwt = null;
+  if (siteData.saison) {
+    document.getElementById("bo-saison-du").value = String(siteData.saison.debut || "").slice(0, 10);
+    document.getElementById("bo-saison-au").value = String(siteData.saison.fin || "").slice(0, 10);
+  }
 
   const listEl = document.getElementById("bo-list");
   const statusEl = document.getElementById("bo-status");
@@ -58,6 +64,11 @@
   async function save() {
     statusEl.textContent = "Enregistrement…";
     try {
+      const sdu = document.getElementById("bo-saison-du").value;
+      const sau = document.getElementById("bo-saison-au").value;
+      if (sdu && sau) siteData.saison = { debut: sdu, fin: sau };
+      const files = [{ path: "src/_data/disponibilites.json", slug: "dispos", raw: JSON.stringify({ reservations }, null, 2) + "\n" }];
+      if (sdu && sau) files.push({ path: "src/_data/site.json", slug: "site", raw: JSON.stringify(siteData, null, 2) + "\n" });
       if (IS_LOCAL) {
         const api = "http://" + location.hostname + ":8081/api/v1";
         const res = await fetch(api, {
@@ -67,7 +78,7 @@
             action: "persistEntry",
             params: {
               branch: "main",
-              dataFiles: [{ path: "src/_data/disponibilites.json", slug: "dispos", raw: JSON.stringify({ reservations }, null, 2) + "\n" }],
+              dataFiles: files,
               assets: [],
               options: { collectionName: "disponibilites", commitMessage: "Mise à jour des disponibilités (backoffice /bo)", useWorkflow: false, status: "published" }
             }
@@ -80,7 +91,7 @@
         const res = await fetch("/.netlify/functions/dispo", {
           method: "POST",
           headers: { "Content-Type": "application/json", Authorization: "Bearer " + jwt },
-          body: JSON.stringify({ reservations })
+          body: JSON.stringify({ reservations, saison: siteData.saison || null })
         });
         const txt = await res.text();
         if (!res.ok) throw new Error(txt || res.status);

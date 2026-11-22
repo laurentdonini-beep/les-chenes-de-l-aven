@@ -39,7 +39,8 @@ layout: base.njk
       </div>
       <section class="room-dispo reveal" id="dispo">
         <h2>Disponibilités de cette chambre</h2>
-        <p class="legend"><span class="swatch"></span> disponible &nbsp; <span class="swatch booked"></span> réservé</p>
+        <p class="legend"><span class="swatch"></span> disponible &nbsp; <span class="swatch booked"></span> réservé &nbsp; <span class="swatch closed"></span> fermé (hors saison)</p>
+        <p class="bo-note" style="margin-bottom: 0.8rem;">Saison : du {{ site.saison.debut | dateFR }} au {{ site.saison.fin | dateFR }} ({{ site.ouverture | lower }}).</p>
         <div class="cal" data-room="{{ page.fileSlug }}"></div>
       </section>
     </div>
@@ -58,4 +59,4 @@ layout: base.njk
     </aside>
   </div>
 </article>
-<script type="application/json" id="dispo-data">{{ disponibilites | json | safe }}</script>
+<script type="application/json" id="dispo-data">{{ { reservations: disponibilites.reservations, saison: site.saison } | json | safe }}</script>

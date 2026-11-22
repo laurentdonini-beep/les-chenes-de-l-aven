@@ -520,3 +520,5 @@ main img.zoomable { cursor: zoom-in; }
 @media (prefers-reduced-motion: reduce) {
   .cal-months.anim-next, .cal-months.anim-prev { animation: none; }
 }
+.cal-day.closed { background: #ddd6c6; color: #a49c8a; }
+.legend .swatch.closed { background: #ddd6c6; }

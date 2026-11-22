@@ -42,6 +42,12 @@ permalink: /bo/
     </section>
 
     <section id="bo-app" style="display:none; margin-top: 1.5rem;">
+      <form id="bo-saison" class="card bo-form" style="grid-template-columns: auto 1fr 1fr auto; margin-bottom: 1.6rem;">
+        <strong style="align-self: center; color: var(--vert);">Saison d'ouverture :</strong>
+        <label>Du<input type="date" id="bo-saison-du"></label>
+        <label>Au<input type="date" id="bo-saison-au"></label>
+        <span class="bo-note" style="align-self: center;">chaque année</span>
+      </form>
       <form id="bo-form" class="card bo-form">
         <label>Chambre
           <select id="bo-chambre">
@@ -65,6 +71,7 @@ permalink: /bo/
     </section>
   </main>
   <script type="application/json" id="dispo-data">{{ disponibilites | json | safe }}</script>
+  <script type="application/json" id="site-data">{{ site | json | safe }}</script>
   <script src="/assets/js/bo.js"></script>
 </body>
 </html>
