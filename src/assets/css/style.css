@@ -429,3 +429,29 @@ main img.zoomable { cursor: zoom-in; }
   transition: background 0.2s, color 0.2s;
 }
 .pill:hover { background: var(--vert); color: var(--blanc); border-color: var(--vert); }
+
+/* Icônes réseaux sociaux dans le header */
+.social-links { display: flex; gap: 0.5rem; align-items: center; margin-left: 0.5rem; }
+.social-links a {
+  width: 34px; height: 34px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--sable); color: var(--vert);
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+.social-links a:hover { background: var(--terra); color: #fff; transform: translateY(-2px); }
+.social-links svg { width: 17px; height: 17px; fill: currentColor; }
+.social-lg a { width: 46px; height: 46px; }
+.social-lg svg { width: 22px; height: 22px; }
+.footer-social a { font-weight: 600; }
+@media (max-width: 900px) {
+  .header-inner { flex-wrap: wrap; }
+  .social-links { margin-left: auto; }
+}
+
+/* Page contact réorganisée */
+.contact-grid { align-items: start; }
+.contact-top { padding-top: 1.5rem; }
+.map-split { align-items: stretch; }
+.map-split .map-wrap { height: 100%; min-height: 320px; }
+.map-split .map-wrap iframe { height: 100%; min-height: 320px; }
+.map-split .card { display: flex; flex-direction: column; justify-content: center; }
