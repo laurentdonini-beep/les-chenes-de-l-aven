@@ -141,8 +141,10 @@ if (heroSlider) {
     slides[cur].classList.add("active");
     dots[cur].classList.add("active");
   }
+  const reduceMotion = typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   function restart() {
     clearInterval(timer);
+    if (reduceMotion) return;
     timer = setInterval(() => go(cur + 1), 5000);
   }
   document.getElementById("hero-prev").addEventListener("click", () => { go(cur - 1); restart(); });
