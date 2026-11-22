@@ -148,6 +148,7 @@ img { max-width: 100%; display: block; }
 
 /* ---------- Split ---------- */
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; }
+.split + .split { margin-top: 2.5rem; }
 .split-img { border-radius: var(--radius); box-shadow: var(--ombre); height: 340px; width: 100%; object-fit: cover; }
 .split-text h2 { margin-bottom: 0.8rem; }
 .split-text p { margin-bottom: 1rem; color: var(--texte-doux); }
