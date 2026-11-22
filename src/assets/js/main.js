@@ -145,7 +145,7 @@ if (heroSlider) {
   function restart() {
     clearInterval(timer);
     if (reduceMotion) return;
-    timer = setInterval(() => go(cur + 1), 5000);
+    timer = setInterval(() => go(cur + 1), 6000);
   }
   document.getElementById("hero-prev").addEventListener("click", () => { go(cur - 1); restart(); });
   document.getElementById("hero-next").addEventListener("click", () => { go(cur + 1); restart(); });

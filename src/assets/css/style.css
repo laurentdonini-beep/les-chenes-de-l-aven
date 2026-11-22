@@ -317,7 +317,8 @@ main img.zoomable { cursor: zoom-in; }
 .hero-img {
   position: absolute; inset: 0;
   width: 100%; height: 100%; object-fit: cover;
-  opacity: 0; transition: opacity 0.9s ease;
+  opacity: 0; transition: opacity 1.6s ease-in-out;
+  will-change: opacity, transform;
 }
 .hero-img.active { opacity: 1; }
 .hero-overlay { z-index: 2; }
@@ -357,8 +358,8 @@ main img.zoomable { cursor: zoom-in; }
 .main-nav a.btn { margin: 0; }
 
 /* Zoom progressif sur la slide active (effet Ken Burns) */
-.hero-img.active { animation: heroZoom 5.5s ease-out forwards; }
-@keyframes heroZoom { from { transform: scale(1); } to { transform: scale(1.07); } }
+.hero-img.active { animation: heroZoom 7s linear forwards; }
+@keyframes heroZoom { from { transform: scale(1); } to { transform: scale(1.045); } }
 @media (prefers-reduced-motion: reduce) {
   .hero-img { transition: none; }
   .hero-img.active { animation: none; }
