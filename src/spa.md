@@ -16,7 +16,7 @@ description: Espace spa aux Chênes de l'Aven — séance de 30 minutes à 5 €
     <p>Il suffit de nous prévenir à l'avance pour mettre le spa à votre disposition. Ce bain à remous, avec luminothérapie et aromathérapie, une eau chauffée à 35°, vous apportera tous les bienfaits nécessaires à la relaxation (4 places assises et 1 place allongée).</p>
   </div>
   <div class="split reveal">
-    <img src="/assets/img/photos/spa.jpg" alt="Espace spa" class="split-img">
+    <img src="/assets/img/photos/spa.jpg" alt="Espace spa" class="split-img" loading="lazy" decoding="async">
     <div class="split-text">
       <h2>Un moment pour soi</h2>
       <p>Située à quelques minutes des sites les plus visités de l'Ardèche, notre maison est aussi un havre de paix : piscine, jardin arboré et espace spa vous attendent au retour de vos balades.</p>

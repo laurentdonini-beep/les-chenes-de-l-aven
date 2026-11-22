@@ -2,7 +2,11 @@
   "nom": "Les Chênes de l'Aven",
   "baseline": "Chambres d'hôtes à Orgnac-l'Aven — Sud Ardèche",
   "hote": "Françoise & Loulou Bonzi",
-  "adresseLignes": ["Clos Dériou", "590A Route de Vallon", "07150 Orgnac-l'Aven, France"],
+  "adresseLignes": [
+    "Clos Dériou",
+    "590A Route de Vallon",
+    "07150 Orgnac-l'Aven, France"
+  ],
   "adresse": "Clos Dériou, 590A Route de Vallon, 07150 Orgnac-l'Aven",
   "tel": "06 10 85 37 23",
   "telHref": "+33610853723",
@@ -14,12 +18,42 @@
   "paiement": "30 % d'acompte demandé à la réservation (par mail) pour bloquer le séjour ; le solde est réglé à l'arrivée, par chèque, espèces ou virement.",
   "spa": "Séance de 30 min : 5 € par personne, réglée sur place. Offerte pour tout séjour d'au moins 3 jours.",
   "nav": [
-    { "label": "Accueil", "url": "/" },
-    { "label": "La maison", "url": "/la-maison/" },
-    { "label": "Chambres", "url": "/chambres/" },
-    { "label": "Spa & bien-être", "url": "/spa/" },
-    { "label": "Activités", "url": "/activites/" },
-    { "label": "Galerie", "url": "/galerie/" },
-    { "label": "Contact", "url": "/contact/", "cta": true }
-  ]
+    {
+      "label": "Accueil",
+      "url": "/"
+    },
+    {
+      "label": "La maison",
+      "url": "/la-maison/"
+    },
+    {
+      "label": "Chambres",
+      "url": "/chambres/"
+    },
+    {
+      "label": "Spa & bien-être",
+      "url": "/spa/"
+    },
+    {
+      "label": "Activités",
+      "url": "/activites/"
+    },
+    {
+      "label": "Galerie",
+      "url": "/galerie/"
+    },
+    {
+      "label": "Contact",
+      "url": "/contact/",
+      "cta": true
+    }
+  ],
+  "url": "https://www.leschenesdelaven.com",
+  "facebook": "https://www.facebook.com/leschenesdelaven/",
+  "instagram": "https://www.instagram.com/leschenesdelaven",
+  "imageOg": "/assets/img/photos/carousel-1.jpg",
+  "coords": {
+    "lat": 44.3523,
+    "lon": 4.3729
+  }
 }

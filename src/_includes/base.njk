@@ -3,19 +3,83 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% if page.url == "/" %}
+  <title>{{ site.nom }} — Chambres d'hôtes à Orgnac-l'Aven (Sud Ardèche)</title>
+  {% else %}
   <title>{{ title }} — {{ site.nom }}</title>
+  {% endif %}
   <meta name="description" content="{{ description | default(site.baseline + ' — ' + site.ouverture + '. ' + site.adresse + '. ' + site.tel) }}">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="{{ site.nom }}">
+  <meta name="theme-color" content="#22392c">
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.nom }}">
+  {% if page.url == "/" %}
+  <meta property="og:title" content="{{ site.nom }} — Chambres d'hôtes à Orgnac-l'Aven (Sud Ardèche)">
+  {% else %}
+  <meta property="og:title" content="{{ title }} — {{ site.nom }}">
+  {% endif %}
+  <meta property="og:description" content="{{ description | default(site.baseline + ' — ' + site.ouverture + '. ' + site.adresse + '. ' + site.tel) }}">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:image" content="{{ site.url }}{{ image | default(site.imageOg) }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ title }} — {{ site.nom }}">
+  <meta name="twitter:description" content="{{ description | default(site.baseline) }}">
+  <meta name="twitter:image" content="{{ site.url }}{{ image | default(site.imageOg) }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">
+  {% set lodging = {
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    "name": site.nom,
+    "description": site.baseline + " — " + site.ouverture,
+    "url": site.url + "/",
+    "telephone": site.telHref,
+    "email": site.email,
+    "priceRange": "80-90 EUR par nuit, petit-déjeuner inclus",
+    "address": { "@type": "PostalAddress", "streetAddress": "Clos Dériou, 590A Route de Vallon", "postalCode": "07150", "addressLocality": "Orgnac-l'Aven", "addressCountry": "FR" },
+    "geo": { "@type": "GeoCoordinates", "latitude": site.coords.lat, "longitude": site.coords.lon },
+    "image": [ site.url + "/assets/img/photos/carousel-1.jpg", site.url + "/assets/img/photos/piscine.jpg", site.url + "/assets/img/photos/maison.jpg" ],
+    "amenityFeature": [
+      { "@type": "LocationFeatureSpecification", "name": "Petit-déjeuner inclus" },
+      { "@type": "LocationFeatureSpecification", "name": "Piscine chauffée (eau salée)" },
+      { "@type": "LocationFeatureSpecification", "name": "Spa" },
+      { "@type": "LocationFeatureSpecification", "name": "Wi-Fi gratuit" },
+      { "@type": "LocationFeatureSpecification", "name": "Parking privatif" },
+      { "@type": "LocationFeatureSpecification", "name": "Climatisation" }
+    ],
+    "openingHoursSpecification": { "@type": "OpeningHoursSpecification", "validFrom": "2025-06-15", "validThrough": "2025-09-15", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"] },
+    "sameAs": [ site.facebook, site.instagram ],
+    "hasMap": "https://www.openstreetmap.org/?mlat=44.3523&mlon=4.3729#map=14/44.3523/4.3729"
+  } %}
+  {% set website = { "@context": "https://schema.org", "@type": "WebSite", "name": site.nom, "url": site.url + "/" } %}
+  {{ [lodging, website] | json | safe }}
+  </script>
+  {% if page.url != "/" %}
+  <script type="application/ld+json">
+  {% set breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Accueil", "item": site.url + "/" },
+      { "@type": "ListItem", "position": 2, "name": title, "item": site.url + page.url }
+    ]
+  } %}
+  {{ breadcrumb | json | safe }}
+  </script>
+  {% endif %}
 </head>
 <body>
   <header class="site-header" id="top">
     <div class="container header-inner">
       <a class="brand" href="/">
-        <img src="/assets/img/favicon.svg" alt="" class="brand-logo">
+        <img src="/assets/img/favicon.svg" alt="" class="brand-logo" loading="lazy" decoding="async">
         <span class="brand-name">{{ site.nom }}</span>
       </a>
       <button class="nav-toggle" id="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
@@ -64,7 +128,7 @@
     <span class="lightbox-caption" id="lightbox-caption"></span>
     <button class="lightbox-btn lightbox-close" id="lightbox-close" aria-label="Fermer">×</button>
     <button class="lightbox-btn lightbox-prev" id="lightbox-prev" aria-label="Photo précédente">‹</button>
-    <img id="lightbox-img" src="" alt="">
+    <img id="lightbox-img" src="" alt="" loading="lazy" decoding="async">
     <button class="lightbox-btn lightbox-next" id="lightbox-next" aria-label="Photo suivante">›</button>
     <span class="lightbox-counter" id="lightbox-counter"></span>
   </div>

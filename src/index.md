@@ -1,11 +1,11 @@
 ---
 layout: base.njk
-title: Accueil
+title: Chambres d'hôtes à Orgnac-l'Aven (Ardèche)
 description: Les Chênes de l'Aven, chambres d'hôtes à Orgnac-l'Aven en Ardèche, aux portes de l'Aven d'Orgnac Grand Site de France. 4 chambres climatisées, piscine, spa et petits-déjeuners au bord de l'eau.
 ---
 <section class="hero">
   <div class="hero-slider" id="hero-slider">
-    <img src="/assets/img/photos/carousel-1.jpg" alt="La maison Les Chênes de l'Aven" class="hero-img active">
+    <img src="/assets/img/photos/carousel-1.jpg" alt="La maison Les Chênes de l'Aven" class="hero-img active" decoding="async">
     <img src="/assets/img/photos/carousel-2.jpg" alt="La piscine et sa terrasse" class="hero-img" loading="lazy">
     <img src="/assets/img/photos/carousel-3.jpg" alt="La piscine et les chaises longues" class="hero-img" loading="lazy">
     <img src="/assets/img/photos/carousel-4.jpg" alt="La terrasse de la piscine" class="hero-img" loading="lazy">
@@ -79,7 +79,7 @@ description: Les Chênes de l'Aven, chambres d'hôtes à Orgnac-l'Aven en Ardèc
 
 <section class="section container">
   <div class="split reveal">
-    <img src="/assets/img/photos/maison.jpg" alt="La maison et sa piscine" class="split-img">
+    <img src="/assets/img/photos/maison.jpg" alt="La maison et sa piscine" class="split-img" loading="lazy" decoding="async">
     <div class="split-text">
       <h2>La maison</h2>
       <p>Nous avons agrandi notre maison familiale pour y créer vos chambres d'hôtes et plusieurs espaces dédiés à votre confort : solarium, pièce commune, terrasse et piscine.</p>

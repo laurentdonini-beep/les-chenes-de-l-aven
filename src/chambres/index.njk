@@ -14,7 +14,7 @@ description: "4 chambres d'hôtes climatisées à Orgnac-l'Aven, pour 1 ou 2 per
   <div class="grid-2">
     {% for chambre in collections.chambres %}
     <a href="{{ chambre.url }}" class="card room-card reveal">
-      <img src="{{ chambre.data.image }}" alt="Chambre {{ chambre.data.title }}" class="room-card-img">
+      <img src="{{ chambre.data.image }}" alt="Chambre {{ chambre.data.title }}" class="room-card-img" loading="lazy" decoding="async">
       <div class="room-card-body">
         <h3>{{ chambre.data.title }}</h3>
         <p class="room-card-meta">{{ chambre.data.surface }} · {{ chambre.data.capacite }}</p>

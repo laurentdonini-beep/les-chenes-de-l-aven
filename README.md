@@ -87,6 +87,22 @@ Pour en ajouter/changer via l'admin : `/admin` → collection « Chambres » (ch
 
 **Archive complète** : `src/assets/img/photos/full/` contient les **81 photos originales** de l'ancien site (optimisées), avec `_manifest.txt` qui indique la section de chacune. La page « La maison » affiche les 25 photos de la maison ; la page « Galerie » affiche les 34 photos de la région en plus des photos curées.
 
+## Référencement (SEO) — déjà en place
+
+- **Meta** : title/description par page, canonical, Open Graph + Twitter Cards, `lang="fr"`, theme-color.
+- **Données structurées JSON-LD** : `LodgingBusiness` (adresse, GPS, tél, email, tarifs, équipements, réseaux sociaux, horaires saisonniers) + `WebSite` + `BreadcrumbList` sur les sous-pages.
+- **robots.txt** + **sitemap.xml** générés automatiquement (toutes les pages, `/admin/` exclu et en noindex).
+- Images en `loading="lazy"` + `decoding="async"` (sauf 1ère slide du hero).
+
+### À faire après la mise en ligne (gratuit)
+
+1. **Google Search Console** : ajouter la propriété `https://www.leschenesdelaven.com`, soumettre le sitemap (`/sitemap.xml`), demander l'indexation.
+2. **Google Business Profile** : créer la fiche « Les Chênes de l'Aven » (mêmes nom/adresse/tél que le site — cohérence NAP), catégorie « Chambre d'hôtes », photos, lien vers le site. C'est le levier n°1 pour apparaître sur Google Maps / « chambres d'hôtes Orgnac-l'Aven ».
+3. Annuaires gratuits : PagesJaunes, TripAdvisor, France-Voyage, Chez l'Habitant (déjà présents), Airbnb si pertinent.
+4. Netlify fait gzip/brotli + cache automatiquement ; certificat HTTPS gratuit.
+
+> Si le site reste sur le `.fr`, changer `url` dans `src/_data/site.json` (canonical/OG/sitemap suivent automatiquement).
+
 ## Mise en ligne
 
 1. Créer un dépôt GitHub et y pousser ce dossier.
