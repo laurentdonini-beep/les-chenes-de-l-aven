@@ -35,3 +35,34 @@ description: Découvrez la maison Les Chênes de l'Aven à Orgnac-l'Aven — esp
     </div>
   </div>
 </section>
+
+<section class="section container">
+  <h2 class="section-title reveal">La maison en photos</h2>
+  <div class="gallery-grid">
+    <img src="/assets/img/photos/full/20200821_085726.jpg" alt="Les Chênes de l'Aven" loading="lazy" class="reveal">
+    <img src="/assets/img/photos/full/20200807_184232.jpg" alt="Les Chênes de l'Aven" loading="lazy" class="reveal">
+    <img src="/assets/img/photos/full/20200720_211244.jpg" alt="Les Chênes de l'Aven" loading="lazy" class="reveal">
+    <img src="/assets/img/photos/full/20200720_211537.jpg" alt="Les Chênes de l'Aven" loading="lazy" class="reveal">
+    <img src="/assets/img/photos/full/20180521_1334292.jpg" alt="Chambre d'hôtes Sud Ardèche" loading="lazy" class="reveal">
+    <img src="/assets/img/photos/full/20191005_1810102.jpg" alt="Chambre d'hôtes Sud Ardèche" loading="lazy" class="reveal">
+    <img src="/assets/img/photos/full/20230803_1126172.jpg" alt="Chambre d'hôtes Sud Ardèche" loading="lazy" class="reveal">
+    <img src="/assets/img/photos/full/20220810_090217.jpg" alt="Les petits déjeuners" loading="lazy" class="reveal">
+    <img src="/assets/img/photos/full/20200522_175013.jpg" alt="Les petits déjeuners" loading="lazy" class="reveal">
+    <img src="/assets/img/photos/full/20210713_082328.jpg" alt="Les petits déjeuners" loading="lazy" class="reveal">
+    <img src="/assets/img/photos/full/20210721_090209.jpg" alt="Les petits déjeuners" loading="lazy" class="reveal">
+    <img src="/assets/img/photos/full/20230625_085828.jpg" alt="Les petits déjeuners" loading="lazy" class="reveal">
+    <img src="/assets/img/photos/full/20190926_120727-1.jpg" alt="La piscine" loading="lazy" class="reveal">
+    <img src="/assets/img/photos/full/20200708_212251-1.jpg" alt="La piscine" loading="lazy" class="reveal">
+    <img src="/assets/img/photos/full/20190930_170643-2.jpg" alt="La piscine" loading="lazy" class="reveal">
+    <img src="/assets/img/photos/full/20200821_085702-1.jpg" alt="La piscine" loading="lazy" class="reveal">
+    <img src="/assets/img/photos/full/20240726_200330-1.jpg" alt="La piscine" loading="lazy" class="reveal">
+    <img src="/assets/img/photos/full/20200627_195556.jpg" alt="La pièce commune" loading="lazy" class="reveal">
+    <img src="/assets/img/photos/full/20180601_145054.jpg" alt="La pièce commune" loading="lazy" class="reveal">
+    <img src="/assets/img/photos/full/20220730_083315.jpg" alt="La pièce commune" loading="lazy" class="reveal">
+    <img src="/assets/img/photos/full/20220625_110421.jpg" alt="La pièce commune" loading="lazy" class="reveal">
+    <img src="/assets/img/photos/full/20180506_190313.jpg" alt="LE SPA" loading="lazy" class="reveal">
+    <img src="/assets/img/photos/full/20190929_200158.jpg" alt="LE SPA" loading="lazy" class="reveal">
+    <img src="/assets/img/photos/full/20190929_195724.jpg" alt="LE SPA" loading="lazy" class="reveal">
+    <img src="/assets/img/photos/full/20190929_200258.jpg" alt="LE SPA" loading="lazy" class="reveal">
+  </div>
+</section>

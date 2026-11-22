@@ -81,7 +81,9 @@ src/
 
 Les vraies photos de l'ancien site WordPress ont été récupérées et intégrées dans `src/assets/img/photos/` (optimisées : max 1920 px, JPEG qualité 82) : hero, maison, piscine, terrasse, pièce commune, petit-déjeuner, spa, les 4 chambres, Aven d'Orgnac, Pont d'Arc, gorges, village.
 
-Pour en ajouter/changer via l'admin : `/admin` → collection « Chambres » (champ Photo) ou « Pages » → uploader dans `uploads` (servi sous `/assets/img/uploads/`).
+Pour en ajouter/changer via l'admin : `/admin` → collection « Chambres » (champ Photo / Photos de la galerie) ou « Pages » → uploader dans `uploads` (servi sous `/assets/img/uploads/`).
+
+**Archive complète** : `src/assets/img/photos/full/` contient les **81 photos originales** de l'ancien site (optimisées), avec `_manifest.txt` qui indique la section de chacune. La page « La maison » affiche les 25 photos de la maison ; la page « Galerie » affiche les 34 photos de la région en plus des photos curées.
 
 ## Mise en ligne
 

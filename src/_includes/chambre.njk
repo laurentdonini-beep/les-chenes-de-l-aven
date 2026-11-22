@@ -31,7 +31,7 @@ layout: base.njk
     <h2>Photos de la chambre</h2>
     <div class="gallery-grid">
       {% for p in photos %}
-      <img src="{{ p }}" alt="{{ title }}" class="reveal">
+      <img src="{{ p }}" alt="{{ title }}" loading="lazy" class="reveal">
       {% endfor %}
     </div>
   </section>
