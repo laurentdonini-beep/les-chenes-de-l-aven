@@ -455,3 +455,27 @@ main img.zoomable { cursor: zoom-in; }
 .map-split .map-wrap { height: 100%; min-height: 320px; }
 .map-split .map-wrap iframe { height: 100%; min-height: 320px; }
 .map-split .card { display: flex; flex-direction: column; justify-content: center; }
+
+/* Page contact : proposition centrée, rien de vide à droite */
+.contact-strip-card { text-align: center; }
+.contact-strip-card .service-icon { font-size: 1.9rem; }
+.contact-strip-card p { margin: 0.3rem 0 0; }
+.contact-strip-card .contact-lines { font-size: 0.95rem; color: var(--texte-doux); }
+.steps { margin-bottom: 2rem; }
+.step {
+  background: var(--blanc);
+  border-radius: var(--radius);
+  box-shadow: var(--ombre);
+  padding: 1.1rem 1.3rem;
+  text-align: center;
+  color: var(--texte-doux);
+  font-size: 0.95rem;
+}
+.step-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--terra); color: #fff;
+  font-weight: 700; margin-bottom: 0.5rem;
+}
+.form-wrap { max-width: 780px; margin: 0 auto; }
+.form-wrap .card h2 { margin-bottom: 1rem; }

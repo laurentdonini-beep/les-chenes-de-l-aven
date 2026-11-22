@@ -15,6 +15,10 @@ const observer = new IntersectionObserver(
   { threshold: 0.12 }
 );
 document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+// filet de sécurité : tout rendre visible même si l'observer ne se déclenche pas
+setTimeout(() => {
+  document.querySelectorAll(".reveal:not(.visible)").forEach((el) => el.classList.add("visible"));
+}, 1500);
 
 const chambres = [
   "Marron Glacé",
