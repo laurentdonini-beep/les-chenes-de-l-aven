@@ -35,7 +35,7 @@ description: Les Chênes de l'Aven, chambres d'hôtes à Orgnac-l'Aven en Ardèc
     <div class="card reveal">
       <h2>4 chambres tout confort</h2>
       <p>Toutes nos chambres sont destinées à 1 ou 2 personnes, climatisées, avec sanitaire privatif. Certaines disposent d'un accès indépendant par l'extérieur.</p>
-      <p><a href="/chambres/" class="link-arrow">Découvrir les chambres →</a></p>
+      <p><a href="/chambres/" class="btn btn-outline btn-small">Découvrir les chambres</a></p>
     </div>
     <div class="card reveal">
       <h2>Petits-déjeuners au bord de la piscine</h2>

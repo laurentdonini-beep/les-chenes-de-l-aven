@@ -16,7 +16,7 @@ description: Que faire autour d'Orgnac-l'Aven — grottes et avens (Aven d'Orgna
       <div class="spot-card-body">
         <h3>L'Aven d'Orgnac</h3>
         <p>Grotte classée Grand Site de France, à quelques minutes de la maison.</p>
-        <span class="link-arrow">Site officiel →</span>
+        <span class="btn-card">Site officiel →</span>
       </div>
     </a>
     <a class="spot-card reveal" href="https://www.grottechauvet2ardeche.com/" target="_blank" rel="noopener">
@@ -24,7 +24,7 @@ description: Que faire autour d'Orgnac-l'Aven — grottes et avens (Aven d'Orgna
       <div class="spot-card-body">
         <h3>Grotte Chauvet 2 & Pont d'Arc</h3>
         <p>Les plus belles grottes ornées du monde et l'arche naturelle emblématique.</p>
-        <span class="link-arrow">Site officiel →</span>
+        <span class="btn-card">Site officiel →</span>
       </div>
     </a>
     <a class="spot-card reveal" href="#villages">
@@ -32,7 +32,7 @@ description: Que faire autour d'Orgnac-l'Aven — grottes et avens (Aven d'Orgna
       <div class="spot-card-body">
         <h3>Villages de caractère</h3>
         <p>Entre Gorges de l'Ardèche et vallée de la Cèze, de nombreux villages classés.</p>
-        <span class="link-arrow">Voir la liste ↓</span>
+        <span class="btn-card">Voir la liste ↓</span>
       </div>
     </a>
   </div>
@@ -43,31 +43,31 @@ description: Que faire autour d'Orgnac-l'Aven — grottes et avens (Aven d'Orgna
   <div class="spot-grid">
     <a class="spot-card reveal" href="https://www.orgnac.com/" target="_blank" rel="noopener">
       <img src="/assets/img/photos/full/20230801_201901.jpg" alt="Intérieur de l'Aven d'Orgnac" loading="lazy">
-      <div class="spot-card-body"><h3>Aven d'Orgnac</h3><span class="link-arrow">orgnac.com →</span></div>
+      <div class="spot-card-body"><h3>Aven d'Orgnac</h3><span class="btn-card">orgnac.com →</span></div>
     </a>
     <a class="spot-card reveal" href="https://www.grottechauvet2ardeche.com/" target="_blank" rel="noopener">
       <img src="/assets/img/photos/web/chauvet-peinture.jpg" alt="Peinture rupestre, grotte Chauvet" loading="lazy">
-      <div class="spot-card-body"><h3>Grotte Chauvet 2</h3><span class="link-arrow">grottechauvet2ardeche.com →</span></div>
+      <div class="spot-card-body"><h3>Grotte Chauvet 2</h3><span class="btn-card">grottechauvet2ardeche.com →</span></div>
     </a>
     <a class="spot-card reveal" href="https://grotte-ardeche.fr/" target="_blank" rel="noopener">
       <img src="/assets/img/photos/full/20191005_181031.jpg" alt="Aven de la Forêt" loading="lazy">
-      <div class="spot-card-body"><h3>Aven de la Forêt</h3><span class="link-arrow">grotte-ardeche.fr →</span></div>
+      <div class="spot-card-body"><h3>Aven de la Forêt</h3><span class="btn-card">grotte-ardeche.fr →</span></div>
     </a>
     <a class="spot-card reveal" href="https://grotte-ardeche.fr/" target="_blank" rel="noopener">
       <img src="/assets/img/photos/full/20191219_112610.jpg" alt="Grotte St-Marcel" loading="lazy">
-      <div class="spot-card-body"><h3>Grotte St-Marcel</h3><span class="link-arrow">grotte-ardeche.fr →</span></div>
+      <div class="spot-card-body"><h3>Grotte St-Marcel</h3><span class="btn-card">grotte-ardeche.fr →</span></div>
     </a>
     <a class="spot-card reveal" href="https://www.grottemadeleine.com/" target="_blank" rel="noopener">
       <img src="/assets/img/photos/full/20170921_171944-1.jpg" alt="Grotte de la Madeleine" loading="lazy">
-      <div class="spot-card-body"><h3>Grotte de la Madeleine</h3><span class="link-arrow">grottemadeleine.com →</span></div>
+      <div class="spot-card-body"><h3>Grotte de la Madeleine</h3><span class="btn-card">grottemadeleine.com →</span></div>
     </a>
     <a class="spot-card reveal" href="https://www.grottedelasalamandre.com/fr/" target="_blank" rel="noopener">
       <img src="/assets/img/photos/full/20200804_123725.jpg" alt="Grotte de la Salamandre" loading="lazy">
-      <div class="spot-card-body"><h3>Grotte de la Salamandre</h3><span class="link-arrow">grottedelasalamandre.com →</span></div>
+      <div class="spot-card-body"><h3>Grotte de la Salamandre</h3><span class="btn-card">grottedelasalamandre.com →</span></div>
     </a>
     <a class="spot-card reveal" href="https://www.grotte-cocaliere.com/" target="_blank" rel="noopener">
       <img src="/assets/img/photos/full/20170921_153149-1.jpg" alt="Grotte de la Coqualière" loading="lazy">
-      <div class="spot-card-body"><h3>Grotte de la Coqualière</h3><span class="link-arrow">grotte-cocaliere.com →</span></div>
+      <div class="spot-card-body"><h3>Grotte de la Coqualière</h3><span class="btn-card">grotte-cocaliere.com →</span></div>
     </a>
   </div>
 </section>
@@ -98,15 +98,15 @@ description: Que faire autour d'Orgnac-l'Aven — grottes et avens (Aven d'Orgna
   <div class="spot-grid">
     <a class="spot-card reveal" href="https://www.accroche-aventure.com/" target="_blank" rel="noopener">
       <img src="/assets/img/photos/web/accrobranche.jpg" alt="Accrobranche" loading="lazy">
-      <div class="spot-card-body"><h3>Accrobranches</h3><p>Parc aventure aux portes des Gorges de l'Ardèche.</p><span class="link-arrow">accroche-aventure.com →</span></div>
+      <div class="spot-card-body"><h3>Accrobranches</h3><p>Parc aventure aux portes des Gorges de l'Ardèche.</p><span class="btn-card">accroche-aventure.com →</span></div>
     </a>
     <a class="spot-card reveal" href="https://www.velorail.fr/" target="_blank" rel="noopener">
       <img src="/assets/img/photos/web/velorail.jpg" alt="Vélo-rail" loading="lazy">
-      <div class="spot-card-body"><h3>Vélo-rail</h3><p>Balade en draisine sur les anciennes voies ferrées.</p><span class="link-arrow">velorail.fr →</span></div>
+      <div class="spot-card-body"><h3>Vélo-rail</h3><p>Balade en draisine sur les anciennes voies ferrées.</p><span class="btn-card">velorail.fr →</span></div>
     </a>
     <a class="spot-card reveal" href="https://www.face-sud.com/" target="_blank" rel="noopener">
       <img src="/assets/img/photos/web/via-ferrata.jpg" alt="Via ferrata" loading="lazy">
-      <div class="spot-card-body"><h3>Via ferrata & outdoor</h3><p>Via ferrata, canyoning, canoë, spéléo en Ardèche.</p><span class="link-arrow">face-sud.com →</span></div>
+      <div class="spot-card-body"><h3>Via ferrata & outdoor</h3><p>Via ferrata, canyoning, canoë, spéléo en Ardèche.</p><span class="btn-card">face-sud.com →</span></div>
     </a>
   </div>
 </section>

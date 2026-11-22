@@ -70,6 +70,8 @@ img { max-width: 100%; display: block; }
 
 .link-arrow { font-weight: 600; text-decoration: none; }
 .link-arrow:hover { text-decoration: underline; }
+.btn-card { display: inline-block; border: 2px solid var(--vert); color: var(--vert); border-radius: 999px; padding: 0.4rem 1.05rem; font-weight: 600; font-size: 0.9rem; text-decoration: none; transition: background 0.2s, color 0.2s; }
+.room-card:hover .btn-card, .spot-card:hover .btn-card { background: var(--vert); color: var(--blanc); }
 
 /* ---------- Header ---------- */
 .site-header {
