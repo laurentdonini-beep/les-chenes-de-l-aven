@@ -2,7 +2,7 @@ backend:
   name: git-gateway
   branch: main
 
-local_backend: false  # remettre true en local pour tester /admin avec `npm run cms:local`
+local_backend: true  # mode test local ; remettre false avant le deploiement Netlify
 
 media_folder: "src/assets/img/uploads"
 public_folder: "/assets/img/uploads"
