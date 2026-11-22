@@ -219,7 +219,7 @@ window.addEventListener("resize", () => {
 });
 window.addEventListener("load", layoutGalleries);
 
-// Calendrier des disponibilites (genere cote client a partir des donnees du site)
+// Calendrier des disponibilites : 4 mois visibles, boutons precedent/suivant
 (function () {
   const dataEl = document.getElementById("dispo-data");
   if (!dataEl) return;
@@ -233,6 +233,7 @@ window.addEventListener("load", layoutGalleries);
   const monthsFR = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
   const daysFR = ["lu","ma","me","je","ve","sa","di"];
   const today = new Date(); today.setHours(0, 0, 0, 0);
+  const NB_MOIS = 4, MAX_OFFSET = 24;
   function bookedOn(room, y, m, d) {
     const t = new Date(y, m, d).getTime();
     return (byRoom[room] || []).some((r) => {
@@ -241,39 +242,66 @@ window.addEventListener("load", layoutGalleries);
       return t >= a && t <= b;
     });
   }
+  function monthBlock(room, y, m) {
+    const monthDiv = document.createElement("div");
+    monthDiv.className = "cal-month";
+    const h = document.createElement("h4");
+    h.textContent = monthsFR[m] + " " + y;
+    monthDiv.appendChild(h);
+    const grid = document.createElement("div");
+    grid.className = "cal-grid";
+    daysFR.forEach((w) => {
+      const c = document.createElement("span");
+      c.className = "cal-dow"; c.textContent = w;
+      grid.appendChild(c);
+    });
+    const offset = (new Date(y, m, 1).getDay() + 6) % 7;
+    for (let k = 0; k < offset; k++) grid.appendChild(document.createElement("span"));
+    const nbDays = new Date(y, m + 1, 0).getDate();
+    for (let day = 1; day <= nbDays; day++) {
+      const cell = document.createElement("span");
+      cell.className = "cal-day";
+      cell.textContent = day;
+      const dt = new Date(y, m, day);
+      if (dt < today) cell.classList.add("past");
+      if (dt.getTime() === today.getTime()) cell.classList.add("today");
+      if (bookedOn(room, y, m, day)) cell.classList.add("booked");
+      grid.appendChild(cell);
+    }
+    monthDiv.appendChild(grid);
+    return monthDiv;
+  }
   document.querySelectorAll(".cal").forEach((cal) => {
     const room = cal.dataset.room;
-    const start = new Date(today.getFullYear(), today.getMonth(), 1);
-    for (let i = 0; i < 6; i++) {
-      const first = new Date(start.getFullYear(), start.getMonth() + i, 1);
-      const y = first.getFullYear(), m = first.getMonth();
-      const monthDiv = document.createElement("div");
-      monthDiv.className = "cal-month";
-      const h = document.createElement("h3");
-      h.textContent = monthsFR[m] + " " + y;
-      monthDiv.appendChild(h);
-      const grid = document.createElement("div");
-      grid.className = "cal-grid";
-      daysFR.forEach((w) => {
-        const c = document.createElement("span");
-        c.className = "cal-dow"; c.textContent = w;
-        grid.appendChild(c);
-      });
-      const offset = (new Date(y, m, 1).getDay() + 6) % 7;
-      for (let k = 0; k < offset; k++) grid.appendChild(document.createElement("span"));
-      const nbDays = new Date(y, m + 1, 0).getDate();
-      for (let day = 1; day <= nbDays; day++) {
-        const cell = document.createElement("span");
-        cell.className = "cal-day";
-        cell.textContent = day;
-        const dt = new Date(y, m, day);
-        if (dt < today) cell.classList.add("past");
-        if (dt.getTime() === today.getTime()) cell.classList.add("today");
-        if (bookedOn(room, y, m, day)) cell.classList.add("booked");
-        grid.appendChild(cell);
+    let offset = 0;
+    const controls = document.createElement("div");
+    controls.className = "cal-controls";
+    const prev = document.createElement("button");
+    prev.type = "button"; prev.className = "btn btn-outline btn-small"; prev.textContent = "‹ Précédent";
+    const range = document.createElement("span");
+    range.className = "cal-range";
+    const next = document.createElement("button");
+    next.type = "button"; next.className = "btn btn-outline btn-small"; next.textContent = "Suivant ›";
+    controls.appendChild(prev); controls.appendChild(range); controls.appendChild(next);
+    const monthsWrap = document.createElement("div");
+    monthsWrap.className = "cal-months";
+    cal.appendChild(controls);
+    cal.appendChild(monthsWrap);
+    function render() {
+      monthsWrap.innerHTML = "";
+      const base = new Date(today.getFullYear(), today.getMonth() + offset, 1);
+      let lastY = base.getFullYear(), lastM = base.getMonth();
+      for (let i = 0; i < NB_MOIS; i++) {
+        const d = new Date(base.getFullYear(), base.getMonth() + i, 1);
+        lastY = d.getFullYear(); lastM = d.getMonth();
+        monthsWrap.appendChild(monthBlock(room, lastY, lastM));
       }
-      monthDiv.appendChild(grid);
-      cal.appendChild(monthDiv);
+      range.textContent = monthsFR[base.getMonth()] + " " + base.getFullYear() + " – " + monthsFR[lastM] + " " + lastY;
+      prev.disabled = offset <= 0;
+      next.disabled = offset >= MAX_OFFSET;
     }
+    prev.addEventListener("click", () => { if (offset > 0) { offset--; render(); } });
+    next.addEventListener("click", () => { if (offset < MAX_OFFSET) { offset++; render(); } });
+    render();
   });
 })();

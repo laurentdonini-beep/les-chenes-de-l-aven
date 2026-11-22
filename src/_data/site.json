@@ -43,10 +43,6 @@
       "url": "/galerie/"
     },
     {
-      "label": "Disponibilités",
-      "url": "/disponibilites/"
-    },
-    {
       "label": "Contact",
       "url": "/contact/",
       "cta": true
