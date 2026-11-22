@@ -37,6 +37,11 @@ layout: base.njk
           <li>Animaux non admis</li>
         </ul>
       </div>
+      <section class="room-dispo reveal" id="dispo">
+        <h2>Disponibilités de cette chambre</h2>
+        <p class="legend"><span class="swatch"></span> disponible &nbsp; <span class="swatch booked"></span> réservé &nbsp; <span class="swatch today"></span> aujourd'hui</p>
+        <div class="cal" data-room="{{ page.fileSlug }}"></div>
+      </section>
     </div>
     <aside class="room-aside">
       <h2>Équipements</h2>
@@ -49,21 +54,8 @@ layout: base.njk
         <p class="room-tarif-note">{{ site.tarifNote }}</p>
         <p class="room-tarif-note"><strong>Paiement :</strong> {{ site.paiement }}</p>
       </div>
-      <div class="room-dispo">
-        <h2>Disponibilités</h2>
-        {% set mine = disponibilites.reservations | byChambre(page.fileSlug) %}
-        {% if mine.length %}
-        <ul>
-          {% for r in mine %}
-          <li>Indisponible du {{ r.du | dateFR }} au {{ r.au | dateFR }}{% if r.note %} ({{ r.note }}){% endif %}</li>
-          {% endfor %}
-        </ul>
-        {% else %}
-        <p>Aucune réservation enregistrée pour l'instant.</p>
-        {% endif %}
-        <p><a href="/disponibilites/">Voir le calendrier complet →</a></p>
-      </div>
       <a href="/contact/?chambre={{ title | urlencode }}" class="btn btn-block">Demander cette chambre</a>
     </aside>
   </div>
 </article>
+<script type="application/json" id="dispo-data">{{ disponibilites | json | safe }}</script>

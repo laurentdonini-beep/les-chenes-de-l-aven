@@ -25,17 +25,3 @@ description: "4 chambres d'hôtes climatisées à Orgnac-l'Aven, pour 1 ou 2 per
     {% endfor %}
   </div>
 </section>
-
-<section class="section container">
-  <h2 class="section-title reveal">Disponibilités des chambres</h2>
-  <p class="legend reveal"><span class="swatch"></span> disponible &nbsp; <span class="swatch booked"></span> réservé &nbsp; <span class="swatch today"></span> aujourd'hui</p>
-  {% for chambre in collections.chambres %}
-  <div class="dispo-room reveal">
-    <h3>{{ chambre.data.title }}</h3>
-    <div class="cal" data-room="{{ chambre.fileSlug }}"></div>
-  </div>
-  {% endfor %}
-  <p class="center reveal" style="margin-top: 2rem;"><a href="/contact/" class="btn btn-outline">Demander une réservation</a></p>
-</section>
-
-<script type="application/json" id="dispo-data">{{ disponibilites | json | safe }}</script>

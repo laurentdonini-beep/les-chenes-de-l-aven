@@ -233,7 +233,7 @@ window.addEventListener("load", layoutGalleries);
   const monthsFR = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
   const daysFR = ["lu","ma","me","je","ve","sa","di"];
   const today = new Date(); today.setHours(0, 0, 0, 0);
-  const NB_MOIS = 4, MAX_OFFSET = 24;
+  const NB_MOIS = 2, MAX_OFFSET = 24;
   function bookedOn(room, y, m, d) {
     const t = new Date(y, m, d).getTime();
     return (byRoom[room] || []).some((r) => {
