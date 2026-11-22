@@ -311,3 +311,47 @@ main img.zoomable { cursor: zoom-in; }
 /* Galerie des fiches chambre */
 .room-gallery { margin-top: 2.5rem; }
 .room-gallery h2 { margin-bottom: 1.2rem; }
+
+/* ---------- Carrousel du hero ---------- */
+.hero-slider { position: absolute; inset: 0; overflow: hidden; }
+.hero-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transition: opacity 0.9s ease;
+}
+.hero-img.active { opacity: 1; }
+.hero-overlay { z-index: 2; }
+.hero-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
+  width: 48px; height: 48px; border-radius: 50%;
+  border: none; cursor: pointer;
+  background: rgba(20, 28, 22, 0.35); color: #fff;
+  font-size: 1.9rem; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.hero-arrow:hover { background: rgba(20, 28, 22, 0.6); }
+.hero-prev { left: 16px; }
+.hero-next { right: 16px; }
+.hero-dots {
+  position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 9px; z-index: 3;
+}
+.hero-dots button {
+  width: 11px; height: 11px; border-radius: 50%;
+  border: none; padding: 0; cursor: pointer;
+  background: rgba(255, 255, 255, 0.45);
+  transition: background 0.2s, transform 0.2s;
+}
+.hero-dots button.active { background: #fff; transform: scale(1.2); }
+@media (max-width: 640px) {
+  .hero-arrow { width: 40px; height: 40px; font-size: 1.5rem; }
+  .hero-prev { left: 8px; }
+  .hero-next { right: 8px; }
+}
+
+/* ---------- Alignement des boutons ---------- */
+.btn { text-align: center; line-height: 1.25; }
+.hero-actions, .band-inner, .main-nav ul { align-items: center; }
+.card .btn, .tarif-card .btn, .room-aside .btn { margin-top: 0.4rem; }
+.main-nav a.btn { margin: 0; }

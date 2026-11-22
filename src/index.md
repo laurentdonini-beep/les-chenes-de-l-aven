@@ -4,7 +4,15 @@ title: Accueil
 description: Les Chênes de l'Aven, chambres d'hôtes à Orgnac-l'Aven en Ardèche, aux portes de l'Aven d'Orgnac Grand Site de France. 4 chambres climatisées, piscine, spa et petits-déjeuners au bord de l'eau.
 ---
 <section class="hero">
-  <img src="/assets/img/photos/hero.jpg" alt="La maison Les Chênes de l'Aven entourée de chênes verts" class="hero-img">
+  <div class="hero-slider" id="hero-slider">
+    <img src="/assets/img/photos/carousel-1.jpg" alt="La maison Les Chênes de l'Aven" class="hero-img active">
+    <img src="/assets/img/photos/carousel-2.jpg" alt="La piscine et sa terrasse" class="hero-img" loading="lazy">
+    <img src="/assets/img/photos/carousel-3.jpg" alt="La piscine et les chaises longues" class="hero-img" loading="lazy">
+    <img src="/assets/img/photos/carousel-4.jpg" alt="La terrasse de la piscine" class="hero-img" loading="lazy">
+    <button class="hero-arrow hero-prev" id="hero-prev" aria-label="Photo précédente">‹</button>
+    <button class="hero-arrow hero-next" id="hero-next" aria-label="Photo suivante">›</button>
+    <div class="hero-dots" id="hero-dots"></div>
+  </div>
   <div class="hero-overlay">
     <div class="container hero-content">
       <p class="hero-kicker">Chambres d'hôtes — Sud Ardèche</p>

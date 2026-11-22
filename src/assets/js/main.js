@@ -70,7 +70,7 @@ if (lightbox) {
   const lbCap = document.getElementById("lightbox-caption");
   const lbCount = document.getElementById("lightbox-counter");
   const imgs = Array.from(document.querySelectorAll("main img")).filter(
-    (img) => img.src && !img.closest("a")
+    (img) => img.src && !img.closest("a") && !img.classList.contains("hero-img")
   );
   imgs.forEach((img) => img.classList.add("zoomable"));
   let idx = 0;
@@ -116,4 +116,38 @@ if (lightbox) {
     if (Math.abs(dx) > 40) show(idx + (dx < 0 ? 1 : -1));
     touchX = null;
   });
+}
+
+// Carrousel du hero : défilement auto 5s, flèches, points, pause au survol
+const heroSlider = document.getElementById("hero-slider");
+if (heroSlider) {
+  const slides = Array.from(heroSlider.querySelectorAll(".hero-img"));
+  const dotsWrap = document.getElementById("hero-dots");
+  let cur = 0;
+  let timer = null;
+  slides.forEach((_, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.setAttribute("aria-label", "Photo " + (i + 1));
+    if (i === 0) b.classList.add("active");
+    b.addEventListener("click", () => { go(i); restart(); });
+    dotsWrap.appendChild(b);
+  });
+  const dots = Array.from(dotsWrap.children);
+  function go(i) {
+    slides[cur].classList.remove("active");
+    dots[cur].classList.remove("active");
+    cur = (i + slides.length) % slides.length;
+    slides[cur].classList.add("active");
+    dots[cur].classList.add("active");
+  }
+  function restart() {
+    clearInterval(timer);
+    timer = setInterval(() => go(cur + 1), 5000);
+  }
+  document.getElementById("hero-prev").addEventListener("click", () => { go(cur - 1); restart(); });
+  document.getElementById("hero-next").addEventListener("click", () => { go(cur + 1); restart(); });
+  heroSlider.addEventListener("mouseenter", () => clearInterval(timer));
+  heroSlider.addEventListener("mouseleave", restart);
+  restart();
 }
