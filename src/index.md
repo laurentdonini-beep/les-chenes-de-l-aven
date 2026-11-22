@@ -83,7 +83,7 @@ description: Les Chênes de l'Aven, chambres d'hôtes à Orgnac-l'Aven en Ardèc
     <div class="split-text">
       <h2>La maison</h2>
       <p>Nous avons agrandi notre maison familiale pour y créer vos chambres d'hôtes et plusieurs espaces dédiés à votre confort : solarium, pièce commune, terrasse et piscine.</p>
-      <p><a href="/la-maison/" class="link-arrow">Visiter la maison →</a></p>
+      <p><a href="/la-maison/" class="btn btn-outline">Visiter la maison</a></p>
     </div>
   </div>
 </section>
