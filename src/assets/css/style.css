@@ -124,6 +124,7 @@ img { max-width: 100%; display: block; }
 .page-hero .lead { margin-top: 1rem; }
 
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; }
+.grid-3 + .center, .grid-2 + .center, .spot-grid + .center { margin-top: 1.8rem; }
 .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.6rem; }
 
 .card {
