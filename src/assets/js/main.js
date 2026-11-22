@@ -182,13 +182,21 @@ function layoutGalleries() {
     const flush = (isLast) => {
       if (!row.length) return;
       let h = (W - gap * (row.length - 1)) / rowA;
-      if (isLast && h > targetH) h = targetH;
+      let stretch = false;
+      if (isLast && h > targetH) { h = targetH; stretch = true; }
       const div = document.createElement("div");
       div.className = "g-row";
       div.style.height = h + "px";
       row.forEach((it) => {
-        it.im.style.height = h + "px";
-        it.im.style.width = Math.round(it.a * h) + "px";
+        it.im.style.height = "100%";
+        it.im.style.objectFit = "cover";
+        if (stretch) {
+          it.im.style.width = "auto";
+          it.im.style.flex = it.a + " 1 0px";
+        } else {
+          it.im.style.width = Math.round(it.a * h) + "px";
+          it.im.style.flex = "0 1 auto";
+        }
         div.appendChild(it.im);
       });
       grid.appendChild(div);
