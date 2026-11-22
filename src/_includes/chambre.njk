@@ -1,0 +1,29 @@
+---
+layout: base.njk
+---
+<article class="room-page container">
+  <p class="breadcrumb"><a href="/chambres/">← Toutes les chambres</a></p>
+  <div class="room-hero">
+    <img src="{{ image }}" alt="Chambre {{ title }}" class="room-hero-img">
+    <div class="room-hero-text">
+      <h1>{{ title }}</h1>
+      <ul class="room-meta">
+        <li>{{ surface }}</li>
+        <li>{{ capacite }}</li>
+        {% if tarif %}<li class="price">{{ tarif }}</li>{% endif %}
+      </ul>
+    </div>
+  </div>
+  <div class="room-body">
+    <div class="room-content">
+      {{ content | safe }}
+    </div>
+    <aside class="room-aside">
+      <h2>Équipements</h2>
+      <ul class="equip-list">
+        {% for eq in equipements %}<li>{{ eq }}</li>{% endfor %}
+      </ul>
+      <a href="/contact/?chambre={{ title | urlencode }}" class="btn btn-block">Demander cette chambre</a>
+    </aside>
+  </div>
+</article>
