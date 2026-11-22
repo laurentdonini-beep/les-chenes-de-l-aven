@@ -26,4 +26,14 @@ layout: base.njk
       <a href="/contact/?chambre={{ title | urlencode }}" class="btn btn-block">Demander cette chambre</a>
     </aside>
   </div>
+  {% if photos and photos.length %}
+  <section class="room-gallery">
+    <h2>Photos de la chambre</h2>
+    <div class="gallery-grid">
+      {% for p in photos %}
+      <img src="{{ p }}" alt="{{ title }}" class="reveal">
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
 </article>

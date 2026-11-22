@@ -44,7 +44,8 @@ collections:
       - { label: "Surface", name: "surface", widget: "string" }
       - { label: "Capacité", name: "capacite", widget: "string" }
       - { label: "Résumé (carte)", name: "resume", widget: "text" }
-      - { label: "Photo", name: "image", widget: "image" }
+      - { label: "Photo principale", name: "image", widget: "image" }
+      - { label: "Photos de la galerie", name: "photos", widget: "list", field: { label: "Photo", name: "photo", widget: "image" } }
       - { label: "Équipements", name: "equipements", widget: "list", field: { label: "Équipement", name: "item", widget: "string" } }
       - { label: "Description", name: "body", widget: "markdown" }
 

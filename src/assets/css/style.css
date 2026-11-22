@@ -307,3 +307,7 @@ main img.zoomable { cursor: zoom-in; }
   .lightbox-next { right: 6px; }
   .lightbox-caption { top: 16px; left: 16px; font-size: 0.85rem; }
 }
+
+/* Galerie des fiches chambre */
+.room-gallery { margin-top: 2.5rem; }
+.room-gallery h2 { margin-bottom: 1.2rem; }

@@ -5,6 +5,11 @@ ordre: 2
 surface: 12 m²
 capacite: 1–2 personnes
 image: /assets/img/photos/chambre-chene-vert.jpg
+photos:
+  - /assets/img/photos/chambre-chene-vert-2.jpg
+  - /assets/img/photos/chambre-chene-vert-3.jpg
+  - /assets/img/photos/chambre-chene-vert-4.jpg
+  - /assets/img/photos/chambre-chene-vert-5.jpg
 resume: Chambre à l'étage, accès par l'escalier extérieur et solarium, vue sur les chênes.
 equipements:
   - Lit en 160 cm
