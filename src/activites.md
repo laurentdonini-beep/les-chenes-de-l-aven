@@ -6,91 +6,132 @@ description: Que faire autour d'Orgnac-l'Aven — grottes et avens (Aven d'Orgna
 <section class="page-hero container">
   <p class="hero-kicker">Accès & loisirs</p>
   <h1>Notre région</h1>
-  <p class="lead">Notre région regorge de curiosités naturelles, comme par exemple l'aven d'Orgnac, la grotte Chauvet, le Pont d'Arc et de nombreux villages classés. Ci-après, une liste non exhaustive de « nos incontournables ».</p>
+  <p class="lead">Notre région regorge de curiosités naturelles : l'aven d'Orgnac, la grotte Chauvet, le Pont d'Arc et de nombreux villages classés. Voici nos incontournables.</p>
 </section>
 
 <section class="section container">
-  <div class="grid-3">
-    <div class="card photo reveal">
+  <div class="spot-grid">
+    <a class="spot-card reveal" href="https://www.orgnac.com/" target="_blank" rel="noopener">
       <img src="/assets/img/photos/aven.jpg" alt="L'Aven d'Orgnac" loading="lazy">
-      <h2>Aven d'Orgnac</h2>
-      <p>Grotte classée Grand Site de France, à quelques minutes de la maison.</p>
-    </div>
-    <div class="card photo reveal">
-      <img src="/assets/img/photos/pont-arc.jpg" alt="Pont d'Arc et Grotte Chauvet" loading="lazy">
-      <h2>Grotte Chauvet & Pont d'Arc</h2>
-      <p>Les plus belles grottes ornées du monde et l'emblématique arche naturelle.</p>
-    </div>
-    <div class="card photo reveal">
+      <div class="spot-card-body">
+        <h3>L'Aven d'Orgnac</h3>
+        <p>Grotte classée Grand Site de France, à quelques minutes de la maison.</p>
+        <span class="link-arrow">Site officiel →</span>
+      </div>
+    </a>
+    <a class="spot-card reveal" href="https://www.grottechauvet2ardeche.com/" target="_blank" rel="noopener">
+      <img src="/assets/img/photos/web/pont-darc.jpg" alt="Le Pont d'Arc" loading="lazy">
+      <div class="spot-card-body">
+        <h3>Grotte Chauvet 2 & Pont d'Arc</h3>
+        <p>Les plus belles grottes ornées du monde et l'arche naturelle emblématique.</p>
+        <span class="link-arrow">Site officiel →</span>
+      </div>
+    </a>
+    <a class="spot-card reveal" href="#villages">
       <img src="/assets/img/photos/village.jpg" alt="Villages classés du Sud Ardèche" loading="lazy">
-      <h2>Villages de caractère</h2>
-      <p>Entre Gorges de l'Ardèche et vallée de la Cèze, de nombreux villages classés.</p>
-    </div>
+      <div class="spot-card-body">
+        <h3>Villages de caractère</h3>
+        <p>Entre Gorges de l'Ardèche et vallée de la Cèze, de nombreux villages classés.</p>
+        <span class="link-arrow">Voir la liste ↓</span>
+      </div>
+    </a>
   </div>
 </section>
 
 <section class="section container">
   <h2 class="section-title reveal">Les grottes & avens</h2>
-  <ul class="link-list reveal">
-    <li><a href="https://www.orgnac.com/" target="_blank" rel="noopener">L'aven d'Orgnac</a></li>
-    <li><a href="https://www.grottechauvet2ardeche.com/" target="_blank" rel="noopener">La grotte Chauvet 2</a></li>
-    <li><a href="https://grotte-ardeche.fr/" target="_blank" rel="noopener">Aven de la Forêt</a></li>
-    <li><a href="https://grotte-ardeche.fr/" target="_blank" rel="noopener">Grotte St-Marcel</a></li>
-    <li><a href="https://www.grottemadeleine.com/" target="_blank" rel="noopener">Grotte de la Madeleine</a></li>
-    <li><a href="https://www.grottedelasalamandre.com/fr/" target="_blank" rel="noopener">Grotte de la Salamandre</a></li>
-    <li><a href="https://www.grotte-cocaliere.com/" target="_blank" rel="noopener">Grotte de la Coqualière</a></li>
-  </ul>
+  <div class="spot-grid">
+    <a class="spot-card reveal" href="https://www.orgnac.com/" target="_blank" rel="noopener">
+      <img src="/assets/img/photos/full/20230801_201901.jpg" alt="Intérieur de l'Aven d'Orgnac" loading="lazy">
+      <div class="spot-card-body"><h3>Aven d'Orgnac</h3><span class="link-arrow">orgnac.com →</span></div>
+    </a>
+    <a class="spot-card reveal" href="https://www.grottechauvet2ardeche.com/" target="_blank" rel="noopener">
+      <img src="/assets/img/photos/web/chauvet-peinture.jpg" alt="Peinture rupestre, grotte Chauvet" loading="lazy">
+      <div class="spot-card-body"><h3>Grotte Chauvet 2</h3><span class="link-arrow">grottechauvet2ardeche.com →</span></div>
+    </a>
+    <a class="spot-card reveal" href="https://grotte-ardeche.fr/" target="_blank" rel="noopener">
+      <img src="/assets/img/photos/full/20191005_181031.jpg" alt="Aven de la Forêt" loading="lazy">
+      <div class="spot-card-body"><h3>Aven de la Forêt</h3><span class="link-arrow">grotte-ardeche.fr →</span></div>
+    </a>
+    <a class="spot-card reveal" href="https://grotte-ardeche.fr/" target="_blank" rel="noopener">
+      <img src="/assets/img/photos/full/20191219_112610.jpg" alt="Grotte St-Marcel" loading="lazy">
+      <div class="spot-card-body"><h3>Grotte St-Marcel</h3><span class="link-arrow">grotte-ardeche.fr →</span></div>
+    </a>
+    <a class="spot-card reveal" href="https://www.grottemadeleine.com/" target="_blank" rel="noopener">
+      <img src="/assets/img/photos/full/20170921_171944-1.jpg" alt="Grotte de la Madeleine" loading="lazy">
+      <div class="spot-card-body"><h3>Grotte de la Madeleine</h3><span class="link-arrow">grottemadeleine.com →</span></div>
+    </a>
+    <a class="spot-card reveal" href="https://www.grottedelasalamandre.com/fr/" target="_blank" rel="noopener">
+      <img src="/assets/img/photos/full/20200804_123725.jpg" alt="Grotte de la Salamandre" loading="lazy">
+      <div class="spot-card-body"><h3>Grotte de la Salamandre</h3><span class="link-arrow">grottedelasalamandre.com →</span></div>
+    </a>
+    <a class="spot-card reveal" href="https://www.grotte-cocaliere.com/" target="_blank" rel="noopener">
+      <img src="/assets/img/photos/full/20170921_153149-1.jpg" alt="Grotte de la Coqualière" loading="lazy">
+      <div class="spot-card-body"><h3>Grotte de la Coqualière</h3><span class="link-arrow">grotte-cocaliere.com →</span></div>
+    </a>
+  </div>
 </section>
 
 <section class="section container">
   <h2 class="section-title reveal">Les rivières</h2>
   <div class="split reveal">
-    <img src="/assets/img/photos/gorges.jpg" alt="Les gorges de l'Ardèche" class="split-img" loading="lazy">
+    <img src="/assets/img/photos/web/canoe-ardeche.jpg" alt="Canoë dans les gorges de l'Ardèche" class="split-img" loading="lazy">
     <div class="split-text">
       <h3>L'Ardèche</h3>
-      <p>La rivière Ardèche, avec sa réserve naturelle et son célèbre Pont-d'Arc, est le lieu touristique à ne pas rater. De nombreux loueurs de canoës proposent la location d'embarcations pour une descente de l'Ardèche en 1 ou 2 jours.</p>
-      <p><a href="https://www.gorges-ardeche-pontdarc.fr/activites/canoe/infos-et-parcours/" target="_blank" rel="noopener" class="link-arrow">Ardèche – Descentes en canoë – infos et parcours (Office de Tourisme) →</a></p>
-      <p>La route sauvage des Gorges de l'Ardèche vous offre de sensationnels panoramas grâce à plus de 10 belvédères, tout en haut des falaises de calcaire surplombant les méandres de la rivière.</p>
+      <p>Avec sa réserve naturelle et son célèbre Pont-d'Arc, c'est le lieu touristique à ne pas rater. De nombreux loueurs de canoës proposent une descente en 1 ou 2 jours. La route sauvage des Gorges offre de sensationnels panoramas depuis plus de 10 belvédères.</p>
+      <p><a class="pill" href="https://www.gorges-ardeche-pontdarc.fr/activites/canoe/infos-et-parcours/" target="_blank" rel="noopener">Descentes en canoë — Office de Tourisme</a></p>
     </div>
   </div>
   <div class="split reveal">
-    <img src="/assets/img/photos/grotte.jpg" alt="La vallée de la Cèze" class="split-img" loading="lazy">
+    <img src="/assets/img/photos/web/sautadet.jpg" alt="Les cascades du Sautadet (vallée de la Cèze)" class="split-img" loading="lazy">
     <div class="split-text">
       <h3>La Cèze</h3>
-      <p>La Cèze est également une rivière toute proche de chez nous, bien plus tranquille que sa rivale l'Ardèche. Demandez-nous par exemple où se trouvent ses petits coins secrets pour vos baignades, un circuit pour découvrir la Venise Gardoise (Goudargues) ou les Cascades du Sautadet.</p>
-      <p><a href="https://www.tourisme-ceze-cevennes.com/fr/decouvrir/decouvrez-la-vallee-de-la-ceze.html" target="_blank" rel="noopener" class="link-arrow">Découvrez la Vallée de la Cèze (Office de Tourisme Cèze Cévennes) →</a></p>
+      <p>Rivière toute proche et bien plus tranquille que l'Ardèche. Demandez-nous nos coins secrets de baignade, un circuit pour découvrir la Venise Gardoise (Goudargues) ou les Cascades du Sautadet.</p>
+      <p><a class="pill" href="https://www.tourisme-ceze-cevennes.com/fr/decouvrir/decouvrez-la-vallee-de-la-ceze.html" target="_blank" rel="noopener">Vallée de la Cèze — Office de Tourisme</a></p>
     </div>
   </div>
 </section>
 
 <section class="section container">
   <h2 class="section-title reveal">Les activités outdoor</h2>
-  <ul class="link-list reveal">
-    <li>Accrobranches : <a href="https://www.accroche-aventure.com/" target="_blank" rel="noopener">Parc aventure aux portes des Gorges de l'Ardèche</a></li>
-    <li>Vélo-rail : <a href="https://www.velorail.fr/" target="_blank" rel="noopener">Vélo-rail en Ardèche</a></li>
-    <li>Via ferrata, canyoning, canoë, spéléo : <a href="https://www.face-sud.com/" target="_blank" rel="noopener">Face Sud – activités en Ardèche</a></li>
-  </ul>
+  <p class="center reveal" style="margin-bottom: 1.6rem; color: var(--texte-doux);">Aux portes des Gorges de l'Ardèche :</p>
+  <div class="spot-grid">
+    <a class="spot-card reveal" href="https://www.accroche-aventure.com/" target="_blank" rel="noopener">
+      <img src="/assets/img/photos/web/accrobranche.jpg" alt="Accrobranche" loading="lazy">
+      <div class="spot-card-body"><h3>Accrobranches</h3><p>Parc aventure aux portes des Gorges de l'Ardèche.</p><span class="link-arrow">accroche-aventure.com →</span></div>
+    </a>
+    <a class="spot-card reveal" href="https://www.velorail.fr/" target="_blank" rel="noopener">
+      <img src="/assets/img/photos/web/velorail.jpg" alt="Vélo-rail" loading="lazy">
+      <div class="spot-card-body"><h3>Vélo-rail</h3><p>Balade en draisine sur les anciennes voies ferrées.</p><span class="link-arrow">velorail.fr →</span></div>
+    </a>
+    <a class="spot-card reveal" href="https://www.face-sud.com/" target="_blank" rel="noopener">
+      <img src="/assets/img/photos/web/via-ferrata.jpg" alt="Via ferrata" loading="lazy">
+      <div class="spot-card-body"><h3>Via ferrata & outdoor</h3><p>Via ferrata, canyoning, canoë, spéléo en Ardèche.</p><span class="link-arrow">face-sud.com →</span></div>
+    </a>
+  </div>
 </section>
 
-<section class="section container">
+<section class="section container" id="villages">
   <h2 class="section-title reveal">Villages & châteaux</h2>
   <div class="grid-2">
-    <div class="card reveal">
-      <h3>Les jolis villages près de chez nous</h3>
+    <div class="card photo reveal">
+      <img src="/assets/img/photos/full/20191208_153004.jpg" alt="Ruelle d'un village ardéchois" loading="lazy">
+      <h3>Les jolis villages</h3>
       <p><strong>Sud Ardèche (villages classés) :</strong> Labeaume, Vogüé, Balazuc, Ruoms, Banne, Les Vans, Naves, Thines, Saint-Montant.</p>
       <p><strong>Nord Gard (incontournables) :</strong> Barjac, Montclus, Cornillon, Goudargues, Lussan, Uzès.</p>
     </div>
-    <div class="card reveal">
+    <div class="card photo reveal">
+      <img src="/assets/img/photos/web/chateau-vogue.jpg" alt="Château de Vogüé" loading="lazy">
       <h3>Les châteaux autour de chez nous</h3>
-      <ul class="link-list">
-        <li><a href="https://www.chateaudevogue.net/" target="_blank" rel="noopener">Château des Roure</a> (Labastide de Virac)</li>
-        <li><a href="https://www.ville-aubenas.fr/" target="_blank" rel="noopener">Visite d'Aubenas</a></li>
-        <li><a href="https://www.chateaudevogue.net/" target="_blank" rel="noopener">Château de Vogüé</a></li>
-        <li><a href="https://www.patrimoine-ardeche.com/visites/largentiere.htm" target="_blank" rel="noopener">Visite de Largentière</a> (Vogüé)</li>
-      </ul>
+      <p>
+        <a class="pill" href="https://www.chateaudevogue.net/" target="_blank" rel="noopener">Château des Roure (Labastide de Virac)</a>
+        <a class="pill" href="https://www.chateaudevogue.net/" target="_blank" rel="noopener">Château de Vogüé</a>
+        <a class="pill" href="https://www.ville-aubenas.fr/" target="_blank" rel="noopener">Aubenas</a>
+        <a class="pill" href="https://www.patrimoine-ardeche.com/visites/largentiere.htm" target="_blank" rel="noopener">Largentière</a>
+      </p>
+      <p class="center" style="margin-top:1rem;"><a href="/galerie/" class="btn btn-outline">Voir toutes les photos de la région</a></p>
     </div>
   </div>
-  <p class="center reveal">Et aussi : <a href="/galerie/" class="btn btn-outline">voir toutes les photos de la région</a></p>
 </section>
 
 <section class="section container">
