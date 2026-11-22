@@ -32,6 +32,30 @@ collections:
           - { label: "Modalités de paiement", name: "paiement", widget: "text" }
           - { label: "Texte spa", name: "spa", widget: "text" }
 
+  - name: "disponibilites"
+    label: "Disponibilités"
+    files:
+      - name: "dispos"
+        label: "Réservations (calendrier des disponibilités)"
+        file: "src/_data/disponibilites.json"
+        format: json
+        fields:
+          - label: "Réservations"
+            name: "reservations"
+            widget: "list"
+            fields:
+              - label: "Chambre"
+                name: "chambre"
+                widget: "select"
+                options:
+                  - { label: "Marron Glacé", value: "marron-glace" }
+                  - { label: "Chêne Vert", value: "chene-vert" }
+                  - { label: "Pitchouline", value: "pitchouline" }
+                  - { label: "Petite-Lauze", value: "petite-lauze" }
+              - { label: "Du (début, inclus)", name: "du", widget: "date" }
+              - { label: "Au (fin, inclus)", name: "au", widget: "date" }
+              - { label: "Note (optionnel)", name: "note", widget: "string", required: false }
+
   - name: "chambres"
     label: "Chambres"
     folder: "src/_chambres"

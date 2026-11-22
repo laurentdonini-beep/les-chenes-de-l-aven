@@ -218,3 +218,62 @@ window.addEventListener("resize", () => {
   galResizeTimer = setTimeout(layoutGalleries, 150);
 });
 window.addEventListener("load", layoutGalleries);
+
+// Calendrier des disponibilites (genere cote client a partir des donnees du site)
+(function () {
+  const dataEl = document.getElementById("dispo-data");
+  if (!dataEl) return;
+  let reservations = [];
+  try { reservations = JSON.parse(dataEl.textContent).reservations || []; } catch (e) { return; }
+  const byRoom = {};
+  reservations.forEach((r) => {
+    if (!r.chambre || !r.du || !r.au) return;
+    (byRoom[r.chambre] = byRoom[r.chambre] || []).push(r);
+  });
+  const monthsFR = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+  const daysFR = ["lu","ma","me","je","ve","sa","di"];
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  function bookedOn(room, y, m, d) {
+    const t = new Date(y, m, d).getTime();
+    return (byRoom[room] || []).some((r) => {
+      const a = new Date(r.du + "T00:00:00").getTime();
+      const b = new Date(r.au + "T23:59:59").getTime();
+      return t >= a && t <= b;
+    });
+  }
+  document.querySelectorAll(".cal").forEach((cal) => {
+    const room = cal.dataset.room;
+    const start = new Date(today.getFullYear(), today.getMonth(), 1);
+    for (let i = 0; i < 6; i++) {
+      const first = new Date(start.getFullYear(), start.getMonth() + i, 1);
+      const y = first.getFullYear(), m = first.getMonth();
+      const monthDiv = document.createElement("div");
+      monthDiv.className = "cal-month";
+      const h = document.createElement("h3");
+      h.textContent = monthsFR[m] + " " + y;
+      monthDiv.appendChild(h);
+      const grid = document.createElement("div");
+      grid.className = "cal-grid";
+      daysFR.forEach((w) => {
+        const c = document.createElement("span");
+        c.className = "cal-dow"; c.textContent = w;
+        grid.appendChild(c);
+      });
+      const offset = (new Date(y, m, 1).getDay() + 6) % 7;
+      for (let k = 0; k < offset; k++) grid.appendChild(document.createElement("span"));
+      const nbDays = new Date(y, m + 1, 0).getDate();
+      for (let day = 1; day <= nbDays; day++) {
+        const cell = document.createElement("span");
+        cell.className = "cal-day";
+        cell.textContent = day;
+        const dt = new Date(y, m, day);
+        if (dt < today) cell.classList.add("past");
+        if (dt.getTime() === today.getTime()) cell.classList.add("today");
+        if (bookedOn(room, y, m, day)) cell.classList.add("booked");
+        grid.appendChild(cell);
+      }
+      monthDiv.appendChild(grid);
+      cal.appendChild(monthDiv);
+    }
+  });
+})();

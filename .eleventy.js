@@ -10,6 +10,11 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/admin");
 
   eleventyConfig.addFilter("json", (value) => JSON.stringify(value));
+  eleventyConfig.addFilter("byChambre", (list, slug) => (list || []).filter((r) => r.chambre === slug));
+  eleventyConfig.addFilter("dateFR", (v) => {
+    const [y, m, d] = String(v).slice(0, 10).split("-");
+    return y && m && d ? `${d}/${m}/${y}` : String(v);
+  });
 
   return {
     markdownTemplateEngine: "njk",

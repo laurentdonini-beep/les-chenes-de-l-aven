@@ -41,6 +41,12 @@ crontab -e
 Alternative sans rien installer : GitHub Desktop récupère automatiquement les nouveautés
 quand il est ouvert — il ne reste plus qu'un clic sur **Pull origin**.
 
+
+### Disponibilités des chambres
+- Page publique `/disponibilites/` : calendrier des 6 prochains mois par chambre (jours réservés en orange), généré automatiquement à partir des données.
+- Sur chaque page chambre, un bloc « Disponibilités » liste les périodes indisponibles.
+- **Pour enregistrer une réservation** : `/admin` → collection « Disponibilités » → ajouter une ligne (chambre, du, au, note) → Publier. Le calendrier se met à jour tout seul au prochain déploiement (ou immédiatement en local après commit+push).
+
 ## Administration (pour ta tante)
 
 ### En local (pour tester)

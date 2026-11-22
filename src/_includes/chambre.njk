@@ -49,6 +49,20 @@ layout: base.njk
         <p class="room-tarif-note">{{ site.tarifNote }}</p>
         <p class="room-tarif-note"><strong>Paiement :</strong> {{ site.paiement }}</p>
       </div>
+      <div class="room-dispo">
+        <h2>Disponibilités</h2>
+        {% set mine = disponibilites.reservations | byChambre(page.fileSlug) %}
+        {% if mine.length %}
+        <ul>
+          {% for r in mine %}
+          <li>Indisponible du {{ r.du | dateFR }} au {{ r.au | dateFR }}{% if r.note %} ({{ r.note }}){% endif %}</li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>Aucune réservation enregistrée pour l'instant.</p>
+        {% endif %}
+        <p><a href="/disponibilites/">Voir le calendrier complet →</a></p>
+      </div>
       <a href="/contact/?chambre={{ title | urlencode }}" class="btn btn-block">Demander cette chambre</a>
     </aside>
   </div>
