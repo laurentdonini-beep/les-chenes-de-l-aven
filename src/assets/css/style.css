@@ -158,8 +158,9 @@ img { max-width: 100%; display: block; }
   border-radius: var(--radius);
   box-shadow: var(--ombre);
   padding: 2rem 2.4rem;
-  border-left: 6px solid var(--terra);
 }
+.tarif-card .band-price { color: var(--vert); font-size: 1.35rem; }
+.tarif-card .band-price span { color: var(--texte-doux); font-size: 1rem; }
 .tarif-prices { display: flex; gap: 3rem; margin-bottom: 1rem; flex-wrap: wrap; }
 .tarif-amount { font-family: var(--font-display); font-size: 2.4rem; color: var(--vert); display: block; }
 .tarif-label { color: var(--texte-doux); font-size: 0.95rem; }

@@ -20,7 +20,7 @@ description: Espace spa aux Chênes de l'Aven — séance de 30 minutes à 5 €
     <div class="split-text">
       <h2>Un moment pour soi</h2>
       <p>Située à quelques minutes des sites les plus visités de l'Ardèche, notre maison est aussi un havre de paix : piscine, jardin arboré et espace spa vous attendent au retour de vos balades.</p>
-      <p><a href="/contact/" class="btn">Réserver votre séjour</a></p>
+      <p><a href="/contact/" class="btn btn-outline">Réserver votre séjour</a></p>
     </div>
   </div>
 </section>
