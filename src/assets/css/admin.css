@@ -1,0 +1,70 @@
+/* Backoffice Decap : meme identite que le site */
+:root {
+  --vert: #22392c;
+  --creme: #f7f3ea;
+  --sable: #efe8d8;
+  --terra: #c4703f;
+  --terra-fonce: #a85a30;
+  --texte: #2b2b26;
+  --radius: 18px;
+}
+
+html, body { background: var(--creme) !important; }
+body {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif !important;
+  color: var(--texte) !important;
+}
+h1, h2, h3, h4, [class*="Heading"] {
+  font-family: "Fraunces", "Iowan Old Style", Georgia, serif !important;
+  color: var(--vert) !important;
+}
+a { color: var(--terra-fonce) !important; }
+
+/* page de connexion */
+[class*="StyledAuthenticationPage"], [class*="AuthenticationPage"] { background: var(--creme) !important; }
+[class*="LoginButton"] button,
+button[class*="LoginButton"],
+[class*="LoginButton-button"] {
+  background: var(--terra) !important;
+  border-color: var(--terra) !important;
+  color: #fff !important;
+  border-radius: 999px !important;
+  font-weight: 600 !important;
+}
+[class*="LoginButton"] button:hover { background: var(--terra-fonce) !important; border-color: var(--terra-fonce) !important; }
+
+/* application */
+[class*="StyledApp"], [class*="AppView"], [class*="AppMain"] { background: var(--creme) !important; }
+[class*="Sidebar"], [class*="StyledSidebar"], [class*="SidebarContainer"] {
+  background: var(--vert) !important;
+  color: var(--creme) !important;
+}
+[class*="Sidebar"] a, [class*="Sidebar"] button, [class*="Sidebar"] span { color: var(--creme) !important; }
+[class*="Sidebar"] [class*="active"], [class*="Sidebar"] a[aria-current] { color: #fff !important; }
+
+/* boutons */
+button[class*="button"], [class*="Button-button"] { border-radius: 999px !important; }
+button[class*="primary"], [class*="Button-button-primary"] {
+  background: var(--terra) !important;
+  border-color: var(--terra) !important;
+  color: #fff !important;
+}
+button[class*="primary"]:hover { background: var(--terra-fonce) !important; border-color: var(--terra-fonce) !important; }
+
+/* champs */
+input, textarea, select { border-radius: 10px !important; border-color: rgba(34, 57, 44, 0.25) !important; }
+input:focus, textarea:focus, select:focus { border-color: var(--vert) !important; outline-color: var(--vert) !important; }
+
+/* cartes / panneaux */
+[class*="Card"], [class*="StyledCard"], [class*="Panel"] {
+  background: #fff !important;
+  border-radius: var(--radius) !important;
+  box-shadow: 0 10px 30px rgba(34, 57, 44, 0.12) !important;
+  border: none !important;
+}
+
+/* barre superieure */
+[class*="Topbar"], [class*="StyledTopbar"], [class*="Navbar"] { background: #fff !important; border-bottom: 1px solid rgba(34, 57, 44, 0.12) !important; }
+
+/* logo decap colore */
+[class*="DecapLogoIcon"] { color: var(--terra) !important; }
