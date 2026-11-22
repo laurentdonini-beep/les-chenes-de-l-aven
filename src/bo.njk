@@ -1,0 +1,70 @@
+---
+permalink: /bo/
+---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Backoffice — Disponibilités — Les Chênes de l'Aven</title>
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <style>
+    .bo-wrap { max-width: 880px; margin: 0 auto; padding: 2.5rem 4% 4rem; }
+    .bo-form { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1.4fr auto; gap: 0.7rem; align-items: end; }
+    .bo-form label { display: block; font-weight: 600; font-size: 0.85rem; color: var(--vert); }
+    .bo-form input, .bo-form select { width: 100%; margin-top: 0.25rem; padding: 0.55rem 0.7rem; border: 1px solid rgba(34,57,44,0.25); border-radius: 10px; font: inherit; font-size: 0.95rem; background: #fff; }
+    .dispo-row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; background: #fff; border-radius: 12px; padding: 0.75rem 1.1rem; margin-bottom: 0.55rem; box-shadow: var(--ombre); }
+    .bo-note { color: var(--texte-doux); font-size: 0.9rem; }
+    .bo-err { color: #a33; font-size: 0.9rem; }
+    #bo-login label { display: block; font-weight: 600; font-size: 0.85rem; color: var(--vert); margin-bottom: 0.8rem; }
+    #bo-login input { width: 100%; margin-top: 0.25rem; padding: 0.55rem 0.7rem; border: 1px solid rgba(34,57,44,0.25); border-radius: 10px; font: inherit; }
+    @media (max-width: 760px) { .bo-form { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body>
+  <main class="bo-wrap">
+    <p class="hero-kicker">Backoffice</p>
+    <h1>Disponibilités des chambres</h1>
+    <p class="lead">Ajoutez ou supprimez des périodes réservées, puis cliquez sur <strong>Enregistrer</strong>. Les visiteurs voient le calendrier à jour sur chaque page chambre.</p>
+
+    <section id="bo-login" class="card" style="display:none; max-width: 420px; margin-top: 1.5rem;">
+      <h2>Connexion</h2>
+      <p class="bo-note">Compte invité sur Netlify Identity (même accès que l'admin).</p>
+      <label>Email<input type="email" id="bo-email" autocomplete="username"></label>
+      <label>Mot de passe<input type="password" id="bo-pass" autocomplete="current-password"></label>
+      <button id="bo-login-btn" class="btn">Se connecter</button>
+      <p id="bo-login-err" class="bo-err"></p>
+    </section>
+
+    <section id="bo-app" style="display:none; margin-top: 1.5rem;">
+      <form id="bo-form" class="card bo-form">
+        <label>Chambre
+          <select id="bo-chambre">
+            {% for ch in collections.chambres %}<option value="{{ ch.fileSlug }}">{{ ch.data.title }}</option>{% endfor %}
+          </select>
+        </label>
+        <label>Du<input type="date" id="bo-du" required></label>
+        <label>Au<input type="date" id="bo-au" required></label>
+        <label>Note<input type="text" id="bo-note" placeholder="optionnel"></label>
+        <button type="submit" class="btn btn-outline btn-small">Ajouter</button>
+      </form>
+
+      <h2 style="margin: 1.8rem 0 0.8rem;">Périodes enregistrées</h2>
+      <div id="bo-list"></div>
+
+      <p style="margin-top: 1.4rem;">
+        <button id="bo-save" class="btn">Enregistrer et publier</button>
+        <span id="bo-status" class="bo-note" style="margin-left: 0.8rem;"></span>
+      </p>
+      <p class="bo-note">En local : après « Enregistrer », faites <em>Commit + Push</em> dans GitHub Desktop. En ligne (Netlify) : le site se met à jour tout seul au prochain déploiement.</p>
+    </section>
+  </main>
+  <script type="application/json" id="dispo-data">{{ disponibilites | json | safe }}</script>
+  <script src="/assets/js/bo.js"></script>
+</body>
+</html>

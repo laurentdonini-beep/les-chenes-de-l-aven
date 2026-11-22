@@ -10,7 +10,7 @@ permalink: /sitemap.xml
     <priority>1.0</priority>
   </url>
 {% for item in collections.all %}
-{% if item.url and item.url != "/admin/" and not item.url.startsWith("/admin") %}
+{% if item.url and item.url != "/admin/" and not item.url.startsWith("/admin") and item.url != "/bo/" %}
   <url>
     <loc>{{ site.url }}{{ item.url }}</loc>
     <changefreq>monthly</changefreq>

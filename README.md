@@ -47,6 +47,12 @@ quand il est ouvert — il ne reste plus qu'un clic sur **Pull origin**.
 - Sur chaque page chambre, un bloc « Disponibilités » liste les périodes indisponibles.
 - **Pour enregistrer une réservation** : `/admin` → collection « Disponibilités » → ajouter une ligne (chambre, du, au, note) → Publier. Le calendrier se met à jour tout seul au prochain déploiement (ou immédiatement en local après commit+push).
 
+
+### Backoffice simple des disponibilités (`/bo/`)
+- Page dédiée, même style que le site, **sans compte requis en local** : `http://localhost:8080/bo/` (avec `npm run cms:local` + `npm start`). Ajouter/supprimer des périodes, « Enregistrer » écrit `src/_data/disponibilites.json` via l'API locale, puis **Commit + Push** dans GitHub Desktop.
+- **En production (Netlify)** : `/bo/` demande une connexion Netlify Identity (même compte que `/admin`), puis écrit le fichier via la fonction `netlify/functions/dispo.js` (API GitHub). Prérequis côté Netlify : Identity activé (invite-only), Git Gateway activé, et variable d'environnement `GITHUB_TOKEN` = un token GitHub (classic, scope `repo`) ayant accès en écriture au dépôt. Le déploiement se relance automatiquement après chaque sauvegarde.
+- `/bo/` est exclu du sitemap et en `noindex`.
+
 ## Administration (pour ta tante)
 
 ### En local (pour tester)

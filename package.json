@@ -12,6 +12,7 @@
   "devDependencies": {
     "@11ty/eleventy": "^3.1.8",
     "decap-cms": "^3.18.0",
-    "decap-server": "^3.11.6"
+    "decap-server": "^3.11.6",
+    "netlify-identity-widget": "^2.0.3"
   }
 }
