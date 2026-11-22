@@ -387,3 +387,10 @@ main img.zoomable { cursor: zoom-in; }
 .room-infos li { padding: 0.3rem 0 0.3rem 1.5rem; position: relative; color: var(--texte-doux); }
 .room-infos li::before { content: "•"; position: absolute; left: 0.4rem; color: var(--terra); font-weight: 700; }
 .site-footer { margin-top: 2rem; }
+
+/* Listes de liens externes (page Activités) */
+.link-list { list-style: none; columns: 2; column-gap: 2.5rem; }
+.link-list li { padding: 0.4rem 0 0.4rem 1.4rem; position: relative; break-inside: avoid; }
+.link-list li::before { content: "→"; position: absolute; left: 0; color: var(--terra); font-weight: 700; }
+.link-list a { font-weight: 500; }
+@media (max-width: 700px) { .link-list { columns: 1; } }

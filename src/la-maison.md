@@ -24,10 +24,12 @@ description: Découvrez la maison Les Chênes de l'Aven à Orgnac-l'Aven — esp
     <div class="card reveal">
       <h2>La terrasse & la piscine</h2>
       <p>À l'ombre des chênes verts et à proximité de la piscine, vous partagerez votre petit-déjeuner avec les autres hôtes (table de 8 personnes maximum).</p>
+      <p>La piscine est ouverte de 8h00 à 19h00 : bassin d'eau salée et chauffée de 10 m (profondeur 1,30 à 1,80 m), plage carrelée d'environ 100 m² avec transats et parasols, sanitaires sous le pool-house.</p>
     </div>
     <div class="card reveal">
       <h2>Les espaces communs</h2>
-      <p>Les chambres de l'étage disposent d'une pièce commune à partager. En cas de mauvais temps, prenez votre petit-déjeuner dans la véranda du rez-de-chaussée (chambres Pitchouline et Petite-Lauze) ou dans la pièce commune de l'étage (chambres Marron Glacé et Chêne Vert).</p>
+      <p>Les chambres de l'étage disposent d'une pièce commune à partager, équipée (climatisation fixe) : lecture, jeux de société, télévision, canapé, frigo, évier et micro-ondes.</p>
+      <p>En cas de mauvais temps, prenez votre petit-déjeuner dans la véranda du rez-de-chaussée (chambres Pitchouline et Petite-Lauze) ou dans la pièce commune de l'étage (chambres Marron Glacé et Chêne Vert).</p>
     </div>
     <div class="card reveal">
       <h2>Le solarium</h2>

@@ -13,6 +13,7 @@ description: Espace spa aux Chênes de l'Aven — séance de 30 minutes à 5 €
   <div class="tarif-card reveal">
     <p class="band-price">{{ site.spa }}</p>
     <p>La séance se règle sur place. Pour un séjour d'au moins 3 jours, 1 séance est offerte.</p>
+    <p>Il suffit de nous prévenir à l'avance pour mettre le spa à votre disposition. Ce bain à remous, avec luminothérapie et aromathérapie, une eau chauffée à 35°, vous apportera tous les bienfaits nécessaires à la relaxation (4 places assises et 1 place allongée).</p>
   </div>
   <div class="split reveal">
     <img src="/assets/img/photos/spa.jpg" alt="Espace spa" class="split-img">
