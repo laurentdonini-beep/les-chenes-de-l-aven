@@ -23,6 +23,12 @@ layout: base.njk
       <ul class="equip-list">
         {% for eq in equipements %}<li>{{ eq }}</li>{% endfor %}
       </ul>
+      <div class="room-tarif">
+        <h2>Tarif</h2>
+        <p class="room-price">{{ site.tarif2 }} <span>/ 2 pers.</span> &nbsp;·&nbsp; {{ site.tarif1 }} <span>/ 1 pers.</span></p>
+        <p class="room-tarif-note">{{ site.tarifNote }}</p>
+        <p class="room-tarif-note"><strong>Paiement :</strong> {{ site.paiement }}</p>
+      </div>
       <a href="/contact/?chambre={{ title | urlencode }}" class="btn btn-block">Demander cette chambre</a>
     </aside>
   </div>

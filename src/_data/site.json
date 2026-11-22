@@ -16,7 +16,7 @@
   "nav": [
     { "label": "Accueil", "url": "/" },
     { "label": "La maison", "url": "/la-maison/" },
-    { "label": "Chambres & tarifs", "url": "/chambres/" },
+    { "label": "Chambres", "url": "/chambres/" },
     { "label": "Spa & bien-être", "url": "/spa/" },
     { "label": "Activités", "url": "/activites/" },
     { "label": "Galerie", "url": "/galerie/" },

@@ -364,3 +364,10 @@ main img.zoomable { cursor: zoom-in; }
   .hero-img { transition: none; }
   .hero-img.active { animation: none; }
 }
+
+/* Bloc tarif dans la fiche chambre */
+.room-tarif { border-top: 1px solid rgba(34, 57, 44, 0.15); margin-top: 1.2rem; padding-top: 1rem; }
+.room-tarif h2 { font-size: 1.2rem; margin-bottom: 0.4rem; }
+.room-price { font-family: var(--font-display); font-size: 1.55rem; color: var(--vert); font-weight: 600; }
+.room-price span { font-size: 0.85rem; color: var(--texte-doux); font-family: var(--font-body); font-weight: 400; }
+.room-tarif-note { font-size: 0.88rem; color: var(--texte-doux); margin-top: 0.45rem; }

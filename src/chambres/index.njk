@@ -1,29 +1,16 @@
 ---
 layout: base.njk
-title: Chambres & tarifs
+title: Chambres
 permalink: /chambres/
-description: "4 chambres d'hôtes climatisées à Orgnac-l'Aven, pour 1 ou 2 personnes. Tarif unique : 90 € pour 2 personnes, 80 € pour 1 personne, petits-déjeuners inclus."
+description: "4 chambres d'hôtes climatisées à Orgnac-l'Aven, pour 1 ou 2 personnes. Tarifs détaillés sur chaque fiche chambre."
 ---
 <section class="page-hero container">
   <p class="hero-kicker">Nos chambres</p>
-  <h1>Chambres & tarifs</h1>
-  <p class="lead">Toutes nos chambres sont destinées à 1 ou 2 personnes. Réservation à partir de 2 nuits minimum.</p>
+  <h1>Nos 4 chambres</h1>
+  <p class="lead">Toutes nos chambres sont destinées à 1 ou 2 personnes. Réservation à partir de 2 nuits minimum. Les tarifs figurent sur chaque fiche chambre.</p>
 </section>
 
 <section class="section container">
-  <div class="tarif-card reveal">
-    <div class="tarif-prices">
-      <div><span class="tarif-amount">{{ site.tarif2 }}</span><span class="tarif-label">2 personnes / nuit</span></div>
-      <div><span class="tarif-amount">{{ site.tarif1 }}</span><span class="tarif-label">1 personne / nuit</span></div>
-    </div>
-    <p><strong>Inclus :</strong> petits-déjeuners, linge de lit et de toilette.</p>
-    <p>{{ site.tarifNote }}</p>
-    <p><strong>Paiement :</strong> {{ site.paiement }}</p>
-  </div>
-</section>
-
-<section class="section container">
-  <h2 class="section-title reveal">Nos 4 chambres</h2>
   <div class="grid-2">
     {% for chambre in collections.chambres %}
     <a href="{{ chambre.url }}" class="card room-card reveal">
