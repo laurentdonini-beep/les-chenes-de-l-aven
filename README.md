@@ -79,7 +79,9 @@ src/
 
 ## Photos
 
-Les images actuelles (`src/assets/img/*.svg`) sont des **placeholders** : à remplacer par les vraies photos de la maison (via l'admin `/admin`, dossier `uploads`, ou en déposant les fichiers dans `src/assets/img/`).
+Les vraies photos de l'ancien site WordPress ont été récupérées et intégrées dans `src/assets/img/photos/` (optimisées : max 1920 px, JPEG qualité 82) : hero, maison, piscine, terrasse, pièce commune, petit-déjeuner, spa, les 4 chambres, Aven d'Orgnac, Pont d'Arc, gorges, village.
+
+Pour en ajouter/changer via l'admin : `/admin` → collection « Chambres » (champ Photo) ou « Pages » → uploader dans `uploads` (servi sous `/assets/img/uploads/`).
 
 ## Mise en ligne
 

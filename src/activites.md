@@ -12,17 +12,17 @@ description: Que faire autour d'Orgnac-l'Aven — Aven d'Orgnac, Grotte Chauvet,
 <section class="section container">
   <div class="grid-3">
     <div class="card photo reveal">
-      <img src="/assets/img/galerie-1.svg" alt="Aven d'Orgnac">
+      <img src="/assets/img/photos/aven.jpg" alt="Aven d'Orgnac">
       <h2>Balades culturelles</h2>
       <p>L'Aven d'Orgnac (Grand Site de France), la Grotte Chauvet et son Pont d'Arc, les villages classés des alentours…</p>
     </div>
     <div class="card photo reveal">
-      <img src="/assets/img/galerie-4.svg" alt="Gorges de l'Ardèche">
+      <img src="/assets/img/photos/gorges.jpg" alt="Gorges de l'Ardèche">
       <h2>Sorties sportives</h2>
       <p>Gorges de l'Ardèche, vallée de la Cèze, randonnées, baignade et canoë dans un cadre sauvage préservé.</p>
     </div>
     <div class="card photo reveal">
-      <img src="/assets/img/galerie-3.svg" alt="Village d'Orgnac-l'Aven">
+      <img src="/assets/img/photos/village.jpg" alt="Village d'Orgnac-l'Aven">
       <h2>Notre village</h2>
       <p>Orgnac-l'Aven, charmant village du sud de l'Ardèche, à quelques minutes de la maison.</p>
     </div>

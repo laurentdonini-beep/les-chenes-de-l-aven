@@ -11,11 +11,15 @@ description: Photos de la maison Les Chênes de l'Aven, de ses chambres, de la p
 
 <section class="section container">
   <div class="gallery-grid">
-    <img src="/assets/img/galerie-1.svg" alt="L'Aven d'Orgnac" class="reveal">
-    <img src="/assets/img/galerie-2.svg" alt="Pont d'Arc et Grotte Chauvet" class="reveal">
-    <img src="/assets/img/galerie-3.svg" alt="Le village d'Orgnac-l'Aven" class="reveal">
-    <img src="/assets/img/galerie-4.svg" alt="Les gorges de l'Ardèche" class="reveal">
-    <img src="/assets/img/maison.svg" alt="La maison et la piscine" class="reveal">
-    <img src="/assets/img/spa.svg" alt="L'espace spa" class="reveal">
+    <img src="/assets/img/photos/maison.jpg" alt="La maison Les Chênes de l'Aven" class="reveal">
+    <img src="/assets/img/photos/piscine.jpg" alt="La piscine" class="reveal">
+    <img src="/assets/img/photos/terrasse.jpg" alt="La terrasse" class="reveal">
+    <img src="/assets/img/photos/piece-commune.jpg" alt="La pièce commune" class="reveal">
+    <img src="/assets/img/photos/petit-dejeuner.jpg" alt="Le petit-déjeuner" class="reveal">
+    <img src="/assets/img/photos/spa.jpg" alt="L'espace spa" class="reveal">
+    <img src="/assets/img/photos/aven.jpg" alt="L'Aven d'Orgnac" class="reveal">
+    <img src="/assets/img/photos/pont-arc.jpg" alt="Pont d'Arc et Grotte Chauvet" class="reveal">
+    <img src="/assets/img/photos/gorges.jpg" alt="Les gorges de l'Ardèche" class="reveal">
+    <img src="/assets/img/photos/village.jpg" alt="Les villages du Sud Ardèche" class="reveal">
   </div>
 </section>

@@ -4,7 +4,7 @@ title: Petite-Lauze
 ordre: 4
 surface: 20 m²
 capacite: 1–2 personnes
-image: /assets/img/chambre-petite-lauze.svg
+image: /assets/img/photos/chambre-petite-lauze.jpg
 resume: Chambre indépendante en rez-de-chaussée, avec vestibule équipé d'un petit frigo.
 equipements:
   - Lit en 160 cm

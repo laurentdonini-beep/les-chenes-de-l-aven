@@ -4,7 +4,7 @@ title: Pitchouline
 ordre: 3
 surface: 16 m²
 capacite: 1–2 personnes
-image: /assets/img/chambre-pitchouline.svg
+image: /assets/img/photos/chambre-pitchouline.jpg
 resume: Chambre avec terrasse privative et bains de soleil, face aux oliviers.
 equipements:
   - Lit en 160 cm

@@ -4,7 +4,7 @@ title: Marron Glacé
 ordre: 1
 surface: 12 m²
 capacite: 1–2 personnes
-image: /assets/img/chambre-marron-glace.svg
+image: /assets/img/photos/chambre-marron-glace.jpg
 resume: Chambre à l'étage avec accès par l'escalier extérieur et solarium commun, vue sur la piscine.
 equipements:
   - Lit en 160 cm

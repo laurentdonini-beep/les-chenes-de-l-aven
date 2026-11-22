@@ -11,7 +11,7 @@ description: Découvrez la maison Les Chênes de l'Aven à Orgnac-l'Aven — esp
 
 <section class="section container">
   <div class="split reveal">
-    <img src="/assets/img/maison.svg" alt="La maison en pierre de pays" class="split-img">
+    <img src="/assets/img/photos/maison.jpg" alt="La maison en pierre de pays" class="split-img">
     <div class="split-text">
       <h2>Une maison en pierre de pays</h2>
       <p>Jolie maison indépendante en pierre de pays, entourée de chênes verts, entre les Gorges de l'Ardèche et la vallée de la Cèze, à 2 pas de la célèbre grotte de l'Aven d'Orgnac.</p>

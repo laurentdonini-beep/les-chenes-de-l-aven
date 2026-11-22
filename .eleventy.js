@@ -1,6 +1,9 @@
 export default function (eleventyConfig) {
   eleventyConfig.addCollection("chambres", (collectionApi) =>
-    collectionApi.getFilteredByGlob("_chambres/*.md").sort((a, b) => (a.data.ordre ?? 99) - (b.data.ordre ?? 99))
+    collectionApi
+      .getAll()
+      .filter((page) => page.inputPath.includes("_chambres/"))
+      .sort((a, b) => (a.data.ordre ?? 99) - (b.data.ordre ?? 99))
   );
 
   eleventyConfig.addPassthroughCopy("src/assets");
