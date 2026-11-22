@@ -496,11 +496,12 @@ main img.zoomable { cursor: zoom-in; }
 .legend .swatch.today { background: var(--sable); outline: 2px solid var(--vert); }
 .dispo-room { margin-bottom: 2.4rem; }
 .dispo-room h3 { font-size: 1.15rem; margin-bottom: 0.7rem; }
-.cal-controls { display: flex; align-items: center; justify-content: flex-end; gap: 0.25rem; margin-bottom: 0.6rem; }
-.cal-nav { border: none; background: transparent; color: var(--texte-doux); font-size: 1.35rem; line-height: 1; padding: 0.15rem 0.55rem; border-radius: 6px; cursor: pointer; transition: background 0.2s, color 0.2s; }
+.cal { display: flex; align-items: center; gap: 0.4rem; }
+.cal-months { flex: 1; }
+.cal-nav { flex: 0 0 auto; border: none; background: transparent; color: var(--texte-doux); font-size: 1.6rem; line-height: 1; padding: 0.2rem 0.5rem; border-radius: 8px; cursor: pointer; transition: background 0.2s, color 0.2s; }
 .cal-nav:hover:not(:disabled) { color: var(--vert); background: var(--sable); }
 .cal-nav:disabled { opacity: 0.3; cursor: default; }
-.cal-months { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.4rem; }
+.cal-months { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.4rem; }
 .cal-month h4 { font-size: 1rem; text-transform: capitalize; margin-bottom: 0.5rem; font-family: var(--font-body); font-weight: 600; }
 .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
 .cal-dow { font-size: 0.68rem; font-weight: 600; color: var(--texte-doux); text-align: center; }

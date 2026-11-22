@@ -274,17 +274,15 @@ window.addEventListener("load", layoutGalleries);
   document.querySelectorAll(".cal").forEach((cal) => {
     const room = cal.dataset.room;
     let offset = 0;
-    const controls = document.createElement("div");
-    controls.className = "cal-controls";
     const prev = document.createElement("button");
     prev.type = "button"; prev.className = "cal-nav"; prev.textContent = "‹"; prev.setAttribute("aria-label", "Mois précédents");
     const next = document.createElement("button");
     next.type = "button"; next.className = "cal-nav"; next.textContent = "›"; next.setAttribute("aria-label", "Mois suivants");
-    controls.appendChild(prev); controls.appendChild(next);
     const monthsWrap = document.createElement("div");
     monthsWrap.className = "cal-months";
-    cal.appendChild(controls);
+    cal.appendChild(prev);
     cal.appendChild(monthsWrap);
+    cal.appendChild(next);
     function render(dir) {
       monthsWrap.innerHTML = "";
       monthsWrap.classList.remove("anim-next", "anim-prev");
