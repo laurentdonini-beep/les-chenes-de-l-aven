@@ -62,3 +62,58 @@ if (form) {
     window.location.href = mailto;
   });
 }
+
+// Lightbox : clic sur une photo de la page -> plein ecran, fleches/clavier/swipe pour defiler
+const lightbox = document.getElementById("lightbox");
+if (lightbox) {
+  const lbImg = document.getElementById("lightbox-img");
+  const lbCap = document.getElementById("lightbox-caption");
+  const lbCount = document.getElementById("lightbox-counter");
+  const imgs = Array.from(document.querySelectorAll("main img")).filter(
+    (img) => img.src && !img.closest("a")
+  );
+  imgs.forEach((img) => img.classList.add("zoomable"));
+  let idx = 0;
+  function show(i) {
+    if (!imgs.length) return;
+    idx = (i + imgs.length) % imgs.length;
+    const img = imgs[idx];
+    lbImg.src = img.currentSrc || img.src;
+    lbImg.alt = img.alt || "";
+    lbCap.textContent = img.alt || "";
+    lbCount.textContent = (idx + 1) + " / " + imgs.length;
+  }
+  function open(i) {
+    show(i);
+    lightbox.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+  function close() {
+    lightbox.classList.remove("open");
+    document.body.style.overflow = "";
+    lbImg.src = "";
+  }
+  imgs.forEach((img, i) => img.addEventListener("click", () => open(i)));
+  document.getElementById("lightbox-close").addEventListener("click", close);
+  document.getElementById("lightbox-prev").addEventListener("click", () => show(idx - 1));
+  document.getElementById("lightbox-next").addEventListener("click", () => show(idx + 1));
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) close();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (!lightbox.classList.contains("open")) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowLeft") show(idx - 1);
+    if (e.key === "ArrowRight") show(idx + 1);
+  });
+  let touchX = null;
+  lightbox.addEventListener("touchstart", (e) => {
+    touchX = e.touches[0].clientX;
+  }, { passive: true });
+  lightbox.addEventListener("touchend", (e) => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 40) show(idx + (dx < 0 ? 1 : -1));
+    touchX = null;
+  });
+}
