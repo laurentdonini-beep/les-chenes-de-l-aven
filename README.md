@@ -63,7 +63,7 @@ Puis ouvrir **http://localhost:8080/admin** — les modifications sont enregistr
    - **Pages** : accueil, la maison, spa, activités, galerie, contact.
 3. Chaque modification publie automatiquement le site (quelques minutes).
 
-> Note : avant le déploiement Netlify, passer `local_backend: true` à `false` dans `src/admin/config.yml` (le backend local ne sert qu'en développement).
+> `local_backend: false` (production, Netlify). Pour tester l'admin **en local**, remets `true` dans `src/admin/config.yml` et lance `npm run cms:local`, puis `npm start`.
 
 ## Structure
 

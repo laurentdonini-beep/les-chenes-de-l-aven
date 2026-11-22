@@ -2,7 +2,7 @@ backend:
   name: git-gateway
   branch: main
 
-local_backend: true
+local_backend: false  # remettre true en local pour tester /admin avec `npm run cms:local`
 
 media_folder: "src/assets/img/uploads"
 public_folder: "/assets/img/uploads"
