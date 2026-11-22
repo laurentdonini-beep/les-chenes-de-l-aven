@@ -204,7 +204,7 @@ img { max-width: 100%; display: block; }
 
 /* ---------- Galerie ---------- */
 .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
-.gallery-grid img { border-radius: var(--radius); height: 260px; width: 100%; object-fit: cover; box-shadow: var(--ombre); transition: transform 0.25s; }
+.gallery-grid img { border-radius: var(--radius); height: 260px; width: 100%; object-fit: contain; background: var(--sable); box-shadow: var(--ombre); transition: transform 0.25s; }
 .gallery-grid img:hover { transform: scale(1.02); }
 
 /* ---------- Contact ---------- */
