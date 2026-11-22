@@ -278,11 +278,9 @@ window.addEventListener("load", layoutGalleries);
     controls.className = "cal-controls";
     const prev = document.createElement("button");
     prev.type = "button"; prev.className = "cal-nav"; prev.textContent = "‹"; prev.setAttribute("aria-label", "Mois précédents");
-    const range = document.createElement("span");
-    range.className = "cal-range";
     const next = document.createElement("button");
     next.type = "button"; next.className = "cal-nav"; next.textContent = "›"; next.setAttribute("aria-label", "Mois suivants");
-    controls.appendChild(prev); controls.appendChild(range); controls.appendChild(next);
+    controls.appendChild(prev); controls.appendChild(next);
     const monthsWrap = document.createElement("div");
     monthsWrap.className = "cal-months";
     cal.appendChild(controls);
@@ -290,13 +288,10 @@ window.addEventListener("load", layoutGalleries);
     function render() {
       monthsWrap.innerHTML = "";
       const base = new Date(today.getFullYear(), today.getMonth() + offset, 1);
-      let lastY = base.getFullYear(), lastM = base.getMonth();
       for (let i = 0; i < NB_MOIS; i++) {
         const d = new Date(base.getFullYear(), base.getMonth() + i, 1);
-        lastY = d.getFullYear(); lastM = d.getMonth();
-        monthsWrap.appendChild(monthBlock(room, lastY, lastM));
+        monthsWrap.appendChild(monthBlock(room, d.getFullYear(), d.getMonth()));
       }
-      range.textContent = monthsFR[base.getMonth()] + " " + base.getFullYear() + " – " + monthsFR[lastM] + " " + lastY;
       prev.disabled = offset <= 0;
       next.disabled = offset >= MAX_OFFSET;
     }
