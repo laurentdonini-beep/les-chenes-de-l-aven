@@ -44,6 +44,18 @@ description: Les Chênes de l'Aven, chambres d'hôtes à Orgnac-l'Aven en Ardèc
   </div>
 </section>
 
+<section class="section container">
+  <h2 class="section-title reveal">Nos services</h2>
+  <div class="services-grid">
+    <div class="service-card reveal"><span class="service-icon">🥐</span><h3>Petit-déjeuner inclus</h3><p>Viennoiseries, pain, produits faits maison, au bord de la piscine.</p></div>
+    <div class="service-card reveal"><span class="service-icon">🏊</span><h3>Piscine chauffée</h3><p>Bassin d'eau salée de 10 m, ouverte de 8h00 à 19h00, plage avec transats.</p></div>
+    <div class="service-card reveal"><span class="service-icon">🛁</span><h3>Spa</h3><p>Bain à remous 35°, luminothérapie, sur réservation (5 €/30 min).</p></div>
+    <div class="service-card reveal"><span class="service-icon">📶</span><h3>Wi-Fi gratuit</h3><p>Connexion sans fil dans toute la maison.</p></div>
+    <div class="service-card reveal"><span class="service-icon">🅿️</span><h3>Parking privatif</h3><p>Places de stationnement privatives dans la propriété clôturée.</p></div>
+    <div class="service-card reveal"><span class="service-icon">🌳</span><h3>Terrasse & jardin</h3><p>À l'ombre des chênes verts, table de ping-pong à disposition.</p></div>
+  </div>
+</section>
+
 <section class="band">
   <div class="container band-inner reveal">
     <div>

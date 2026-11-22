@@ -1,17 +1,17 @@
 :root {
-  --vert: #22392c;
-  --vert-2: #33523f;
-  --vert-clair: #5c7a63;
-  --creme: #f7f3ea;
-  --sable: #efe8d8;
-  --terra: #c4703f;
-  --terra-fonce: #a85a30;
-  --texte: #2b2b26;
-  --texte-doux: #5d5d54;
+  --vert: #000076;
+  --vert-2: #1a1f8f;
+  --vert-clair: #828e84;
+  --creme: #faf8f5;
+  --sable: #eef1e8;
+  --terra: #828e84;
+  --terra-fonce: #67756c;
+  --texte: #33333a;
+  --texte-doux: #6b6b74;
   --blanc: #ffffff;
-  --ombre: 0 10px 30px rgba(34, 57, 44, 0.12);
+  --ombre: 0 10px 30px rgba(0, 0, 118, 0.10);
   --radius: 18px;
-  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --font-display: "Overlock SC", "Iowan Old Style", Georgia, serif;
   --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
@@ -429,3 +429,23 @@ main img.zoomable { cursor: zoom-in; }
   transition: background 0.2s, color 0.2s;
 }
 .pill:hover { background: var(--vert); color: var(--blanc); border-color: var(--vert); }
+
+/* Services (inspiré du style "havre de paix") */
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+.service-card {
+  background: var(--blanc);
+  border-radius: var(--radius);
+  box-shadow: var(--ombre);
+  padding: 1.6rem 1.4rem;
+  text-align: center;
+  transition: transform 0.25s;
+}
+.service-card:hover { transform: translateY(-4px); }
+.service-icon { font-size: 2.1rem; display: block; margin-bottom: 0.5rem; }
+.service-card h3 { font-size: 1.15rem; margin-bottom: 0.4rem; }
+.service-card p { color: var(--texte-doux); font-size: 0.93rem; }
+@media (max-width: 800px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .services-grid { grid-template-columns: 1fr; } }
+
+/* Titres en Overlock SC : espacement des petites capitales */
+h1, h2, h3, .brand-name, .band-price, .tarif-amount, .room-price { letter-spacing: 0.02em; }
