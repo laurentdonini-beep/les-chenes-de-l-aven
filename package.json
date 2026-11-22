@@ -6,9 +6,12 @@
   "description": "Site des Chambres d'hôtes Les Chênes de l'Aven (Orgnac-l'Aven, Ardèche) — site statique Eleventy + CMS Decap, 100% gratuit",
   "scripts": {
     "build": "eleventy",
-    "start": "eleventy --serve --port=8080"
+    "start": "eleventy --serve --port=8080",
+    "cms:local": "decap-server --port=8081"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^3.1.8"
+    "@11ty/eleventy": "^3.1.8",
+    "decap-cms-app": "^3.18.0",
+    "decap-server": "^3.11.6"
   }
 }

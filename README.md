@@ -21,12 +21,27 @@ npm start          # serveur local sur http://localhost:8080
 
 ## Administration (pour ta tante)
 
-1. Déployer le site sur Netlify (gratuit) et activer **Identity**.
-2. Ouvrir `https://<site>/admin` → se connecter → modifier :
+### En local (pour tester)
+
+Le CMS est embarqué dans le site (`src/admin/vendor/`), donc `/admin` s'affiche **sans connexion Internet**.
+
+```bash
+npm start          # terminal 1 : le site sur http://localhost:8080
+npm run cms:local  # terminal 2 : le proxy local du CMS sur http://localhost:8081
+```
+
+Puis ouvrir **http://localhost:8080/admin** — les modifications sont enregistrées dans le dépôt git local (faire ensuite `git add -A && git commit && git push` pour les publier).
+
+### En production (Netlify, gratuit)
+
+1. Déployer le site sur Netlify et activer **Identity** (Site settings → Identity → Enable, mode « Invite only »).
+2. Ouvrir `https://<site>/admin` → se connecter avec l'invitation → modifier :
    - **Paramètres du site** : téléphone, email, tarifs, horaires, texte du spa.
    - **Chambres** : ajouter/modifier une chambre, changer sa photo.
    - **Pages** : accueil, la maison, spa, activités, galerie, contact.
 3. Chaque modification publie automatiquement le site (quelques minutes).
+
+> Note : avant le déploiement Netlify, passer `local_backend: true` à `false` dans `src/admin/config.yml` (le backend local ne sert qu'en développement).
 
 ## Structure
 
