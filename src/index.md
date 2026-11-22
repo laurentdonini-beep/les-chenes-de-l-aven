@@ -5,10 +5,10 @@ description: Les Chênes de l'Aven, chambres d'hôtes à Orgnac-l'Aven en Ardèc
 ---
 <section class="hero">
   <div class="hero-slider" id="hero-slider">
-    <img src="/assets/img/photos/carousel-1.jpg" alt="La maison Les Chênes de l'Aven" class="hero-img active" decoding="async">
-    <img src="/assets/img/photos/carousel-2.jpg" alt="La piscine et sa terrasse" class="hero-img" loading="lazy">
+    <img src="/assets/img/photos/carousel-2.jpg" alt="La piscine des Chênes de l'Aven" class="hero-img active" decoding="async">
     <img src="/assets/img/photos/carousel-3.jpg" alt="La piscine et les chaises longues" class="hero-img" loading="lazy">
     <img src="/assets/img/photos/carousel-4.jpg" alt="La terrasse de la piscine" class="hero-img" loading="lazy">
+    <img src="/assets/img/photos/carousel-1.jpg" alt="La maison Les Chênes de l'Aven" class="hero-img" loading="lazy">
     <button class="hero-arrow hero-prev" id="hero-prev" aria-label="Photo précédente">‹</button>
     <button class="hero-arrow hero-next" id="hero-next" aria-label="Photo suivante">›</button>
     <div class="hero-dots" id="hero-dots"></div>
@@ -79,7 +79,7 @@ description: Les Chênes de l'Aven, chambres d'hôtes à Orgnac-l'Aven en Ardèc
 
 <section class="section container">
   <div class="split reveal">
-    <img src="/assets/img/photos/maison.jpg" alt="La maison et sa piscine" class="split-img" loading="lazy" decoding="async">
+    <img src="/assets/img/photos/piscine.jpg" alt="La piscine et le jardin des Chênes de l'Aven" class="split-img" loading="lazy" decoding="async">
     <div class="split-text">
       <h2>La maison</h2>
       <p>Nous avons agrandi notre maison familiale pour y créer vos chambres d'hôtes et plusieurs espaces dédiés à votre confort : solarium, pièce commune, terrasse et piscine.</p>
