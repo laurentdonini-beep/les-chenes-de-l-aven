@@ -19,6 +19,28 @@ npm run build      # génère le site dans _site/
 npm start          # serveur local sur http://localhost:8080
 ```
 
+## Synchronisation automatique (pull auto)
+
+Scripts fournis : `scripts/sync-pull.sh` (Mac/Linux) et `scripts/sync-pull.bat` (Windows).
+Ils font `git fetch` + `git pull --ff-only` : **rien n'est jamais écrasé** — si tu as des
+modifications locales non publiées, le pull est simplement refusé (publie-les d'abord avec
+Commit + Push dans GitHub Desktop, puis relance). La commande `git` en ligne de commande
+réutilise la connexion de GitHub Desktop, donc aucun mot de passe à ressaisir.
+
+**Windows** (Planificateur de tâches) : créer une tâche « Sync les-chenes-de-l-aven »,
+déclencheur « toutes les 15 minutes », action = exécuter
+`<dossier du dépôt>\scripts\sync-pull.bat` avec « Démarrer dans » = le dossier du dépôt.
+
+**Mac / Linux** (cron) :
+```bash
+crontab -e
+# ajouter cette ligne (adapter le chemin) :
+*/15 * * * * cd "$HOME/Documents/GitHub/les-chenes-de-l-aven" && git pull --ff-only origin main >> "$HOME/les-chenes-sync.log" 2>&1
+```
+
+Alternative sans rien installer : GitHub Desktop récupère automatiquement les nouveautés
+quand il est ouvert — il ne reste plus qu'un clic sur **Pull origin**.
+
 ## Administration (pour ta tante)
 
 ### En local (pour tester)
