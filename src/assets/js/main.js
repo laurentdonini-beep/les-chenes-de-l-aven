@@ -157,3 +157,56 @@ if (heroSlider) {
   heroSlider.addEventListener("mouseleave", restart);
   restart();
 }
+
+// Galerie "best grid" (style Modula) : rangees de hauteur egale, bas aligne
+let imgSizes = null;
+function layoutGalleries() {
+  const gap = window.innerWidth <= 640 ? 8 : 12;
+  document.querySelectorAll(".gallery-grid").forEach((grid) => {
+    grid.querySelectorAll(".g-row").forEach((row) => {
+      while (row.firstChild) grid.appendChild(row.firstChild);
+      row.remove();
+    });
+    const imgs = Array.from(grid.querySelectorAll("img"));
+    if (!imgs.length) return;
+    const W = grid.clientWidth;
+    if (!W) return;
+    const targetH = Math.max(160, Math.min(300, W / 3));
+    const items = imgs.map((im) => {
+      const src = im.getAttribute("src") || "";
+      const key = src.replace(/^\/assets\/img\//, "").split("?")[0];
+      const s = (imgSizes && imgSizes[key]) || (im.naturalWidth ? [im.naturalWidth, im.naturalHeight] : null);
+      return { im, a: s && s[1] ? s[0] / s[1] : 1 };
+    });
+    let row = [], rowA = 0;
+    const flush = (isLast) => {
+      if (!row.length) return;
+      let h = (W - gap * (row.length - 1)) / rowA;
+      if (isLast && h > targetH) h = targetH;
+      const div = document.createElement("div");
+      div.className = "g-row";
+      div.style.height = h + "px";
+      row.forEach((it) => {
+        it.im.style.height = h + "px";
+        it.im.style.width = Math.round(it.a * h) + "px";
+        div.appendChild(it.im);
+      });
+      grid.appendChild(div);
+      row = []; rowA = 0;
+    };
+    items.forEach((it, i) => {
+      row.push(it); rowA += it.a;
+      if (rowA * targetH + gap * (row.length - 1) >= W || i === items.length - 1) flush(i === items.length - 1);
+    });
+  });
+}
+fetch("/assets/js/img-sizes.json")
+  .then((r) => (r.ok ? r.json() : null))
+  .then((j) => { imgSizes = j; layoutGalleries(); })
+  .catch(() => layoutGalleries());
+let galResizeTimer = null;
+window.addEventListener("resize", () => {
+  clearTimeout(galResizeTimer);
+  galResizeTimer = setTimeout(layoutGalleries, 150);
+});
+window.addEventListener("load", layoutGalleries);
