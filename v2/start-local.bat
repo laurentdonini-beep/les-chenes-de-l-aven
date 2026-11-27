@@ -11,6 +11,7 @@ REM ============================================================
 cd /d "%~dp0"
 
 REM --- Verification de Java (JDK 21 requis par Spring Boot) ---
+REM On ne fait PAS confiance a un JAVA_HOME existant : on le recalcule a chaque lancement.
 where java >nul 2>&1
 if errorlevel 1 (
   echo ERREUR : Java n'est pas detecte sur ce PC.
@@ -19,12 +20,24 @@ if errorlevel 1 (
   pause
   exit /b 1
 )
-if "%JAVA_HOME%"=="" (
-  for /f "delims=" %%i in ('where java') do set "JAVABIN=%%i"
-  set "JAVA_HOME=%JAVABIN:\bin\java.exe=%"
-  echo JAVA_HOME defini automatiquement : %JAVA_HOME%
+set "JAVABIN="
+for /f "delims=" %%i in ('where java') do if not defined JAVABIN set "JAVABIN=%%i"
+set "JAVA_HOME=%JAVABIN:\bin\java.exe=%"
+if not exist "%JAVA_HOME%\bin\java.exe" (
+  REM where java a retourne un chemin etrange : on cherche le JDK dans les dossiers standards
+  for /d %%d in ("C:\Program Files\Eclipse Adoptium\jdk-*" "C:\Program Files\Java\jdk-*" "C:\Program Files\Microsoft\jdk-*" "C:\Program Files\Amazon Corretto\jdk*" "C:\Program Files\Zulu\zulu-*") do (
+    if exist "%%d\bin\java.exe" set "JAVA_HOME=%%d"
+  )
 )
-java -version
+if not exist "%JAVA_HOME%\bin\java.exe" (
+  echo ERREUR : impossible de trouver le dossier du JDK (JAVA_HOME).
+  echo Definit-le manuellement : recherche Windows "variables d'environnement" -^> Nouvelle variable
+  echo Nom : JAVA_HOME   Valeur : le dossier du JDK 21, ex : C:\Program Files\Eclipse Adoptium\jdk-21.0.7.6-hotspot
+  pause
+  exit /b 1
+)
+echo JAVA_HOME = %JAVA_HOME%
+"%JAVA_HOME%\bin\java.exe" -version
 
 echo [1/3] Installation des dependances du front (si besoin)...
 cd frontend
