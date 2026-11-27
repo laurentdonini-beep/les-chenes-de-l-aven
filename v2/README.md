@@ -20,7 +20,11 @@ Le backoffice `/bo` (login + gestion des disponibilités + saison) remplace l'an
 
 Prérequis : **Node.js 22+** et **Java 21+** (JDK Temurin), rien d'autre (le Maven Wrapper `mvnw` est fourni).
 
-**Windows** : double-clic sur `v2\start-local.bat`
+**Windows (méthode recommandée, une seule commande dans PowerShell)** :
+```powershell
+powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\Documents\GitHub\les-chenes-de-l-aven\v2\start-local.ps1"
+```
+(ou double-clic sur `v2\start-local.bat` dans l'Explorateur — le fichier est en CRLF)
 **Linux/Mac** : `./v2/start-local.sh`
 
 Puis ouvrir **http://localhost:8080** — le site complet (front Angular buildé servi par Spring).
