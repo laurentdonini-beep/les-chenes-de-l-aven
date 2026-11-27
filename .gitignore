@@ -2,6 +2,5 @@ node_modules/
 _site/
 .DS_Store
 v2/frontend/node_modules/
-v2/frontend/dist/
 v2/backend/target/
 v2/backend/data/

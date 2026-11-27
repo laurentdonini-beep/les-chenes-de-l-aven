@@ -147,3 +147,5 @@ v2/
    ├─ config/               SecurityConfig (session+CSRF+CORS), DataSeeder, SpaFallbackFilter
    └─ resources/seed/       contenu initial (site.json, chambres, disponibilités)
 ```
+
+> **Note** : le build du front (`v2/frontend/dist/`) est **commité dans le dépôt** — pas besoin de lancer `ng build` en local pour faire tourner le site (utile si esbuild est bloqué par l'antivirus : `spawn EPERM`). Le script `start-local.ps1` ne rebuild que si `src/` a changé ; s'il ne peut pas builder, il continue avec le `dist/` existant.

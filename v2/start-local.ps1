@@ -69,12 +69,18 @@ if ($needBuild) {
         npx ng build
     }
     if ($LASTEXITCODE -ne 0) {
-        Write-Host "ERREUR ng build. Causes possibles : Node > 22 (installe Node 22 LTS), antivirus qui bloque"
-        Write-Host "node_modules\@esbuild (ajoute le dossier du depot aux exclusions de Windows Defender),"
-        Write-Host "ou processus node bloques :  taskkill /F /IM node.exe   puis relance."
-        Read-Host "Entree"
-        Pop-Location
-        exit 1
+        if (Test-Path "dist\frontend\browser\index.html") {
+            Write-Host "ATTENTION : ng build impossible ici (spawn EPERM = binaire esbuild bloque, souvent antivirus),"
+            Write-Host "mais un build dist/ existe deja (commite dans le depot) -> on continue avec."
+            Write-Host "Pour corriger plus tard : exclusions Windows Defender sur le dossier du depot, puis npm rebuild esbuild."
+        } else {
+            Write-Host "ERREUR ng build et aucun dist existant. Causes : antivirus bloque esbuild.exe"
+            Write-Host "(ajoute le dossier du depot aux exclusions Defender, puis npm rebuild esbuild), Node trop vieux"
+            Write-Host "(Angular 22 exige >= 22.22.3 ou >= 24.15.0), ou processus bloques : taskkill /F /IM node.exe"
+            Read-Host "Entree"
+            Pop-Location
+            exit 1
+        }
     }
 } else {
     Write-Host "  (dist a jour, build ignore)"
