@@ -15,11 +15,14 @@ if (-not $node) {
     exit 1
 }
 $nodeVer = (& node -v)
-$nodeMajor = [int](($nodeVer -replace 'v', '').Split('.')[0])
+$parts = ($nodeVer -replace 'v', '').Split('.')
+$nodeMajor = [int]$parts[0]; $nodeMinor = [int]$parts[1]
 Write-Host "Node.js $nodeVer"
-if ($nodeMajor -gt 22) {
-    Write-Host "ATTENTION : Angular 19 supporte Node 22 LTS maximum (toi: $nodeVer)."
-    Write-Host "Installe Node 22 LTS (https://nodejs.org, bouton LTS), ouvre une NOUVELLE fenetre PowerShell, puis relance ce script."
+# Angular 22 exige : node ^22.22.3 || ^24.15.0 || >=26.0.0
+$nodeOk = ($nodeMajor -ge 26) -or ($nodeMajor -eq 24 -and $nodeMinor -ge 15) -or ($nodeMajor -eq 22 -and $nodeMinor -ge 22)
+if (-not $nodeOk) {
+    Write-Host "ATTENTION : Angular 22 exige Node >= 22.22.3 ou >= 24.15.0 (toi: $nodeVer)."
+    Write-Host "Installe la derniere version de https://nodejs.org (LTS ou Current), ouvre une NOUVELLE fenetre PowerShell, puis relance ce script."
 }
 
 # --- Java (JDK 21 requis par Spring Boot) ---

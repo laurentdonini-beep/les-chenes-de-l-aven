@@ -3,7 +3,7 @@
 Même design que le site v1, mais architecture « vraie app » :
 
 ```
-Navigateur ──► Angular 19 (SPA, dans v2/frontend)
+Navigateur ──► Angular 22 (SPA, dans v2/frontend)
                   │  appels REST (/api/...)
                   ▼
             Spring Boot 3 + Java 21 (v2/backend)
@@ -18,7 +18,7 @@ Le backoffice `/bo` (login + gestion des disponibilités + saison) remplace l'an
 
 ## Lancer en local (le plus simple)
 
-Prérequis : **Node.js 22+** et **Java 21+** (JDK Temurin), rien d'autre (le Maven Wrapper `mvnw` est fourni).
+Prérequis : **Node.js ≥ 22.22.3 ou ≥ 24.15.0** (Angular 22)  et **Java 21+** (JDK Temurin), rien d'autre (le Maven Wrapper `mvnw` est fourni).
 
 **Windows (méthode recommandée, une seule commande dans PowerShell)** :
 ```powershell
@@ -135,7 +135,7 @@ Le backend sert le dossier du front via la variable `FRONTEND_DIR`
 
 ```
 v2/
-├─ frontend/            Angular 19 (standalone, signaux, lazy routes)
+├─ frontend/            Angular 22 (standalone, signaux, lazy routes)
 │  ├─ src/app/core/     models, SiteService, ApiService, AuthService, SeoService
 │  ├─ src/app/shared/   carrousel hero, lightbox, calendrier dispo, galerie, reveal
 │  ├─ src/app/pages/    accueil, la-maison, chambres, chambre, spa, activités, galerie, contact, crédits, /bo
