@@ -60,7 +60,7 @@ import { RevealDirective } from '../shared/reveal.directive';
               <p class="form-ok">✅ Merci {{ form.nom }} ! Votre demande a bien été envoyée à {{ s.email }}. Nous vous répondons sous 24–48 h.</p>
               <p><button type="button" class="btn btn-outline" (click)="sent.set(false)">Envoyer une autre demande</button></p>
             } @else {
-              <form #f="ngForm" (ngSubmit)="submit(f)">
+              <form id="contact-form" #f="ngForm" (ngSubmit)="submit(f)">
                 <div class="form-row">
                   <label>Nom *
                     <input type="text" name="nom" [(ngModel)]="form.nom" required>
