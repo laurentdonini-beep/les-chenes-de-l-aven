@@ -10,6 +10,22 @@ REM       set ADMIN_PASSWORD=monmotdepasse   puis start-local.bat
 REM ============================================================
 cd /d "%~dp0"
 
+REM --- Verification de Java (JDK 21 requis par Spring Boot) ---
+where java >nul 2>&1
+if errorlevel 1 (
+  echo ERREUR : Java n'est pas detecte sur ce PC.
+  echo Installe Eclipse Temurin JDK 21 : https://adoptium.net/temurin/releases/?version=21
+  echo Pendant l'installation, laisse coches "Add to PATH" et "Set JAVA_HOME variable".
+  pause
+  exit /b 1
+)
+if "%JAVA_HOME%"=="" (
+  for /f "delims=" %%i in ('where java') do set "JAVABIN=%%i"
+  set "JAVA_HOME=%JAVABIN:\bin\java.exe=%"
+  echo JAVA_HOME defini automatiquement : %JAVA_HOME%
+)
+java -version
+
 echo [1/3] Installation des dependances du front (si besoin)...
 cd frontend
 if not exist node_modules (

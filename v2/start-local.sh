@@ -9,6 +9,18 @@
 # ============================================================
 cd "$(dirname "$0")"
 
+# --- Vérification de Java (JDK 21 requis par Spring Boot) ---
+if ! command -v java >/dev/null 2>&1; then
+  echo "ERREUR : Java n'est pas installé. Installe un JDK 21 (ex: https://adoptium.net/temurin/releases/?version=21)"
+  exit 1
+fi
+if [ -z "$JAVA_HOME" ] && command -v java >/dev/null 2>&1; then
+  JAVABIN=$(command -v java)
+  export JAVA_HOME="${JAVABIN%/bin/java}"
+  echo "JAVA_HOME défini automatiquement : $JAVA_HOME"
+fi
+java -version
+
 echo "[1/3] Installation des dépendances du front (si besoin)..."
 cd frontend
 if [ ! -d node_modules ]; then
