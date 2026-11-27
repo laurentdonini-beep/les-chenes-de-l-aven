@@ -7,6 +7,21 @@
 # ============================================================
 $root = $PSScriptRoot
 
+# --- Node.js (22 LTS recommande ; Angular 19 ne supporte pas Node > 22) ---
+$node = Get-Command node -ErrorAction SilentlyContinue
+if (-not $node) {
+    Write-Host "ERREUR : Node.js introuvable. Installe Node 22 LTS : https://nodejs.org (bouton LTS)"
+    Read-Host "Entree pour quitter"
+    exit 1
+}
+$nodeVer = (& node -v)
+$nodeMajor = [int](($nodeVer -replace 'v', '').Split('.')[0])
+Write-Host "Node.js $nodeVer"
+if ($nodeMajor -gt 22) {
+    Write-Host "ATTENTION : Angular 19 supporte Node 22 LTS maximum (toi: $nodeVer)."
+    Write-Host "Installe Node 22 LTS (https://nodejs.org, bouton LTS), ouvre une NOUVELLE fenetre PowerShell, puis relance ce script."
+}
+
 # --- Java (JDK 21 requis par Spring Boot) ---
 $java = Get-Command java -ErrorAction SilentlyContinue
 if (-not $java) {
@@ -30,7 +45,7 @@ if (-not (Test-Path "node_modules")) {
     if ($LASTEXITCODE -ne 0) { Write-Host "ERREUR npm install"; Read-Host "Entree"; exit 1 }
 }
 
-# --- [2/3] Build du front : OBLIGATOIRE si dist absent OU si src/public plus recent que dist ---
+# --- [2/3] Build du front : si dist absent OU si src/public plus recent que dist ---
 Write-Host "[2/3] Build du front Angular (si besoin)..."
 $distIndex = "dist\frontend\browser\index.html"
 $needBuild = -not (Test-Path $distIndex)
@@ -43,7 +58,21 @@ if (-not $needBuild) {
 if ($needBuild) {
     Write-Host "npx ng build..."
     npx ng build
-    if ($LASTEXITCODE -ne 0) { Write-Host "ERREUR ng build"; Read-Host "Entree"; exit 1 }
+    if ($LASTEXITCODE -ne 0) {
+        # Auto-reparation : spawn EPERM = binaire esbuild bloque/corrompu (souvent antivirus)
+        Write-Host "  Build echoue -> tentative de reparation : npm rebuild esbuild, puis nouvel essai..."
+        npm rebuild esbuild
+        Start-Sleep -Seconds 2
+        npx ng build
+    }
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "ERREUR ng build. Causes possibles : Node > 22 (installe Node 22 LTS), antivirus qui bloque"
+        Write-Host "node_modules\@esbuild (ajoute le dossier du depot aux exclusions de Windows Defender),"
+        Write-Host "ou processus node bloques :  taskkill /F /IM node.exe   puis relance."
+        Read-Host "Entree"
+        Pop-Location
+        exit 1
+    }
 } else {
     Write-Host "  (dist a jour, build ignore)"
 }
