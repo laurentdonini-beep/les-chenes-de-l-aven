@@ -5,8 +5,8 @@ REM  Double-clic sur ce fichier, puis ouvrir http://localhost:8080
 REM  Backoffice : http://localhost:8080/bo
 REM    email    : admin@leschenesdelaven.fr
 REM    password : variable ADMIN_PASSWORD (defaut : change-me)
-REM    pour changer : set ADMIN_PASSWORD=monmotdepasse puis lancer
 REM  Depuis PowerShell :  .\start-local.bat   (avec .\ devant !)
+REM  Note : le front est TOUJOURS rebuild (rapide) pour eviter de servir un vieux CSS.
 REM ============================================================
 cd /d "%~dp0"
 
@@ -44,10 +44,12 @@ if not exist node_modules (
   call npm install
 )
 
-echo [2/3] Build du front Angular (si besoin)...
-if not exist dist\frontend\browser\index.html (
-  echo npx ng build...
-  call npx ng build
+echo [2/3] Build du front Angular (toujours, pour etre sur du CSS a jour)...
+call npx ng build
+if errorlevel 1 (
+  echo ERREUR ng build
+  pause
+  exit /b 1
 )
 cd ..
 
@@ -55,5 +57,6 @@ echo [3/3] Demarrage du backend Spring Boot (API + site sur http://localhost:808
 echo      Premier lancement : telecharge Maven + dependances, quelques minutes.
 cd backend
 if "%ADMIN_PASSWORD%"=="" set ADMIN_PASSWORD=change-me
+echo Backoffice /bo : email admin@leschenesdelaven.fr / mot de passe = %ADMIN_PASSWORD%
 call mvnw.cmd spring-boot:run
 pause

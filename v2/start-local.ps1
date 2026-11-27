@@ -30,12 +30,22 @@ if (-not (Test-Path "node_modules")) {
     if ($LASTEXITCODE -ne 0) { Write-Host "ERREUR npm install"; Read-Host "Entree"; exit 1 }
 }
 
-# --- [2/3] Build du front ---
+# --- [2/3] Build du front : OBLIGATOIRE si dist absent OU si src/public plus recent que dist ---
 Write-Host "[2/3] Build du front Angular (si besoin)..."
-if (-not (Test-Path "dist\frontend\browser\index.html")) {
+$distIndex = "dist\frontend\browser\index.html"
+$needBuild = -not (Test-Path $distIndex)
+if (-not $needBuild) {
+    $distTime = (Get-Item $distIndex).LastWriteTime
+    $newer = Get-ChildItem -Path "src", "public", "angular.json", "package.json" -Recurse -File -ErrorAction SilentlyContinue |
+             Where-Object { $_.LastWriteTime -gt $distTime }
+    if ($newer) { $needBuild = $true; Write-Host "  (sources modifies depuis le dernier build -> rebuild)" }
+}
+if ($needBuild) {
     Write-Host "npx ng build..."
     npx ng build
     if ($LASTEXITCODE -ne 0) { Write-Host "ERREUR ng build"; Read-Host "Entree"; exit 1 }
+} else {
+    Write-Host "  (dist a jour, build ignore)"
 }
 Pop-Location
 
