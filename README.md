@@ -121,3 +121,11 @@ Pour en ajouter/changer via l'admin : `/admin` → collection « Chambres » (ch
 2. Sur Netlify : "Add new site → Import from Git", branche `main`, commande `npm run build`, dossier `_site`.
 3. Activer Identity, inviter ta tante par email.
 4. Faire pointer le nom de domaine `leschenesdelaven.com` vers Netlify (DNS) — ou garder le .fr.
+
+---
+
+## v2 — version Angular + Spring Boot (branche `vibe/angular-spring-35f94a`)
+
+Le site existe maintenant en deux versions :
+- **v1 (racine, `src/`, branche `main`)** : Eleventy statique + Decap CMS, déployable gratuitement sur Netlify — **toujours fonctionnelle, gardée comme secours**.
+- **v2 (`v2/`)** : application Angular 19 + API Spring Boot 3 (Java 21) + base H2, backoffice `/bo` sécurisé. Voir **`v2/README.md`** pour le lancement local et le déploiement sur VPS (Hetzner ~4,5 €/mois, Nginx + HTTPS, DNS).

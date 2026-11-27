@@ -1,0 +1,95 @@
+[
+  {
+    "slug": "chene-vert",
+    "titre": "Chêne Vert",
+    "ordre": 2,
+    "surface": "12 m²",
+    "capacite": "1–2 personnes",
+    "resume": "Chambre à l'étage, accès par l'escalier extérieur et solarium, vue sur les chênes.",
+    "image": "/assets/img/photos/chambre-chene-vert.jpg",
+    "contenuHtml": "<p>Chambre de 12 m² à l'étage, face à la chambre Marron Glacé. Même accès par l'escalier extérieur et le solarium commun, avec vue sur les chênes qui donnent leur nom à la maison.</p>\n",
+    "equipements": [
+      "Lit en 160 cm",
+      "Cabinet de toilette (douche, lavabo, sèche-cheveux, WC)",
+      "Climatisation fixe",
+      "Vue sur les chênes, exposition ouest",
+      "Accès par l'escalier extérieur, solarium commun"
+    ],
+    "photos": [
+      "/assets/img/photos/chambre-chene-vert-2.jpg",
+      "/assets/img/photos/chambre-chene-vert-3.jpg",
+      "/assets/img/photos/chambre-chene-vert-4.jpg",
+      "/assets/img/photos/chambre-chene-vert-5.jpg"
+    ]
+  },
+  {
+    "slug": "marron-glace",
+    "titre": "Marron Glacé",
+    "ordre": 1,
+    "surface": "12 m²",
+    "capacite": "1–2 personnes",
+    "resume": "Chambre à l'étage avec accès par l'escalier extérieur et solarium commun, vue sur la piscine.",
+    "image": "/assets/img/photos/chambre-marron-glace.jpg",
+    "contenuHtml": "<p>Chambre de 12 m² à l'étage, face à la chambre Chêne Vert. L'accès se fait par l'escalier extérieur qui donne sur un solarium commun, et vous disposez d'une pièce commune à partager avec les autres hôtes.</p>\n",
+    "equipements": [
+      "Lit en 160 cm",
+      "Cabinet de toilette (douche, lavabo, sèche-cheveux, WC)",
+      "Climatisation fixe",
+      "Vue sur la piscine, exposition est",
+      "Accès par l'escalier extérieur, solarium commun"
+    ],
+    "photos": [
+      "/assets/img/photos/chambre-marron-glace-2.jpg",
+      "/assets/img/photos/chambre-marron-glace-3.jpg",
+      "/assets/img/photos/chambre-marron-glace-4.jpg",
+      "/assets/img/photos/chambre-marron-glace-5.jpg",
+      "/assets/img/photos/chambre-marron-glace-6.jpg",
+      "/assets/img/photos/chambre-marron-glace-7.jpg"
+    ]
+  },
+  {
+    "slug": "petite-lauze",
+    "titre": "Petite-Lauze",
+    "ordre": 4,
+    "surface": "20 m²",
+    "capacite": "1–2 personnes",
+    "resume": "Chambre indépendante en rez-de-chaussée, avec vestibule équipé d'un petit frigo.",
+    "image": "/assets/img/photos/chambre-petite-lauze.jpg",
+    "contenuHtml": "<p>Située en rez-de-chaussée, la chambre Petite-Lauze est indépendante de notre maison : c'est une construction de 20 m² comprenant un vestibule équipé d'un petit frigo.</p>\n",
+    "equipements": [
+      "Lit en 160 cm",
+      "Cabinet de toilette (douche, lavabo, sèche-cheveux)",
+      "WC séparé",
+      "Vestibule avec petit frigo",
+      "Climatisation fixe",
+      "Entrée indépendante en rez-de-chaussée"
+    ],
+    "photos": [
+      "/assets/img/photos/chambre-petite-lauze-2.jpg",
+      "/assets/img/photos/chambre-petite-lauze-3.jpg",
+      "/assets/img/photos/chambre-petite-lauze-4.jpg"
+    ]
+  },
+  {
+    "slug": "pitchouline",
+    "titre": "Pitchouline",
+    "ordre": 3,
+    "surface": "16 m²",
+    "capacite": "1–2 personnes",
+    "resume": "Chambre avec terrasse privative et bains de soleil, face aux oliviers.",
+    "image": "/assets/img/photos/chambre-pitchouline.jpg",
+    "contenuHtml": "<p>L'accès se fait par 3 marches qui donnent sur une terrasse privative, avec bains de soleil, face à nos oliviers. Chambre de 16 m².</p>\n",
+    "equipements": [
+      "Lit en 160 cm",
+      "Cabinet de toilette (douche, lavabo, sèche-cheveux, WC)",
+      "Climatiseur portatif",
+      "Terrasse privative avec bains de soleil, face aux oliviers"
+    ],
+    "photos": [
+      "/assets/img/photos/chambre-pitchouline-2.jpg",
+      "/assets/img/photos/chambre-pitchouline-3.jpg",
+      "/assets/img/photos/chambre-pitchouline-4.jpg",
+      "/assets/img/photos/chambre-pitchouline-5.jpg"
+    ]
+  }
+]

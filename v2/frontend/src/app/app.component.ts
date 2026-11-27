@@ -1,0 +1,35 @@
+import { Component, inject, signal } from '@angular/core';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { filter } from 'rxjs';
+import { SiteService } from './core/site.service';
+import { SeoService } from './core/seo.service';
+import { LightboxService } from './shared/lightbox.service';
+import { LightboxComponent } from './shared/lightbox.component';
+
+@Component({
+  selector: 'app-root',
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, LightboxComponent],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
+})
+export class AppComponent {
+  readonly site = inject(SiteService).site;
+  readonly year = new Date().getFullYear();
+  readonly navOpen = signal(false);
+
+  private router = inject(Router);
+  private lightbox = inject(LightboxService);
+
+  constructor() {
+    inject(SeoService).init();
+    // à chaque navigation : fermer le menu mobile et vider la lightbox
+    this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe(() => {
+      this.navOpen.set(false);
+      this.lightbox.reset();
+    });
+  }
+
+  toggleNav(): void {
+    this.navOpen.update(v => !v);
+  }
+}
