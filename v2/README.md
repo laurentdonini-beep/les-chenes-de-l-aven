@@ -16,20 +16,37 @@ Navigateur ──► Angular 19 (SPA, dans v2/frontend)
 
 Le backoffice `/bo` (login + gestion des disponibilités + saison) remplace l'ancien `/bo/` statique et Decap CMS.
 
-## Lancer en local (dev)
+## Lancer en local (le plus simple)
 
-Prérequis : Node 22+, Java 21+, Maven 3.9+.
+Prérequis : **Node.js 22+** et **Java 21+** (JDK Temurin), rien d'autre (le Maven Wrapper `mvnw` est fourni).
+
+**Windows** : double-clic sur `v2\start-local.bat`
+**Linux/Mac** : `./v2/start-local.sh`
+
+Puis ouvrir **http://localhost:8080** — le site complet (front Angular buildé servi par Spring).
+Backoffice : **http://localhost:8080/bo** — email `admin@leschenesdelaven.fr`, mot de passe = variable
+`ADMIN_PASSWORD` (défaut `change-me` ; pour le changer : `set ADMIN_PASSWORD=...` avant le `.bat`, ou
+`ADMIN_PASSWORD=... ./start-local.sh`).
+
+La base de données H2 est un fichier dans `v2/backend/data/` : elle persiste entre les lancements
+(les réservations ajoutées dans `/bo` restent). Pour repartir à zéro : supprimer ce dossier.
+
+### Mode développement (rechargement à chaud du front)
 
 ```bash
-# Terminal 1 — le backend (API + sert le front buildé si présent)
-cd v2/backend
-mvn spring-boot:run            # ou : mvn package puis java -jar target/api-1.0.0.jar
-# variables utiles en local : ADMIN_EMAIL / ADMIN_PASSWORD (défaut : admin@leschenesdelaven.fr / change-me)
+# Terminal 1 — le backend
+cd v2/backend && ./mvnw spring-boot:run        # API sur http://localhost:8080
 
-# Terminal 2 — le front en mode dev (proxy /api -> localhost:8080)
-cd v2/frontend
-npm install
-npx ng serve                   # http://localhost:4200
+# Terminal 2 — le front en dev (proxy /api -> 8080)
+cd v2/frontend && npm install && npx ng serve  # http://localhost:4200
+```
+
+### Commandes à la main (équivalent)
+
+```bash
+cd v2/frontend && npm install && npx ng build   # -> dist/frontend/browser
+cd v2/backend  && ./mvnw -DskipTests package     # -> target/api-1.0.0.jar (Maven n'est pas requis : mvnw suffit)
+cd v2/backend  && ./mvnw spring-boot:run         # sert API + front sur http://localhost:8080
 ```
 
 Au premier démarrage, le backend peuple la base H2 depuis `src/main/resources/seed/`
