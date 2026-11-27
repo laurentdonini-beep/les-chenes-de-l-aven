@@ -524,3 +524,17 @@ main img.zoomable { cursor: zoom-in; }
 }
 .cal-day.closed { background: #ddd6c6; color: #a49c8a; }
 .legend .swatch.closed { background: #ddd6c6; }
+
+/* ---------- Backoffice (/bo) ---------- */
+.bo-nav { display: flex; align-items: center; gap: 0.4rem 0.9rem; flex-wrap: wrap; margin: 2.2rem 0 1.2rem; padding-bottom: 0.9rem; border-bottom: 2px solid var(--sable); }
+.bo-nav-title { font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; color: var(--vert); margin-right: 0.6rem; }
+.bo-nav a { text-decoration: none; color: var(--texte-doux); font-weight: 600; font-size: 0.92rem; padding: 0.35rem 0.85rem; border-radius: 999px; transition: background 0.2s, color 0.2s; }
+.bo-nav a:hover { color: var(--vert); }
+.bo-nav a.active { background: var(--vert); color: var(--blanc); }
+.bo-nav-user { margin-left: auto; color: var(--texte-doux); font-size: 0.85rem; }
+.bo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; align-items: start; }
+@media (max-width: 900px) { .bo-grid { grid-template-columns: 1fr; } }
+.bo-msg { border-radius: 8px; padding: 0.6rem 0.9rem; margin-bottom: 1rem; }
+.bo-msg.ok { background: #e6f2e8; color: #22392c; }
+.bo-msg.err { background: #fdecea; color: #b3261e; }
+.bo-note { color: var(--texte-doux); font-size: 0.85rem; }

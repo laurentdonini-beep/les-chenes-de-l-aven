@@ -3,7 +3,8 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DomSanitizer, Meta, Title } from '@angular/platform-browser';
 import { ApiService } from '../core/api.service';
 import { SiteService } from '../core/site.service';
-import { ChambreDetail } from '../core/models';
+import { ChambreDetail, Reservation } from '../core/models';
+import { resumeDispo } from '../shared/dispo-utils';
 import { RevealDirective } from '../shared/reveal.directive';
 import { GalleryGridComponent, GalleryImage } from '../shared/gallery-grid.component';
 import { CalendarComponent } from '../shared/calendar.component';
@@ -53,6 +54,17 @@ import { DateFRPipe } from '../shared/date-fr.pipe';
                 <p class="legend"><span class="swatch"></span> disponible &nbsp; <span class="swatch booked"></span> réservé &nbsp; <span class="swatch closed"></span> fermé (hors saison)</p>
                 <p class="bo-note" style="margin-bottom: 0.8rem;">Saison : du {{ s.saison.debut | dateFR }} au {{ s.saison.fin | dateFR }} ({{ s.ouverture.toLowerCase() }}).</p>
                 <app-calendar [room]="c.slug" />
+                @if (resumeDispo(); as r) {
+                  <p class="bo-note" style="margin-top: 0.8rem;">
+                    @if (r.terminee) {
+                      La saison est terminée (fin le {{ r.fin | dateFR }}).
+                    } @else if (r.complet) {
+                      🔴 <strong>Complet</strong> — plus aucune nuit disponible jusqu'au {{ r.fin | dateFR }}.
+                    } @else {
+                      🟢 <strong>{{ r.libres }} nuit{{ r.libres > 1 ? 's' : '' }}</strong> encore disponible{{ r.libres > 1 ? 's' : '' }} jusqu'au {{ r.fin | dateFR }} (sur {{ r.total }} restantes).
+                    }
+                  </p>
+                }
               </section>
             </div>
             <aside class="room-aside">
@@ -90,6 +102,11 @@ export class ChambreDetailComponent implements OnInit {
   readonly site = this.siteSvc.site;
   readonly chambre = signal<ChambreDetail | null>(null);
   readonly notFound = signal(false);
+  readonly dispo = signal<Reservation[]>([]);
+
+  /** Résumé dispo : nuits libres restantes, ou « complet » si plus rien. */
+  readonly resumeDispo = computed(() =>
+    resumeDispo(this.site()?.saison ?? null, this.dispo(), this.chambre()?.slug ?? ''));
 
   readonly contenuHtml = computed(() => {
     const c = this.chambre();
@@ -103,6 +120,7 @@ export class ChambreDetailComponent implements OnInit {
 
   ngOnInit(): void {
     const slug = this.route.snapshot.paramMap.get('slug') ?? '';
+    this.api.disponibilites(slug).subscribe(r => this.dispo.set(r));
     this.api.chambre(slug).subscribe({
       next: c => {
         this.chambre.set(c);

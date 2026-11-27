@@ -72,15 +72,28 @@ export const routes: Routes = [
     }
   },
   {
-    path: 'bo',
-    loadComponent: () => import('./pages/bo-dashboard.component').then(m => m.BoDashboardComponent),
-    canActivate: [authGuard],
-    data: { title: 'Backoffice' }
-  },
-  {
     path: 'bo/login',
     loadComponent: () => import('./pages/bo-login.component').then(m => m.BoLoginComponent),
     data: { title: 'Connexion — Backoffice' }
+  },
+  {
+    path: 'bo',
+    pathMatch: 'full',
+    loadComponent: () => import('./pages/bo-dashboard.component').then(m => m.BoDashboardComponent),
+    canActivate: [authGuard],
+    data: { title: 'Tableau de bord — Backoffice' }
+  },
+  {
+    path: 'bo/reservations',
+    loadComponent: () => import('./pages/bo-reservations.component').then(m => m.BoReservationsComponent),
+    canActivate: [authGuard],
+    data: { title: 'Réservations — Backoffice' }
+  },
+  {
+    path: 'bo/calendriers',
+    loadComponent: () => import('./pages/bo-calendars.component').then(m => m.BoCalendarsComponent),
+    canActivate: [authGuard],
+    data: { title: 'Saison & calendriers — Backoffice' }
   },
   {
     path: '**',
