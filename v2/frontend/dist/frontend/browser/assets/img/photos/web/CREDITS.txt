@@ -1,0 +1,16 @@
+# Crédits des photos externes (Wikimedia Commons)
+
+- `photos/web/aven-orgnac.jpg` — File:Musée Aven d'Orgnac Ardèche 9.jpg — Selmoval — licence CC BY-SA 4.0 — https://commons.wikimedia.org/wiki/File:Mus%C3%A9e_Aven_d%27Orgnac_Ard%C3%A8che_9.jpg
+- `photos/web/pont-darc.jpg` — File:Pont d'Arc 2015 - 02.JPG — Superjuju10 — licence CC BY-SA 4.0 — https://commons.wikimedia.org/wiki/File:Pont_d%27Arc_2015_-_02.JPG
+- `photos/web/canoe-ardeche.jpg` — File:Canoë en bas des Gorges de l'Ardèche.jpg — Celeda — licence CC BY-SA 4.0 — https://commons.wikimedia.org/wiki/File:Cano%C3%AB_en_bas_des_Gorges_de_l%27Ard%C3%A8che.jpg
+- `photos/web/vogue-village.jpg` — File:Vogüé Flussblick 1.jpg — Superbass — licence CC BY-SA 4.0 — https://commons.wikimedia.org/wiki/File:Vog%C3%BC%C3%A9_Flussblick_1.jpg
+- `photos/web/chateau-vogue.jpg` — File:Château de Vogüé - entrée.jpg — Romainbehar — licence CC0 — https://commons.wikimedia.org/wiki/File:Ch%C3%A2teau_de_Vog%C3%BC%C3%A9_-_entr%C3%A9e.jpg
+- `photos/web/labeaume.jpg` — File:Pont-De-Labeaume place.jpg — Kakoula10 — licence CC BY-SA 4.0 — https://commons.wikimedia.org/wiki/File:Pont-De-Labeaume_place.jpg
+- `photos/web/goudargues.jpg` — File:Goudargues 2.JPG — Vi..Cult... — licence CC BY-SA 3.0 — https://commons.wikimedia.org/wiki/File:Goudargues_2.JPG
+- `photos/web/sautadet.jpg` — File:Cascades Sautadet.jpg — Benh LIEU SONG — licence CC BY-SA 3.0 — https://commons.wikimedia.org/wiki/File:Cascades_Sautadet.jpg
+- `photos/web/chauvet-peinture.jpg` — File:Rhinocéros grotte Chauvet.jpg — Inocybe at French Wikipedia — licence Public domain — https://commons.wikimedia.org/wiki/File:Rhinoc%C3%A9ros_grotte_Chauvet.jpg
+- `photos/web/orgnac-village.jpg` — File:Orgnac-l'Aven village et champs banner.jpg — File:Vue d'ensemble d'Orgnac-l'Aven.JPG : Vi..Cult...
+derivative work : Barbe-sauvage — licence CC BY-SA 3.0 — https://commons.wikimedia.org/wiki/File:Orgnac-l%27Aven_village_et_champs_banner.jpg
+- `photos/web/accrobranche.jpg` — File:Accrobranche, Bellerive-sur-Allier .jpg — TCY — licence CC BY-SA 4.0 — https://commons.wikimedia.org/wiki/File:Accrobranche,_Bellerive-sur-Allier_.jpg
+- `photos/web/velorail.jpg` — File:Draisines in Broby, 2009-09-02.jpg — Erik Lundin — licence CC BY-SA 3.0 — https://commons.wikimedia.org/wiki/File:Draisines_in_Broby,_2009-09-02.jpg
+- `photos/web/via-ferrata.jpg` — File:La Colmiane Les Baus de la Frema via Ferrata 1.jpg — kallerna — licence CC BY-SA 4.0 — https://commons.wikimedia.org/wiki/File:La_Colmiane_Les_Baus_de_la_Frema_via_Ferrata_1.jpg
