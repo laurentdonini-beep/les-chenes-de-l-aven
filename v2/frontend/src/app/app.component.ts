@@ -4,6 +4,7 @@ import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } fro
 import { filter } from 'rxjs';
 import { SiteService } from './core/site.service';
 import { SeoService } from './core/seo.service';
+import { ApiCsrfService } from './core/api-csrf.service';
 import { LightboxService } from './shared/lightbox.service';
 import { LightboxComponent } from './shared/lightbox.component';
 
@@ -33,8 +34,12 @@ export class AppComponent {
       this.isBo.set(this.router.url.startsWith('/bo'));
     });
     // App mobile (Capacitor) : on démarre directement sur le backoffice /bo
-    if (Capacitor.isNativePlatform() && (this.router.url === '/' || this.router.url === '')) {
-      this.router.navigate(['/bo']);
+    if (Capacitor.isNativePlatform()) {
+      // récupère le token CSRF (cross-origin) pour les requêtes mutantes
+      inject(ApiCsrfService).bootstrap();
+      if (this.router.url === '/' || this.router.url === '') {
+        this.router.navigate(['/bo']);
+      }
     }
   }
 

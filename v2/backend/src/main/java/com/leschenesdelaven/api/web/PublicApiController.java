@@ -17,6 +17,7 @@ import com.leschenesdelaven.api.repo.MessageRepository;
 import com.leschenesdelaven.api.repo.ReservationRepository;
 import com.leschenesdelaven.api.repo.SiteParamsRepository;
 import com.leschenesdelaven.api.service.MailService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -68,6 +70,18 @@ public class PublicApiController {
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Paramètres du site illisibles");
         }
+    }
+
+    /**
+     * Token CSRF pour l'app mobile (Capacitor) : en cross-origin (app servie en http://localhost,
+     * API sur une autre origine), le cookie XSRF-TOKEN n'est pas lisible en JS — on le renvoie ici
+     * pour que l'app puisse le renvoyer en en-tête X-XSRF-TOKEN.
+     */
+    @GetMapping("/csrf")
+    public Map<String, String> csrf(HttpServletRequest request) {
+        CsrfToken t = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
+        if (t == null) t = (CsrfToken) request.getAttribute("_csrf");
+        return Map.of("token", t != null ? t.getToken() : "");
     }
 
     /** Paramètres généraux du site (coordonnées, tarifs, nav, saison, réseaux sociaux...). */

@@ -163,10 +163,19 @@ v2/
 L'app mobile embarque **le front Angular compilé** (aucun deuxième code à maintenir) :
 au lancement, elle ouvre directement le backoffice **/bo** (login requis, même API sécurisée).
 
-- **API** : en prod, l'app appelle `https://www.leschenesdelaven.com/api/...` (voir `src/environments/environment.capacitor.ts`).
-  En test local sur téléphone (même Wi-Fi que le PC) : mets `http://<IP-du-PC>:8080` dans ce fichier, puis rebuild.
-- **Notifications** : notifications locales toutes les 30 s (nouveau message 📨 / nouvelle réservation 📅) + badge avec le nombre de messages non lus sur l'onglet Messages. Push même app fermée = FCM (Android, gratuit) / APNs (iOS, compte développeur payant) — étape suivante si besoin.
-- **CORS** : le backend autorise déjà les origines Capacitor (`capacitor://localhost`, `http://localhost`).
+- **API** : voir `src/environments/environment.capacitor.ts` — **émulateur Android local : `http://10.0.2.2:8080` (défaut ; 10.0.2.2 = le PC vu depuis l'émulateur)** ; vrai téléphone sur le même Wi-Fi : `http://<IP-du-PC>:8080` (`ipconfig`) + pare-feu Windows à autoriser pour Java:8080 ; prod : `https://www.leschenesdelaven.com`.
+- **Cross-origin (mobile)** : l'app (origine `http://localhost`) appelle l'API sur une autre origine → l'interceptor envoie `withCredentials` (session JSESSIONID) + le token CSRF en en-tête, récupéré via `GET /api/public/csrf` (le cookie XSRF-TOKEN n'est pas lisible cross-origin). CORS : origines Capacitor autorisées + `allowCredentials`.
+- **Notifications** : notifications locales toutes les 30 s (nouveau message / nouvelle réservation) + badge avec le nombre de messages non lus sur l'onglet Messages. Push même app fermée = FCM (Android, gratuit) / APNs (iOS, compte développeur payant) — étape suivante si besoin.
+- **CORS** : le backend autorise déjà les origines Capacitor (`capacitor://localhost`, `http://localhost`) + credentials.
+
+### Tester sur un émulateur Android (guide complet : `v2/ANDROID.md`)
+
+Préparer le PC une fois (Android Studio, `ANDROID_HOME`, virtualisation BIOS, AVD Pixel — voir `ANDROID.md`), puis, émulateur démarré + backend lancé (`start-local.ps1`) :
+```powershell
+powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\Documents\GitHub\les-chenes-de-l-aven\v2\run-android.ps1"
+#  -ApkOnly  -> produit seulement l'APK (frontend/android/app/build/outputs/apk/debug/app-debug.apk)
+```
+Le script fait `ng build --configuration capacitor`, `cap add android` si besoin, `cap sync`, puis installe sur l'appareil détecté (`cap run android`).
 
 ### Build Android (APK pour ta tante)
 Prérequis : Android Studio + JDK 17+.
