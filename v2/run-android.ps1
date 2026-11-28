@@ -107,23 +107,19 @@ if (-not (Test-Path "node_modules\@capacitor\cli\bin\capacitor")) {
   }
 }
 
-# plateforme Android ajoutee ET complete ? (sinon cap sync dit "platform has not been added yet")
-$androidOk = (Test-Path "android\app\build.gradle") -and (Test-Path "android\capacitor.settings.gradle")
-if (-not $androidOk) {
-  if (Test-Path "android") {
-    Write-Host "Dossier android/ incomplet (ajout interrompu) -> nettoyage avant cap add..."
-    Remove-Item "android" -Recurse -Force -ErrorAction SilentlyContinue
-  }
-  Write-Host "Premiere fois : ajout de la plateforme Android (cap add android)..."
-  node node_modules/@capacitor/cli/bin/capacitor add android
-  if ($LASTEXITCODE -ne 0) { Write-Host "ERREUR cap add android"; Pop-Location; Read-Host "Entree"; exit 1 }
-}
-
 }
 
 Write-Host "[2/3] cap sync android (copie du build dans le projet Android)..."
 node node_modules/@capacitor/cli/bin/capacitor sync android
-if ($LASTEXITCODE -ne 0) { Write-Host "ERREUR cap sync"; Pop-Location; Read-Host "Entree"; exit 1 }
+if ($LASTEXITCODE -ne 0) {
+  # plateforme pas encore ajoutee (ou dossier android/ partiel) -> on la (re)crée proprement puis on resynchronise
+  Write-Host "  cap sync a echoue -> ajout de la plateforme Android (cap add android) puis nouvel essai..."
+  if (Test-Path "android") { Remove-Item "android" -Recurse -Force -ErrorAction SilentlyContinue }
+  node node_modules/@capacitor/cli/bin/capacitor add android
+  if ($LASTEXITCODE -ne 0) { Write-Host "ERREUR cap add android"; Pop-Location; Read-Host "Entree"; exit 1 }
+  node node_modules/@capacitor/cli/bin/capacitor sync android
+  if ($LASTEXITCODE -ne 0) { Write-Host "ERREUR cap sync"; Pop-Location; Read-Host "Entree"; exit 1 }
+}
 
 $apkRel = "android\app\build\outputs\apk\debug\app-debug.apk"
 if ($ApkOnly) {
