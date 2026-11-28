@@ -47,13 +47,19 @@ jobs:
           npx cap sync android
 
       - name: Composants SDK Android (platform 36, build-tools 36)
+        env:
+          ANDROID_HOME: ${{ env.ANDROID_SDK_ROOT }}
         run: |
+          export PATH="$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$PATH"
+          command -v sdkmanager || { echo "sdkmanager introuvable"; ls "$ANDROID_SDK_ROOT/cmdline-tools"; exit 1; }
           yes | sdkmanager --licenses
           sdkmanager "platforms;android-36" "build-tools;36.0.0" "platform-tools"
 
       - name: Gradle assembleDebug
         working-directory: v2/frontend/android
-        run: ./gradlew assembleDebug --no-daemon
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
 
       - uses: actions/upload-artifact@v4
         with:
