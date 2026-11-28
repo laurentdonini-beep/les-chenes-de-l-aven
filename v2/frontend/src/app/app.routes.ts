@@ -106,6 +106,11 @@ export const routes: Routes = [
         path: 'tarifs',
         loadComponent: () => import('./pages/bo-tarifs.component').then(m => m.BoTarifsComponent),
         data: { title: 'Tarifs — Backoffice' }
+      },
+      {
+        path: 'photos',
+        loadComponent: () => import('./pages/bo-photos.component').then(m => m.BoPhotosComponent),
+        data: { title: 'Photos — Backoffice' }
       }
     ]
   },

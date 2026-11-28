@@ -93,3 +93,11 @@ export interface MessageView {
   mailEnvoye: boolean;
   traite: boolean;
 }
+
+/** Image du site vue depuis le BO (GET /api/admin/media). */
+export interface MediaItem {
+  path: string;                 // URL publique : /assets/img/... ou /uploads/...
+  name: string;
+  size: number;                 // octets
+  source: 'site' | 'upload' | 'remplacee';
+}

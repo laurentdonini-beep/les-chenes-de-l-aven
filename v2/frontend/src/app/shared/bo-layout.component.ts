@@ -81,6 +81,7 @@ import { MessageView } from '../core/models';
           <a routerLink="/bo/reservations" routerLinkActive="active">🗓️ Réservations</a>
           <a routerLink="/bo/calendriers" routerLinkActive="active">🗓️ Saison &amp; calendriers</a>
           <a routerLink="/bo/tarifs" routerLinkActive="active">💶 Tarifs &amp; promos</a>
+          <a routerLink="/bo/photos" routerLinkActive="active">🖼️ Photos</a>
           <a routerLink="/bo/messages" routerLinkActive="active">✉️ Messages@if (nonTraites()) { <span class="bo-badge">{{ nonTraites() }}</span> }</a>
         </nav>
         <div class="bo-side-foot">

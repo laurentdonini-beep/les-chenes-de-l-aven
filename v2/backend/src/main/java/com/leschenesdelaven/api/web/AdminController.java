@@ -2,6 +2,7 @@ package com.leschenesdelaven.api.web;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.leschenesdelaven.api.dto.ChambrePhotosRequest;
 import com.leschenesdelaven.api.dto.ChambreTarifsRequest;
 import com.leschenesdelaven.api.dto.MessageUpdateRequest;
 import com.leschenesdelaven.api.dto.MessageView;
@@ -154,6 +155,27 @@ public class AdminController {
         c.setTarif2(body.tarif2());
         chambreRepository.save(c);
         return Map.of("ok", true, "slug", slug, "tarif1", body.tarif1(), "tarif2", body.tarif2());
+    }
+
+    /** Images d'une chambre (image principale + galerie) — chemins /assets/img/... ou /uploads/... */
+    @PutMapping("/chambres/{slug}/photos")
+    public Map<String, Object> putPhotosChambre(@PathVariable String slug,
+                                                @Valid @RequestBody ChambrePhotosRequest body) throws Exception {
+        Chambre c = chambreRepository.findBySlug(slug)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Chambre inconnue : " + slug));
+        List<String> photos = body.photos() == null ? List.of() : body.photos();
+        List<String> all = new java.util.ArrayList<>(photos);
+        all.add(body.image());
+        for (String p : all) {
+            if (p == null || (!p.startsWith("/assets/img/") && !p.startsWith("/uploads/"))) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                        "Chemin d'image invalide : " + p + " (attendu : /assets/img/... ou /uploads/...)");
+            }
+        }
+        c.setImage(body.image());
+        c.setPhotos(objectMapper.writeValueAsString(photos));
+        chambreRepository.save(c);
+        return Map.of("ok", true, "slug", slug, "image", c.getImage(), "photos", photos);
     }
 
     @GetMapping("/tarifs")

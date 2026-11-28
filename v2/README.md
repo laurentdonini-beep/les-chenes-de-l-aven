@@ -15,7 +15,14 @@ Navigateur ──► Angular 22 (SPA, dans v2/frontend)
 ```
 
 Le backoffice `/bo` (login + gestion des disponibilités + saison) remplace l'ancien `/bo/` statique et Decap CMS.
-Il a son **propre habillage** : menu latéral à **gauche** (tableau de bord, réservations, saison & calendriers, tarifs & promos, messages), sans le header/footer du site public. Sur mobile, ce menu devient une barre horizontale en haut.
+Il a son **propre habillage** : menu latéral à **gauche** (tableau de bord, réservations, saison & calendriers, tarifs & promos, **photos**, messages), sans le header/footer du site public. Sur mobile, ce menu devient une barre horizontale en haut.
+
+**Section Photos (`/bo/photos`)** — gestion autonome des images du site :
+- **Ajouter** des photos (bouton « ⬆ Ajouter des photos… », plusieurs fichiers, JPG/PNG/WebP/GIF/SVG, max 20 Mo) → elles arrivent dans `/uploads/...` (dossier persistant `backend/data/uploads`, hors du build) ;
+- **Remplacer** n'importe quelle image du site à la **même URL** (ex. la photo de la piscine) : toutes les pages sont mises à jour d'un coup ; « ↩ Originale » restaure l'image livrée avec le site ;
+- **Supprimer** une photo uploadée ;
+- choisir l'**image principale** et la **galerie** de chaque chambre (sélecteur de photos).
+API : `GET/POST/DELETE /api/admin/media` (upload multipart `file` + `targetPath` optionnel), `PUT /api/admin/chambres/{slug}/photos`.
 
 ## Lancer en local (le plus simple)
 
