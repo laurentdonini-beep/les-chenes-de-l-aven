@@ -4,3 +4,5 @@ _site/
 v2/frontend/node_modules/
 v2/backend/target/
 v2/backend/data/
+v2/frontend/android/
+v2/frontend/ios/

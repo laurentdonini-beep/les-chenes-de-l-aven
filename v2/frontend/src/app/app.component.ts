@@ -1,4 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
+import { Capacitor } from '@capacitor/core';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 import { SiteService } from './core/site.service';
@@ -27,6 +28,10 @@ export class AppComponent {
       this.navOpen.set(false);
       this.lightbox.reset();
     });
+    // App mobile (Capacitor) : on démarre directement sur le backoffice /bo
+    if (Capacitor.isNativePlatform() && (this.router.url === '/' || this.router.url === '')) {
+      this.router.navigate(['/bo']);
+    }
   }
 
   toggleNav(): void {

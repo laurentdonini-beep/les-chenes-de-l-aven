@@ -149,3 +149,27 @@ v2/
 ```
 
 > **Note** : le build du front (`v2/frontend/dist/`) est **commité dans le dépôt** — pas besoin de lancer `ng build` en local pour faire tourner le site (utile si esbuild est bloqué par l'antivirus : `spawn EPERM`). Le script `start-local.ps1` ne rebuild que si `src/` a changé ; s'il ne peut pas builder, il continue avec le `dist/` existant.
+
+## Application mobile du BO (Capacitor — un seul code source)
+
+L'app mobile embarque **le front Angular compilé** (aucun deuxième code à maintenir) :
+au lancement, elle ouvre directement le backoffice **/bo** (login requis, même API sécurisée).
+
+- **API** : en prod, l'app appelle `https://www.leschenesdelaven.com/api/...` (voir `src/environments/environment.capacitor.ts`).
+  En test local sur téléphone (même Wi-Fi que le PC) : mets `http://<IP-du-PC>:8080` dans ce fichier, puis rebuild.
+- **Notifications** : notifications locales toutes les 30 s (nouveau message 📨 / nouvelle réservation 📅) + badge avec le nombre de messages non lus sur l'onglet Messages. Push même app fermée = FCM (Android, gratuit) / APNs (iOS, compte développeur payant) — étape suivante si besoin.
+- **CORS** : le backend autorise déjà les origines Capacitor (`capacitor://localhost`, `http://localhost`).
+
+### Build Android (APK pour ta tante)
+Prérequis : Android Studio + JDK 17+.
+```bash
+cd v2/frontend
+npm install
+npx cap add android        # une seule fois (dossier android/ généré, ignoré par git)
+npm run cap:sync           # = build:cap (ng build --configuration capacitor) + npx cap sync
+npx cap open android       # ouvre Android Studio
+```
+Dans Android Studio : **Build → Build Bundle(s)/APK → Build APK** → récupérer `android/app/build/outputs/apk/debug/app-debug.apk` → l'envoyer à ta tante (ou installer via USB avec le mode développeur activé sur son téléphone : 7 taps sur « Numéro de build » dans les réglages).
+
+### iOS
+Nécessite un Mac + Xcode + compte Apple Developer (99 €/an) : `npx cap add ios && npx cap open ios`.
