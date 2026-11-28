@@ -85,6 +85,8 @@ powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\Documents\GitHub\les-
 ```
 Le script fait tout seul : build Angular (config `capacitor`) → `cap sync android` → `cap run android` (build Gradle + installation).
 
+> 💡 **Si `ng build` est bloqué sur ton PC** (antivirus/WDAC qui bloque `esbuild.exe`, erreur `spawn EPERM` / « Accès refusé ») : le dépôt contient un **bundle Android précompilé** (`frontend/android-web/`, apiBase = `http://10.0.2.2:8080`). Le script l'utilise **automatiquement, sans lancer `ng build`** — il ne fait que `cap add android` (1ère fois) + `cap sync` + `cap run android`. Pour forcer un rebuild : `run-android.ps1 -Rebuild`.
+
 ⏳ **Premier lancement : plusieurs minutes** (Gradle télécharge ~2 Go). Les suivants sont plus rapides.
 
 ## 8. Tester l'app
