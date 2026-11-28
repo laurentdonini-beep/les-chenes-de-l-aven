@@ -132,39 +132,47 @@ if ($LASTEXITCODE -ne 0) {
   if ($LASTEXITCODE -ne 0) { Write-Host "ERREUR cap sync"; Pop-Location; Read-Host "Entree"; exit 1 }
 }
 
-# --- AAPT2 : le binaire du cache Gradle (~/.gradle) est bloque par l'AV -> on utilise une copie telechargee
-#     depuis Google Maven (meme version qu'AGP) dans %LOCALAPPDATA% (dossier exclu de Defender) ---
+# --- AAPT2 : le binaire du cache Gradle (~/.gradle) est bloque par l'AV/politique de sécurité ---
+# On prend le premier aapt2.exe qui s'exécute vraiment : d'abord celui du SDK (build-tools),
+# sinon celui telecharge depuis Google Maven dans %LOCALAPPDATA%.
+$candidates = @()
+$btDir = Get-ChildItem "$env:ANDROID_HOME\build-tools" -Directory -ErrorAction SilentlyContinue | Sort-Object Name -Descending | Select-Object -First 1
+if ($btDir) { $candidates += (Join-Path $btDir.FullName "aapt2.exe") }
 $aapt2Ver = (Get-ChildItem "$env:USERPROFILE\.gradle\caches\modules-2\files-2.1\com.android.tools.build\aapt2" -Directory -ErrorAction SilentlyContinue | Sort-Object Name -Descending | Select-Object -First 1).Name
 if (-not $aapt2Ver) { $aapt2Ver = "8.13.0-13719691" }
 $aapt2Dir = "$env:LOCALAPPDATA\aapt2-$aapt2Ver"
-$aapt2Exe = "$aapt2Dir\aapt2.exe"
-if (-not (Test-Path $aapt2Exe)) {
-  Write-Host "Telechargement de aapt2 $aapt2Ver (Google Maven) dans $aapt2Dir ..."
+$aapt2ExeDl = "$aapt2Dir\aapt2.exe"
+if (-not (Test-Path $aapt2ExeDl)) {
+  Write-Host "Telechargement aapt2 $aapt2Ver (Google Maven) dans $aapt2Dir ..."
   New-Item -ItemType Directory -Force $aapt2Dir | Out-Null
   $jar = "$aapt2Dir\aapt2.jar"
   Invoke-WebRequest -Uri "https://dl.google.com/dl/android/maven2/com/android/tools/build/aapt2/$aapt2Ver/aapt2-$aapt2Ver-windows.jar" -OutFile $jar
-  # un .jar est un zip : Expand-Archive (fiable sur Windows) ; repli tar -xf
-  $zip = "$aapt2Dir\aapt2.zip"
-  Copy-Item $jar $zip -Force
-  try { Expand-Archive $zip -DestinationPath $aapt2Dir -Force } catch { tar -xf $zip -C $aapt2Dir }
-  Unblock-File $aapt2Exe -ErrorAction SilentlyContinue
+  $zip = "$aapt2Dir\aapt2.zip"; Copy-Item $jar $zip -Force
+  try { Expand-Archive $zip -DestinationPath $aapt2Dir -Force } catch { tar -xf $zip -C $aapt2Dir }   # un .jar est un zip
 }
-if (Test-Path $aapt2Exe) {
-  $v = & $aapt2Exe version 2>$null
-  if ($v) {
-    $gp = "android\gradle.properties"
-    $line = "android.aapt2FromMavenOverride=$($aapt2Exe.Replace('\','\\'))"
-    $cur = if (Test-Path $gp) { Get-Content $gp -Raw } else { "" }
-    if ($cur -notmatch 'aapt2FromMavenOverride') { Add-Content -Path $gp -Value $line }
-    Write-Host "AAPT2 override OK : $aapt2Exe (version: $v)"
-    Write-Host "  ligne écrite dans $gp : $line"
-    # ceinture + bretelles : remplacer aussi les aapt2.exe extraits dans le cache Gradle par le bon
-    Get-ChildItem "$env:USERPROFILE\.gradle\caches" -Recurse -Filter aapt2.exe -ErrorAction SilentlyContinue | ForEach-Object {
-      Copy-Item $aapt2Exe $_.FullName -Force -ErrorAction SilentlyContinue
-    }
-  } else {
-    Write-Host "ATTENTION : aapt2 telecharge bloque aussi -> VC++ Redist x64 (https://aka.ms/vs/17/release/vc_redist.x64.exe) + reboot, ou ticket IT (WDAC)."
+if (Test-Path $aapt2ExeDl) { $candidates += $aapt2ExeDl }
+
+$goodAapt2 = $null
+foreach ($c in $candidates) {
+  if (Test-Path $c) {
+    Unblock-File $c -ErrorAction SilentlyContinue
+    $v = & $c version 2>$null
+    if ($v) { $goodAapt2 = $c; Write-Host "AAPT2 OK : $c -> $v"; break }
+    else { Write-Host "AAPT2 bloque (Acces refuse) : $c" }
   }
+}
+if ($goodAapt2) {
+  $gp = "android\gradle.properties"
+  $line = "android.aapt2FromMavenOverride=$($goodAapt2.Replace('\','\\'))"
+  $cur = if (Test-Path $gp) { Get-Content $gp -Raw } else { "" }
+  if ($cur -notmatch 'aapt2FromMavenOverride') { Add-Content -Path $gp -Value $line }
+  Write-Host "ligne ecrite dans $gp : $line"
+  # ceinture + bretelles : remplacer les aapt2.exe extraits dans le cache Gradle par le bon
+  Get-ChildItem "$env:USERPROFILE\.gradle\caches" -Recurse -Filter aapt2.exe -ErrorAction SilentlyContinue | ForEach-Object {
+    Copy-Item $goodAapt2 $_.FullName -Force -ErrorAction SilentlyContinue
+  }
+} else {
+  Write-Host "ATTENTION : aucun aapt2 executable (ni SDK ni telecharge). Installe VC++ Redist x64 (https://aka.ms/vs/17/release/vc_redist.x64.exe) + reboot, ou ticket IT (WDAC bloque les binaires non approuves)."
 }
 
 $apkRel = "android\app\build\outputs\apk\debug\app-debug.apk"
