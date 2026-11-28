@@ -55,13 +55,27 @@ Write-Host "[1/3] Build Angular (configuration capacitor, apiBase = http://10.0.
 npx ng build --configuration capacitor
 if ($LASTEXITCODE -ne 0) {
   # auto-réparation esbuild (antivirus) comme start-local.ps1
-  Write-Host "  Build echoue -> npm rebuild esbuild + nouvel essai..."
-  npm rebuild esbuild
+  Write-Host "  Build echoue -> on tue node (verrou), npm rebuild esbuild, nouvel essai..."
+  taskkill /F /IM node.exe 2>$null
+  Start-Sleep -Seconds 1
+  npm rebuild esbuild 2>$null
   Start-Sleep -Seconds 2
   npx ng build --configuration capacitor
   if ($LASTEXITCODE -ne 0) {
+    # Plan B : copier le binaire esbuild HORS du dossier surveillé par l'antivirus
+    $bin = "node_modules\@esbuild\win32-x64\bin\esbuild.exe"
+    if (Test-Path $bin) {
+      $out = "$env:LOCALAPPDATA\esbuild-bin"
+      New-Item -ItemType Directory -Force $out | Out-Null
+      Copy-Item $bin "$out\esbuild.exe" -Force
+      $env:ESBUILD_BINARY_PATH = "$out\esbuild.exe"
+      Write-Host "  Plan B : binaire esbuild copié dans $out et ESBUILD_BINARY_PATH forcé -> nouvel essai..."
+      npx ng build --configuration capacitor
+    }
+  }
+  if ($LASTEXITCODE -ne 0) {
     Write-Host ""
-    Write-Host "ERREUR ng build persistante (souvent 'spawn EPERM' = Windows Defender bloque esbuild)."
+    Write-Host "ERREUR ng build persistante (souvent 'spawn EPERM' = antivirus bloque esbuild)."
     Write-Host "A faire UNE fois :"
     Write-Host "  1) Parametres Windows -> Confidentialite et securite -> Securite Windows"
     Write-Host "     -> Protection contre les virus et menaces -> Gerer les parametres -> Exclusions"
