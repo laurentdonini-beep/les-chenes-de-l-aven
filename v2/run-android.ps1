@@ -14,7 +14,7 @@
 #     (l'émulateur y accède via http://10.0.2.2:8080, déjà configuré)
 #  Premier lancement : Gradle télécharge ~2 Go, quelques minutes.
 # ============================================================
-param([switch]$ApkOnly, [switch]$Rebuild)
+param([switch]$ApkOnly, [switch]$Rebuild, [string]$ApkPath)
 $root = $PSScriptRoot
 
 # --- Node.js ---
@@ -48,6 +48,17 @@ if (-not $env:ANDROID_HOME -or -not (Test-Path "$env:ANDROID_HOME\platform-tools
 }
 Write-Host "ANDROID_HOME = $env:ANDROID_HOME"
 $adb = "$env:ANDROID_HOME\platform-tools\adb.exe"
+
+# Mode install d'un APK déjà buildé (ex: téléchargé depuis GitHub Actions) : run-android.ps1 -ApkPath "C:\...\app-debug.apk"
+if ($ApkPath) {
+  if (-not (Test-Path $ApkPath)) { Write-Host "ERREUR : APK introuvable : $ApkPath"; Read-Host "Entree"; exit 1 }
+  $devs = (& $adb devices) | Where-Object { $_ -match "\tdevice\s*$" }
+  if (-not $devs) { Write-Host "Aucun appareil (démarre l'émulateur d'abord)."; Read-Host "Entree"; exit 1 }
+  Write-Host "Installation de $ApkPath sur l'appareil..."
+  & $adb install -r "$ApkPath"
+  if ($LASTEXITCODE -eq 0) { Write-Host "OK ! L'app 'BO Chênes de l'Aven' est installée — ouvre-la sur l'émulateur." }
+  Read-Host "Entree"; exit 0
+}
 
 # AAPT2 (Gradle) a besoin de l'UCRT Windows et son binaire dans le cache Gradle peut être bloque par l'AV :
 #  - si ucrtbase.dll manque -> installer le VC++ Redist x64 (https://aka.ms/vs/17/release/vc_redist.x64.exe)

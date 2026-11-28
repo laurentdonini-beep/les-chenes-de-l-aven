@@ -98,6 +98,19 @@ Le script fait tout seul : build Angular (config `capacitor`) → `cap sync andr
 
 ---
 
+## ☁️ Si le PC bloque les builds (antivirus / WDAC d'entreprise) : APK via GitHub Actions
+
+Si `run-android.ps1` échoue chez toi à cause d'un antivirus/politique qui bloque `esbuild.exe` ou `aapt2.exe` (« Accès refusé » / `spawn EPERM`), **ne build pas localement** : le workflow GitHub Actions [`.github/workflows/build-apk.yml`](../.github/workflows/build-apk.yml) build l'APK sur une machine Linux propre à chaque push sur `vibe/angular-spring-35f94a`.
+
+1. Va sur https://github.com/laurentdonini-beep/les-chenes-de-l-aven/actions → workflow **« Build APK Android (backoffice) »** → dernier run vert → **Artifacts** → télécharge **`app-debug-apk`** (zip) → extrais `app-debug.apk`.
+2. Émulateur démarré (`adb devices` → `emulator-5554  device`), puis :
+   ```powershell
+   powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\Documents\GitHub\les-chenes-de-l-aven\v2\run-android.ps1" -ApkPath "C:\Chemin\app-debug.apk"
+   ```
+   ou simplement : `& "$env:ANDROID_HOME\platform-tools\adb.exe" install -r "C:\Chemin\app-debug.apk"`
+   ou encore plus simple : **glisse-dépose le fichier .apk sur la fenêtre de l'émulateur**.
+3. Ouvre l'app « BO Chênes de l'Aven » sur l'émulateur → connexion `/bo` (`admin@leschenesdelaven.fr` / `change-me`). L'app appelle l'API du PC via `http://10.0.2.2:8080` (backend lancé avec `start-local.ps1`).
+
 ## 🐞 Dépannage
 
 | Symptôme | Cause / solution |
