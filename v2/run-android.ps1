@@ -107,8 +107,14 @@ if (-not (Test-Path "node_modules\@capacitor\cli\bin\capacitor")) {
   }
 }
 
-if (-not (Test-Path "android\app\build.gradle")) {
-  Write-Host "Premiere fois : ajout de la plateforme Android (node node_modules/@capacitor/cli/bin/capacitor add android)..."
+# plateforme Android ajoutee ET complete ? (sinon cap sync dit "platform has not been added yet")
+$androidOk = (Test-Path "android\app\build.gradle") -and (Test-Path "android\capacitor.settings.gradle")
+if (-not $androidOk) {
+  if (Test-Path "android") {
+    Write-Host "Dossier android/ incomplet (ajout interrompu) -> nettoyage avant cap add..."
+    Remove-Item "android" -Recurse -Force -ErrorAction SilentlyContinue
+  }
+  Write-Host "Premiere fois : ajout de la plateforme Android (cap add android)..."
   node node_modules/@capacitor/cli/bin/capacitor add android
   if ($LASTEXITCODE -ne 0) { Write-Host "ERREUR cap add android"; Pop-Location; Read-Host "Entree"; exit 1 }
 }
