@@ -14,7 +14,7 @@
 #     (l'émulateur y accède via http://10.0.2.2:8080, déjà configuré)
 #  Premier lancement : Gradle télécharge ~2 Go, quelques minutes.
 # ============================================================
-param([switch]$ApkOnly)
+param([switch]$ApkOnly, [switch]$Rebuild)
 $root = $PSScriptRoot
 
 # --- Node.js ---
@@ -51,8 +51,15 @@ $adb = "$env:ANDROID_HOME\platform-tools\adb.exe"
 
 Push-Location "$root\frontend"
 
-Write-Host "[1/3] Build Angular (configuration capacitor, apiBase = http://10.0.2.2:8080)..."
-npx ng build --configuration capacitor
+$bundlePrecompile = (Test-Path "android-web\index.html")
+if ($bundlePrecompile -and -not $Rebuild) {
+  $env:CAP_WEB_DIR = "android-web"
+  Write-Host "[1/3] Bundle Android précompilé trouvé (android-web) -> AUCUN ng build sur ce PC"
+  Write-Host "      (apiBase = http://10.0.2.2:8080 ; pour rebuilder quand même : -Rebuild)"
+} else {
+  $env:CAP_WEB_DIR = ""
+  Write-Host "[1/3] Build Angular (configuration capacitor, apiBase = http://10.0.2.2:8080)..."
+  npx ng build --configuration capacitor
 if ($LASTEXITCODE -ne 0) {
   # auto-réparation esbuild (antivirus) comme start-local.ps1
   Write-Host "  Build echoue -> on tue node (verrou), npm rebuild esbuild, nouvel essai..."
@@ -63,7 +70,7 @@ if ($LASTEXITCODE -ne 0) {
   npx ng build --configuration capacitor
   if ($LASTEXITCODE -ne 0) {
     # Plan B : copier le binaire esbuild HORS du dossier surveillé par l'antivirus
-    $bin = "node_modules\@esbuild\win32-x64\bin\esbuild.exe"
+    $bin = "node_modules\@esbuild\win32-x64\esbuild.exe"
     if (Test-Path $bin) {
       $out = "$env:LOCALAPPDATA\esbuild-bin"
       New-Item -ItemType Directory -Force $out | Out-Null
@@ -83,7 +90,7 @@ if ($LASTEXITCODE -ne 0) {
     Write-Host "     (optionnel: exclusion de Processus -> C:\Program Files\nodejs\node.exe)"
     Write-Host "  2) Dans ce PowerShell : taskkill /F /IM node.exe"
     Write-Host "  3) Puis : cd frontend ; npm rebuild esbuild"
-    Write-Host "  4) Verifier : node_modules\@esbuild\win32-x64\bin\esbuild.exe --version"
+    Write-Host "  4) Verifier : node_modules\@esbuild\win32-x64\esbuild.exe --version"
     Write-Host "  5) Relancer ce script dans une NOUVELLE fenetre PowerShell."
     Write-Host "  Details : v2\ANDROID.md (section Depannage)."
     Pop-Location; Read-Host "Entree"; exit 1
@@ -94,6 +101,8 @@ if (-not (Test-Path "android\app\build.gradle")) {
   Write-Host "Premiere fois : ajout de la plateforme Android (npx cap add android)..."
   npx cap add android
   if ($LASTEXITCODE -ne 0) { Write-Host "ERREUR cap add android"; Pop-Location; Read-Host "Entree"; exit 1 }
+}
+
 }
 
 Write-Host "[2/3] cap sync android (copie du build dans le projet Android)..."

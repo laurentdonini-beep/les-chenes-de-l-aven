@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /bo
+Disallow: /bo/login
+
+Sitemap: https://www.leschenesdelaven.com/sitemap.xml
