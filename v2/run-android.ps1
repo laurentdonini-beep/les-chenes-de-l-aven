@@ -59,25 +59,6 @@ if (-not (Test-Path "C:\Windows\System32\ucrtbase.dll")) {
 Get-ChildItem "$env:USERPROFILE\.gradle" -Recurse -Filter *.exe -ErrorAction SilentlyContinue | Unblock-File -ErrorAction SilentlyContinue
 Add-MpPreference -ExclusionPath "$env:USERPROFILE\.gradle" -ErrorAction SilentlyContinue
 
-# AAPT2 : si le binaire du cache Gradle est bloque par l'AV/politique, utiliser celui du SDK (build-tools)
-$btDir = Get-ChildItem "$env:ANDROID_HOME\build-tools" -Directory -ErrorAction SilentlyContinue | Sort-Object Name -Descending | Select-Object -First 1
-if ($btDir) {
-  $sdkAapt2 = Join-Path $btDir.FullName "aapt2.exe"
-  if (Test-Path $sdkAapt2) {
-    $v = & $sdkAapt2 version 2>$null
-    if ($v) {
-      $gp = "android\gradle.properties"
-      $line = "android.aapt2FromMavenOverride=$($sdkAapt2.Replace('\','\\'))"
-      $cur = if (Test-Path $gp) { Get-Content $gp -Raw } else { "" }
-      if ($cur -notmatch 'aapt2FromMavenOverride') {
-        Add-Content -Path $gp -Value $line
-        Write-Host "AAPT2 : binaire SDK utilise ($sdkAapt2) via android.aapt2FromMavenOverride"
-      }
-    } else {
-      Write-Host "ATTENTION : aapt2.exe du SDK aussi bloque -> installe VC++ Redist x64 (https://aka.ms/vs/17/release/vc_redist.x64.exe) + redemarre, ou demande a l'IT d'autoriser aapt2."
-    }
-  }
-}
 
 Push-Location "$root\frontend"
 
@@ -149,6 +130,33 @@ if ($LASTEXITCODE -ne 0) {
   if ($LASTEXITCODE -ne 0) { Write-Host "ERREUR cap add android"; Pop-Location; Read-Host "Entree"; exit 1 }
   node node_modules/@capacitor/cli/bin/capacitor sync android
   if ($LASTEXITCODE -ne 0) { Write-Host "ERREUR cap sync"; Pop-Location; Read-Host "Entree"; exit 1 }
+}
+
+# --- AAPT2 : le binaire du cache Gradle (~/.gradle) est bloque par l'AV -> on utilise une copie telechargee
+#     depuis Google Maven (meme version qu'AGP) dans %LOCALAPPDATA% (dossier exclu de Defender) ---
+$aapt2Ver = (Get-ChildItem "$env:USERPROFILE\.gradle\caches\modules-2\files-2.1\com.android.tools.build\aapt2" -Directory -ErrorAction SilentlyContinue | Sort-Object Name -Descending | Select-Object -First 1).Name
+if (-not $aapt2Ver) { $aapt2Ver = "8.13.0-13719691" }
+$aapt2Dir = "$env:LOCALAPPDATA\aapt2-$aapt2Ver"
+$aapt2Exe = "$aapt2Dir\aapt2.exe"
+if (-not (Test-Path $aapt2Exe)) {
+  Write-Host "Telechargement de aapt2 $aapt2Ver (Google Maven) dans $aapt2Dir ..."
+  New-Item -ItemType Directory -Force $aapt2Dir | Out-Null
+  $jar = "$aapt2Dir\aapt2.jar"
+  Invoke-WebRequest -Uri "https://dl.google.com/dl/android/maven2/com/android/tools/build/aapt2/$aapt2Ver/aapt2-$aapt2Ver-windows.jar" -OutFile $jar
+  tar -xzf $jar -C $aapt2Dir
+  Unblock-File $aapt2Exe -ErrorAction SilentlyContinue
+}
+if (Test-Path $aapt2Exe) {
+  $v = & $aapt2Exe version 2>$null
+  if ($v) {
+    $gp = "android\gradle.properties"
+    $line = "android.aapt2FromMavenOverride=$($aapt2Exe.Replace('\','\\'))"
+    $cur = if (Test-Path $gp) { Get-Content $gp -Raw } else { "" }
+    if ($cur -notmatch 'aapt2FromMavenOverride') { Add-Content -Path $gp -Value $line }
+    Write-Host "AAPT2 override OK : $aapt2Exe"
+  } else {
+    Write-Host "ATTENTION : aapt2 telecharge bloque aussi -> VC++ Redist x64 (https://aka.ms/vs/17/release/vc_redist.x64.exe) + reboot, ou ticket IT (WDAC)."
+  }
 }
 
 $apkRel = "android\app\build\outputs\apk\debug\app-debug.apk"
