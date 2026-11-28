@@ -1,3 +1,14 @@
+@if (isBo()) {
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" routerLink="/">
+        <img src="/assets/img/favicon.svg" alt="" class="brand-logo" loading="lazy" decoding="async">
+        <span class="brand-name">{{ site()?.nom }} — Backoffice</span>
+      </a>
+      <a routerLink="/" class="btn btn-outline btn-small">← Voir le site public</a>
+    </div>
+  </header>
+} @else {
 <header class="site-header" id="top">
   <div class="container header-inner">
     <a class="brand" routerLink="/">
@@ -27,11 +38,13 @@
     </div>
   </div>
 </header>
+}
 
 <main>
   <router-outlet />
 </main>
 
+@if (!isBo()) {
 <footer class="site-footer">
   <div class="container footer-grid">
     <div>
@@ -64,5 +77,6 @@
     <p>© {{ year }} {{ site()?.nom }} — Orgnac-l'Aven, Ardèche · <a routerLink="/credits">Crédits photos</a></p>
   </div>
 </footer>
+}
 
 <app-lightbox />

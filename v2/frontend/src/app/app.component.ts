@@ -17,16 +17,20 @@ export class AppComponent {
   readonly site = inject(SiteService).site;
   readonly year = new Date().getFullYear();
   readonly navOpen = signal(false);
+  /** true sur les routes /bo* : on masque le header/footer du site public. */
+  readonly isBo = signal(false);
 
   private router = inject(Router);
   private lightbox = inject(LightboxService);
 
   constructor() {
     inject(SeoService).init();
+    this.isBo.set(this.router.url.startsWith('/bo'));
     // à chaque navigation : fermer le menu mobile et vider la lightbox
     this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe(() => {
       this.navOpen.set(false);
       this.lightbox.reset();
+      this.isBo.set(this.router.url.startsWith('/bo'));
     });
     // App mobile (Capacitor) : on démarre directement sur le backoffice /bo
     if (Capacitor.isNativePlatform() && (this.router.url === '/' || this.router.url === '')) {
