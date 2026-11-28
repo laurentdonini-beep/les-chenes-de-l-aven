@@ -143,7 +143,10 @@ if (-not (Test-Path $aapt2Exe)) {
   New-Item -ItemType Directory -Force $aapt2Dir | Out-Null
   $jar = "$aapt2Dir\aapt2.jar"
   Invoke-WebRequest -Uri "https://dl.google.com/dl/android/maven2/com/android/tools/build/aapt2/$aapt2Ver/aapt2-$aapt2Ver-windows.jar" -OutFile $jar
-  tar -xzf $jar -C $aapt2Dir
+  # un .jar est un zip : Expand-Archive (fiable sur Windows) ; repli tar -xf
+  $zip = "$aapt2Dir\aapt2.zip"
+  Copy-Item $jar $zip -Force
+  try { Expand-Archive $zip -DestinationPath $aapt2Dir -Force } catch { tar -xf $zip -C $aapt2Dir }
   Unblock-File $aapt2Exe -ErrorAction SilentlyContinue
 }
 if (Test-Path $aapt2Exe) {
@@ -153,7 +156,12 @@ if (Test-Path $aapt2Exe) {
     $line = "android.aapt2FromMavenOverride=$($aapt2Exe.Replace('\','\\'))"
     $cur = if (Test-Path $gp) { Get-Content $gp -Raw } else { "" }
     if ($cur -notmatch 'aapt2FromMavenOverride') { Add-Content -Path $gp -Value $line }
-    Write-Host "AAPT2 override OK : $aapt2Exe"
+    Write-Host "AAPT2 override OK : $aapt2Exe (version: $v)"
+    Write-Host "  ligne écrite dans $gp : $line"
+    # ceinture + bretelles : remplacer aussi les aapt2.exe extraits dans le cache Gradle par le bon
+    Get-ChildItem "$env:USERPROFILE\.gradle\caches" -Recurse -Filter aapt2.exe -ErrorAction SilentlyContinue | ForEach-Object {
+      Copy-Item $aapt2Exe $_.FullName -Force -ErrorAction SilentlyContinue
+    }
   } else {
     Write-Host "ATTENTION : aapt2 telecharge bloque aussi -> VC++ Redist x64 (https://aka.ms/vs/17/release/vc_redist.x64.exe) + reboot, ou ticket IT (WDAC)."
   }
