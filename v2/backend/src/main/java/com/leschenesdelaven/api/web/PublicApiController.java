@@ -7,6 +7,8 @@ import com.leschenesdelaven.api.dto.ChambreDetail;
 import com.leschenesdelaven.api.dto.ChambreSummary;
 import com.leschenesdelaven.api.dto.ContactRequest;
 import com.leschenesdelaven.api.dto.ReservationView;
+import com.leschenesdelaven.api.dto.TarifPeriodeView;
+import com.leschenesdelaven.api.repo.TarifPeriodeRepository;
 import com.leschenesdelaven.api.model.Chambre;
 import com.leschenesdelaven.api.model.Message;
 import com.leschenesdelaven.api.model.SiteParams;
@@ -38,6 +40,7 @@ public class PublicApiController {
     private final ChambreRepository chambreRepository;
     private final ReservationRepository reservationRepository;
     private final MessageRepository messageRepository;
+    private final TarifPeriodeRepository tarifPeriodeRepository;
     private final MailService mailService;
     private final ObjectMapper objectMapper;
 
@@ -45,12 +48,14 @@ public class PublicApiController {
                                ChambreRepository chambreRepository,
                                ReservationRepository reservationRepository,
                                MessageRepository messageRepository,
+                               TarifPeriodeRepository tarifPeriodeRepository,
                                MailService mailService,
                                ObjectMapper objectMapper) {
         this.siteParamsRepository = siteParamsRepository;
         this.chambreRepository = chambreRepository;
         this.reservationRepository = reservationRepository;
         this.messageRepository = messageRepository;
+        this.tarifPeriodeRepository = tarifPeriodeRepository;
         this.mailService = mailService;
         this.objectMapper = objectMapper;
     }
@@ -93,8 +98,11 @@ public class PublicApiController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Chambre inconnue : " + slug));
         List<String> equipements = objectMapper.readValue(c.getEquipements(), new TypeReference<>() {});
         List<String> photos = objectMapper.readValue(c.getPhotos(), new TypeReference<>() {});
+        List<TarifPeriodeView> periodes = tarifPeriodeRepository.findApplicables(slug).stream()
+                .map(TarifPeriodeView::of).toList();
         return new ChambreDetail(c.getSlug(), c.getTitre(), c.getOrdre(), c.getSurface(), c.getCapacite(),
-                c.getResume(), c.getImage(), c.getContenu(), equipements, photos);
+                c.getResume(), c.getImage(), c.getContenu(), equipements, photos,
+                c.getTarif1(), c.getTarif2(), periodes);
     }
 
     /** Disponibilités : toutes les réservations, ou filtrées par ?chambre=slug. */

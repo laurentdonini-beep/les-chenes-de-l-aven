@@ -2,9 +2,15 @@ package com.leschenesdelaven.api.web;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.leschenesdelaven.api.dto.ChambreTarifsRequest;
 import com.leschenesdelaven.api.dto.ReservationRequest;
 import com.leschenesdelaven.api.dto.ReservationView;
+import com.leschenesdelaven.api.dto.TarifPeriodeRequest;
+import com.leschenesdelaven.api.dto.TarifPeriodeView;
+import com.leschenesdelaven.api.model.Chambre;
 import com.leschenesdelaven.api.model.Reservation;
+import com.leschenesdelaven.api.model.TarifPeriode;
+import com.leschenesdelaven.api.repo.TarifPeriodeRepository;
 import com.leschenesdelaven.api.model.SiteParams;
 import com.leschenesdelaven.api.repo.ChambreRepository;
 import com.leschenesdelaven.api.repo.ReservationRepository;
@@ -33,15 +39,18 @@ public class AdminController {
     private final ReservationRepository reservationRepository;
     private final ChambreRepository chambreRepository;
     private final SiteParamsRepository siteParamsRepository;
+    private final TarifPeriodeRepository tarifPeriodeRepository;
     private final ObjectMapper objectMapper;
 
     public AdminController(ReservationRepository reservationRepository,
                            ChambreRepository chambreRepository,
                            SiteParamsRepository siteParamsRepository,
+                           TarifPeriodeRepository tarifPeriodeRepository,
                            ObjectMapper objectMapper) {
         this.reservationRepository = reservationRepository;
         this.chambreRepository = chambreRepository;
         this.siteParamsRepository = siteParamsRepository;
+        this.tarifPeriodeRepository = tarifPeriodeRepository;
         this.objectMapper = objectMapper;
     }
 
@@ -99,6 +108,71 @@ public class AdminController {
         params.setData(body.toString());
         siteParamsRepository.save(params);
         return Map.of("ok", true);
+    }
+
+    // ---------------- Tarifs ----------------
+
+    /** Prix de base d'une chambre (null = hériter des tarifs généraux du site). */
+    @PutMapping("/chambres/{slug}/tarifs")
+    public Map<String, Object> putTarifsChambre(@PathVariable String slug,
+                                                @Valid @RequestBody ChambreTarifsRequest body) {
+        Chambre c = chambreRepository.findBySlug(slug)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Chambre inconnue : " + slug));
+        c.setTarif1(body.tarif1());
+        c.setTarif2(body.tarif2());
+        chambreRepository.save(c);
+        return Map.of("ok", true, "slug", slug, "tarif1", body.tarif1(), "tarif2", body.tarif2());
+    }
+
+    @GetMapping("/tarifs")
+    public List<TarifPeriodeView> listTarifs() {
+        return tarifPeriodeRepository.findAllByOrderByDebutAsc().stream()
+                .map(TarifPeriodeView::of).toList();
+    }
+
+    @PostMapping("/tarifs")
+    public TarifPeriodeView createTarif(@Valid @RequestBody TarifPeriodeRequest body) {
+        return saveTarif(null, body);
+    }
+
+    @PutMapping("/tarifs/{id}")
+    public TarifPeriodeView updateTarif(@PathVariable long id, @Valid @RequestBody TarifPeriodeRequest body) {
+        if (!tarifPeriodeRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Période tarifaire introuvable : " + id);
+        }
+        return saveTarif(id, body);
+    }
+
+    private TarifPeriodeView saveTarif(Long id, TarifPeriodeRequest body) {
+        if (!body.debut().isBefore(body.fin())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "La date de début doit précéder la date de fin");
+        }
+        String chambre = (body.chambre() == null || body.chambre().isBlank()) ? null : body.chambre();
+        if (chambre != null && chambreRepository.findBySlug(chambre).isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Chambre inconnue : " + chambre);
+        }
+        var chevauchements = tarifPeriodeRepository.findOverlapping(chambre, body.debut(), body.fin());
+        if (chevauchements.stream().anyMatch(t -> id == null || !t.getId().equals(id))) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    "Chevauchement avec une période tarifaire existante (même chambre ou globale)");
+        }
+        TarifPeriode t = (id == null) ? new TarifPeriode() : tarifPeriodeRepository.findById(id).orElseThrow();
+        t.setChambre(chambre);
+        t.setDebut(body.debut());
+        t.setFin(body.fin());
+        t.setPrix1(body.prix1());
+        t.setPrix2(body.prix2());
+        t.setLabel(body.label());
+        return TarifPeriodeView.of(tarifPeriodeRepository.save(t));
+    }
+
+    @DeleteMapping("/tarifs/{id}")
+    public ResponseEntity<Void> deleteTarif(@PathVariable long id) {
+        if (!tarifPeriodeRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Période tarifaire introuvable : " + id);
+        }
+        tarifPeriodeRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
     private SiteParams currentParams() {

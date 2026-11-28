@@ -12,6 +12,7 @@ import { AuthService } from '../core/auth.service';
       <a routerLink="/bo" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">📊 Tableau de bord</a>
       <a routerLink="/bo/reservations" routerLinkActive="active">📅 Réservations</a>
       <a routerLink="/bo/calendriers" routerLinkActive="active">🗓️ Saison & calendriers</a>
+      <a routerLink="/bo/tarifs" routerLinkActive="active">💰 Tarifs & promos</a>
       <span class="bo-nav-user">{{ auth.user() }}</span>
       <button type="button" class="btn btn-outline btn-small" (click)="logout()">Se déconnecter</button>
     </nav>

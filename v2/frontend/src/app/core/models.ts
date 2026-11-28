@@ -36,12 +36,25 @@ export interface ChambreSummary {
   capacite: string;
   resume: string;
   image: string;
+  tarif1?: number | null;   // prix de base 1 pers (null = tarifs généraux du site)
+  tarif2?: number | null;   // prix de base 2 pers
+}
+
+export interface TarifPeriode {
+  id: number;
+  chambre: string | null;   // null = toutes les chambres
+  debut: string;
+  fin: string;
+  prix1: number;
+  prix2: number;
+  label: string;
 }
 
 export interface ChambreDetail extends ChambreSummary {
   contenu: string;          // HTML pré-rendu par le backend
   equipements: string[];
   photos: string[];
+  periodes: TarifPeriode[]; // périodes tarifaires applicables (chambre + globales)
 }
 
 export interface Reservation {

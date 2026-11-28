@@ -34,6 +34,10 @@ public class Chambre {
 
     private String image;
 
+    /** Prix de base de la chambre (null = hériter des tarifs généraux du site). */
+    private Integer tarif1;
+    private Integer tarif2;
+
     /** Contenu de la page chambre, pré-rendu en HTML. */
     @Lob
     @Column(columnDefinition = "CLOB")
@@ -64,6 +68,10 @@ public class Chambre {
     public void setResume(String resume) { this.resume = resume; }
     public String getImage() { return image; }
     public void setImage(String image) { this.image = image; }
+    public Integer getTarif1() { return tarif1; }
+    public void setTarif1(Integer tarif1) { this.tarif1 = tarif1; }
+    public Integer getTarif2() { return tarif2; }
+    public void setTarif2(Integer tarif2) { this.tarif2 = tarif2; }
     public String getContenu() { return contenu; }
     public void setContenu(String contenu) { this.contenu = contenu; }
     public String getEquipements() { return equipements; }

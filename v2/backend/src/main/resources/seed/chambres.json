@@ -7,6 +7,8 @@
     "capacite": "1–2 personnes",
     "resume": "Chambre à l'étage, accès par l'escalier extérieur et solarium, vue sur les chênes.",
     "image": "/assets/img/photos/chambre-chene-vert.jpg",
+    "tarif1": 80,
+    "tarif2": 90,
     "contenuHtml": "<p>Chambre de 12 m² à l'étage, face à la chambre Marron Glacé. Même accès par l'escalier extérieur et le solarium commun, avec vue sur les chênes qui donnent leur nom à la maison.</p>\n",
     "equipements": [
       "Lit en 160 cm",
@@ -30,6 +32,8 @@
     "capacite": "1–2 personnes",
     "resume": "Chambre à l'étage avec accès par l'escalier extérieur et solarium commun, vue sur la piscine.",
     "image": "/assets/img/photos/chambre-marron-glace.jpg",
+    "tarif1": 80,
+    "tarif2": 90,
     "contenuHtml": "<p>Chambre de 12 m² à l'étage, face à la chambre Chêne Vert. L'accès se fait par l'escalier extérieur qui donne sur un solarium commun, et vous disposez d'une pièce commune à partager avec les autres hôtes.</p>\n",
     "equipements": [
       "Lit en 160 cm",
@@ -55,6 +59,8 @@
     "capacite": "1–2 personnes",
     "resume": "Chambre indépendante en rez-de-chaussée, avec vestibule équipé d'un petit frigo.",
     "image": "/assets/img/photos/chambre-petite-lauze.jpg",
+    "tarif1": 80,
+    "tarif2": 90,
     "contenuHtml": "<p>Située en rez-de-chaussée, la chambre Petite-Lauze est indépendante de notre maison : c'est une construction de 20 m² comprenant un vestibule équipé d'un petit frigo.</p>\n",
     "equipements": [
       "Lit en 160 cm",
@@ -78,6 +84,8 @@
     "capacite": "1–2 personnes",
     "resume": "Chambre avec terrasse privative et bains de soleil, face aux oliviers.",
     "image": "/assets/img/photos/chambre-pitchouline.jpg",
+    "tarif1": 80,
+    "tarif2": 90,
     "contenuHtml": "<p>L'accès se fait par 3 marches qui donnent sur une terrasse privative, avec bains de soleil, face à nos oliviers. Chambre de 16 m².</p>\n",
     "equipements": [
       "Lit en 160 cm",

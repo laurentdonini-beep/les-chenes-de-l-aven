@@ -96,6 +96,12 @@ export const routes: Routes = [
     data: { title: 'Saison & calendriers — Backoffice' }
   },
   {
+    path: 'bo/tarifs',
+    loadComponent: () => import('./pages/bo-tarifs.component').then(m => m.BoTarifsComponent),
+    canActivate: [authGuard],
+    data: { title: 'Tarifs — Backoffice' }
+  },
+  {
     path: '**',
     loadComponent: () => import('./pages/not-found.component').then(m => m.NotFoundComponent),
     data: { title: 'Page introuvable' }

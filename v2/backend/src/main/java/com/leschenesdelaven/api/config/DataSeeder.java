@@ -61,6 +61,8 @@ public class DataSeeder implements CommandLineRunner {
                 ch.setCapacite(c.path("capacite").asText(""));
                 ch.setResume(c.path("resume").asText(""));
                 ch.setImage(c.path("image").asText(""));
+                ch.setTarif1(c.hasNonNull("tarif1") ? c.get("tarif1").asInt() : null);
+                ch.setTarif2(c.hasNonNull("tarif2") ? c.get("tarif2").asInt() : null);
                 ch.setContenu(c.path("contenuHtml").asText(""));
                 ch.setEquipements(objectMapper.writeValueAsString(c.path("equipements")));
                 ch.setPhotos(objectMapper.writeValueAsString(c.path("photos")));

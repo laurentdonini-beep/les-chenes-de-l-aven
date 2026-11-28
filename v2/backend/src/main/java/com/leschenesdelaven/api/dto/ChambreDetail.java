@@ -12,5 +12,8 @@ public record ChambreDetail(
         String image,
         String contenu,          // HTML pré-rendu
         List<String> equipements,
-        List<String> photos) {
+        List<String> photos,
+        Integer tarif1,          // prix de base chambre (null = tarifs généraux du site)
+        Integer tarif2,
+        List<TarifPeriodeView> periodes) {   // périodes tarifaires applicables (chambre + globales)
 }

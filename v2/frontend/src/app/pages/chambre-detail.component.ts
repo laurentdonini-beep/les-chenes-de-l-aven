@@ -3,7 +3,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DomSanitizer, Meta, Title } from '@angular/platform-browser';
 import { ApiService } from '../core/api.service';
 import { SiteService } from '../core/site.service';
-import { ChambreDetail, Reservation } from '../core/models';
+import { ChambreDetail, Reservation, TarifPeriode } from '../core/models';
 import { resumeDispo } from '../shared/dispo-utils';
 import { RevealDirective } from '../shared/reveal.directive';
 import { GalleryGridComponent, GalleryImage } from '../shared/gallery-grid.component';
@@ -74,7 +74,20 @@ import { DateFRPipe } from '../shared/date-fr.pipe';
               </ul>
               <div class="room-tarif">
                 <h2>Tarif</h2>
-                <p class="room-price">{{ s.tarif2 }} <span>/ 2 pers.</span> &nbsp;·&nbsp; {{ s.tarif1 }} <span>/ 1 pers.</span></p>
+                @if (tarifActuel(); as t) {
+                  <p class="room-price">{{ t.prix2 }} € <span>/ 2 pers.</span> &nbsp;·&nbsp; {{ t.prix1 }} € <span>/ 1 pers.</span></p>
+                  @if (t.label) {
+                    <p class="room-tarif-note"><strong>{{ t.label }}</strong> — en vigueur jusqu'au {{ t.finLabel | dateFR }}</p>
+                  }
+                  @if (t.periodes.length) {
+                    <p class="room-tarif-note" style="margin-bottom:0.3rem;"><strong>Tarifs spéciaux :</strong></p>
+                    <ul class="room-tarif-note" style="margin:0 0 0.6rem 1.1rem; padding:0;">
+                      @for (p of t.periodes; track p.id) {
+                        <li>{{ p.label }} : du {{ p.debut | dateFR }} au {{ p.fin | dateFR }} — {{ p.prix2 }} €/2 pers. · {{ p.prix1 }} €/1 pers.{{ p.chambre ? '' : ' (toutes les chambres)' }}</li>
+                      }
+                    </ul>
+                  }
+                }
                 <p class="room-tarif-note">{{ s.tarifNote }}</p>
                 <p class="room-tarif-note"><strong>Paiement :</strong> {{ s.paiement }}</p>
               </div>
@@ -107,6 +120,33 @@ export class ChambreDetailComponent implements OnInit {
   /** Résumé dispo : nuits libres restantes, ou « complet » si plus rien. */
   readonly resumeDispo = computed(() =>
     resumeDispo(this.site()?.saison ?? null, this.dispo(), this.chambre()?.slug ?? ''));
+
+  private static parsePrix(s: string | undefined): number {
+    const m = (s ?? '').match(/\d+/);
+    return m ? Number(m[0]) : 0;
+  }
+
+  private static parseDate(d: string): Date {
+    const [y, m, day] = d.split('-').map(Number);
+    return new Date(y, (m || 1) - 1, day || 1);
+  }
+
+  /** Tarif en vigueur aujourd'hui : période active (chambre ou globale) sinon prix de base chambre/site. */
+  readonly tarifActuel = computed(() => {
+    const c = this.chambre();
+    const s = this.site();
+    if (!c || !s) return null;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const periode = (c.periodes ?? []).find(p => {
+      const d = ChambreDetailComponent.parseDate(p.debut);
+      const f = ChambreDetailComponent.parseDate(p.fin);
+      return d <= today && today <= f;
+    });
+    const prix1 = periode ? periode.prix1 : (c.tarif1 ?? ChambreDetailComponent.parsePrix(s.tarif1));
+    const prix2 = periode ? periode.prix2 : (c.tarif2 ?? ChambreDetailComponent.parsePrix(s.tarif2));
+    return { prix1, prix2, label: periode?.label ?? null, finLabel: periode?.fin ?? null, periodes: c.periodes ?? [] };
+  });
 
   readonly contenuHtml = computed(() => {
     const c = this.chambre();
