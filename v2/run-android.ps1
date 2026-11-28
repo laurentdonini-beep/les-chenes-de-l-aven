@@ -98,21 +98,21 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 if (-not (Test-Path "android\app\build.gradle")) {
-  Write-Host "Premiere fois : ajout de la plateforme Android (npx cap add android)..."
-  npx cap add android
+  Write-Host "Premiere fois : ajout de la plateforme Android (node node_modules/@capacitor/cli/bin/capacitor add android)..."
+  node node_modules/@capacitor/cli/bin/capacitor add android
   if ($LASTEXITCODE -ne 0) { Write-Host "ERREUR cap add android"; Pop-Location; Read-Host "Entree"; exit 1 }
 }
 
 }
 
 Write-Host "[2/3] cap sync android (copie du build dans le projet Android)..."
-npx cap sync android
+node node_modules/@capacitor/cli/bin/capacitor sync android
 if ($LASTEXITCODE -ne 0) { Write-Host "ERREUR cap sync"; Pop-Location; Read-Host "Entree"; exit 1 }
 
 $apkRel = "android\app\build\outputs\apk\debug\app-debug.apk"
 if ($ApkOnly) {
   Write-Host "[3/3] Build de l'APK uniquement (gradle, premier lancement long)..."
-  npx cap build android
+  node node_modules/@capacitor/cli/bin/capacitor build android
   if ($LASTEXITCODE -ne 0) { Write-Host "ERREUR gradle"; Pop-Location; Read-Host "Entree"; exit 1 }
   Write-Host "APK pret : $root\frontend\$apkRel"
   Write-Host "Envoie ce fichier sur le telephone (WhatsApp/mail/USB), puis ouvre-le et autorise 'installer depuis cette source'."
@@ -131,7 +131,7 @@ if (-not $devices) {
 $devices | ForEach-Object { Write-Host "  appareil : $_" }
 
 Write-Host "Build Gradle + installation sur l'appareil (premier lancement : plusieurs minutes, ~2 Go téléchargés)..."
-npx cap run android
+node node_modules/@capacitor/cli/bin/capacitor run android
 if ($LASTEXITCODE -ne 0) { Write-Host "ERREUR cap run android"; Pop-Location; Read-Host "Entree"; exit 1 }
 
 Write-Host ""
