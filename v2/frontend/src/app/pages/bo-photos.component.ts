@@ -262,10 +262,29 @@ export class BoPhotosComponent implements OnInit {
   }
 
   copyPath(m: MediaItem): void {
-    navigator.clipboard?.writeText(m.path).then(
-      () => this.msg.set({ ok: true, text: `📋 Chemin copié : ${m.path}` }),
-      () => this.msg.set({ ok: false, text: 'Chemin : ' + m.path })
-    );
+    const ok = () => this.msg.set({ ok: true, text: `📋 Chemin copié : ${m.path}` });
+    // repli si navigator.clipboard indisponible (contexte non sécurisé : http://IP, WebView...)
+    const fallback = () => {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = m.path;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        ok();
+      } catch {
+        this.msg.set({ ok: false, text: 'Chemin (à copier à la main) : ' + m.path });
+      }
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(m.path).then(ok, fallback);
+    } else {
+      fallback();
+    }
   }
 
   openPick(slug: string, field: 'image' | 'gallery'): void {
