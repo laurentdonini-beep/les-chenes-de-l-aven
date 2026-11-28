@@ -59,6 +59,26 @@ if (-not (Test-Path "C:\Windows\System32\ucrtbase.dll")) {
 Get-ChildItem "$env:USERPROFILE\.gradle" -Recurse -Filter *.exe -ErrorAction SilentlyContinue | Unblock-File -ErrorAction SilentlyContinue
 Add-MpPreference -ExclusionPath "$env:USERPROFILE\.gradle" -ErrorAction SilentlyContinue
 
+# AAPT2 : si le binaire du cache Gradle est bloque par l'AV/politique, utiliser celui du SDK (build-tools)
+$btDir = Get-ChildItem "$env:ANDROID_HOME\build-tools" -Directory -ErrorAction SilentlyContinue | Sort-Object Name -Descending | Select-Object -First 1
+if ($btDir) {
+  $sdkAapt2 = Join-Path $btDir.FullName "aapt2.exe"
+  if (Test-Path $sdkAapt2) {
+    $v = & $sdkAapt2 version 2>$null
+    if ($v) {
+      $gp = "android\gradle.properties"
+      $line = "android.aapt2FromMavenOverride=$($sdkAapt2.Replace('\','\\'))"
+      $cur = if (Test-Path $gp) { Get-Content $gp -Raw } else { "" }
+      if ($cur -notmatch 'aapt2FromMavenOverride') {
+        Add-Content -Path $gp -Value $line
+        Write-Host "AAPT2 : binaire SDK utilise ($sdkAapt2) via android.aapt2FromMavenOverride"
+      }
+    } else {
+      Write-Host "ATTENTION : aapt2.exe du SDK aussi bloque -> installe VC++ Redist x64 (https://aka.ms/vs/17/release/vc_redist.x64.exe) + redemarre, ou demande a l'IT d'autoriser aapt2."
+    }
+  }
+}
+
 Push-Location "$root\frontend"
 
 $bundlePrecompile = (Test-Path "android-web\index.html")
