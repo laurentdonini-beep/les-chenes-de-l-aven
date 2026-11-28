@@ -49,6 +49,16 @@ if (-not $env:ANDROID_HOME -or -not (Test-Path "$env:ANDROID_HOME\platform-tools
 Write-Host "ANDROID_HOME = $env:ANDROID_HOME"
 $adb = "$env:ANDROID_HOME\platform-tools\adb.exe"
 
+# AAPT2 (Gradle) a besoin de l'UCRT Windows et son binaire dans le cache Gradle peut être bloque par l'AV :
+#  - si ucrtbase.dll manque -> installer le VC++ Redist x64 (https://aka.ms/vs/17/release/vc_redist.x64.exe)
+if (-not (Test-Path "C:\Windows\System32\ucrtbase.dll")) {
+  Write-Host "ATTENTION : Windows Universal C Runtime (ucrtbase.dll) absent -> AAPT2 va echouer."
+  Write-Host "  Installe le VC++ Redistributable x64 : https://aka.ms/vs/17/release/vc_redist.x64.exe puis redemarre le PC."
+}
+# debloquer les .exe du cache Gradle (aapt2.exe, etc.) et exclure le cache Gradle de Defender (si admin)
+Get-ChildItem "$env:USERPROFILE\.gradle" -Recurse -Filter *.exe -ErrorAction SilentlyContinue | Unblock-File -ErrorAction SilentlyContinue
+Add-MpPreference -ExclusionPath "$env:USERPROFILE\.gradle" -ErrorAction SilentlyContinue
+
 Push-Location "$root\frontend"
 
 $bundlePrecompile = (Test-Path "android-web\index.html")
