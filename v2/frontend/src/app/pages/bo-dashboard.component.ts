@@ -22,6 +22,10 @@ import { StatsGlobal, computeStats } from '../shared/dispo-utils';
     .bar > span { display: block; height: 100%; background: var(--terra); border-radius: 999px; }
     .bar.ok > span { background: var(--vert); }
     .statut-complet { color: #b3261e; font-weight: 700; }
+    .bo-alert { border-radius: 10px; padding: 0.55rem 0.9rem; margin-bottom: 0.5rem; font-size: 0.95rem; }
+    .bo-alert.err { background: #fdecea; color: #b3261e; font-weight: 600; }
+    .bo-alert.warn { background: #fdf3e0; color: #8a5a00; }
+    .bo-alert.info { background: #e6f2e8; color: #22392c; }
     .statut-ok { color: var(--vert); font-weight: 600; }
     table.bo-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
     table.bo-table th, table.bo-table td { text-align: left; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--sable); vertical-align: top; }
@@ -37,6 +41,14 @@ import { StatsGlobal, computeStats } from '../shared/dispo-utils';
           <a routerLink="/bo/calendriers">modifier la saison</a> ·
           <a routerLink="/bo/reservations">gérer les réservations</a>
         </p>
+
+        @if (alertes().length) {
+          <div style="margin-bottom:1.2rem;">
+            @for (a of alertes(); track a.text) {
+              <p class="bo-alert" [class]="'bo-alert ' + a.cls">{{ a.icon }} {{ a.text }}</p>
+            }
+          </div>
+        }
 
         @if (stats(); as st) {
           <div class="grid-3" style="margin-bottom:1.4rem;">
@@ -112,6 +124,36 @@ export class BoDashboardComponent implements OnInit {
   readonly stats = computed<StatsGlobal | null>(() => {
     const s = this.site();
     return s ? computeStats(this.chambres(), this.reservations(), s.saison) : null;
+  });
+
+  /** Alertes affichées en haut du tableau de bord. */
+  readonly alertes = computed<{ icon: string; text: string; cls: string }[]>(() => {
+    const s = this.site();
+    const st = this.stats();
+    if (!s || !st) return [];
+    const out: { icon: string; text: string; cls: string }[] = [];
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const parse = (d: string) => { const [y, m, dd] = d.split('-').map(Number); return new Date(y, (m || 1) - 1, dd || 1); };
+    const debut = parse(s.saison.debut), fin = parse(s.saison.fin);
+    const DAY = 86400000;
+    if (fin < today) {
+      out.push({ icon: '🏁', text: `La saison est terminée (fin le ${s.saison.fin}). Pensez à mettre à jour la saison pour l'année prochaine.`, cls: 'info' });
+    } else {
+      const jours = Math.round((debut.getTime() - today.getTime()) / DAY);
+      if (debut > today && jours <= 45) {
+        out.push({ icon: '⏰', text: `La saison ouvre dans ${jours} jour(s) (le ${s.saison.debut}).`, cls: 'warn' });
+      }
+    }
+    for (const c of st.parChambre) {
+      const nom = this.titreOf(c.slug);
+      if (c.complet) out.push({ icon: '🔴', text: `${nom} est COMPLET sur la saison.`, cls: 'err' });
+      else if (st.nuitsSaison > 0 && c.libres <= 10) out.push({ icon: '🟠', text: `${nom} : plus que ${c.libres} nuit(s) libres.`, cls: 'warn' });
+    }
+    if (st.aVenir.length > 0) {
+      const n = st.aVenir[0];
+      out.push({ icon: '📅', text: `Prochaine réservation : ${this.titreOf(n.chambre)}, du ${n.debut} au ${n.fin}${n.note ? ' (' + n.note + ')' : ''}.`, cls: 'info' });
+    }
+    return out;
   });
 
   ngOnInit(): void {

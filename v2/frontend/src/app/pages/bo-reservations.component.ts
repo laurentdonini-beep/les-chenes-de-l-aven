@@ -26,6 +26,7 @@ interface LigneReservation extends Reservation {
     table.bo-table th, table.bo-table td { text-align: left; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--sable); vertical-align: top; }
     table.bo-table th { color: var(--texte-doux); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; cursor: pointer; }
     .bo-del { border: none; background: transparent; color: #b3261e; cursor: pointer; font-size: 0.85rem; text-decoration: underline; padding: 0; }
+    .bo-edit { border: none; background: transparent; color: var(--vert); cursor: pointer; font-size: 0.85rem; text-decoration: underline; padding: 0; margin-right: 0.6rem; }
     .bo-empty { color: var(--texte-doux); font-style: italic; }
     .bo-note { color: var(--texte-doux); font-size: 0.85rem; }
     .bo-filters { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
@@ -43,7 +44,7 @@ interface LigneReservation extends Reservation {
 
       <div class="bo-grid">
         <div class="card">
-          <h2>Ajouter une réservation</h2>
+          <h2>{{ editId() ? 'Modifier la réservation #' + editId() : 'Ajouter une réservation' }}</h2>
           <form #f="ngForm" (ngSubmit)="addRes(f)">
             <label>Chambre *
               <select name="chambre" [(ngModel)]="newRes.chambre" required>
@@ -64,7 +65,10 @@ interface LigneReservation extends Reservation {
               <input type="checkbox" name="vacances" [ngModel]="newRes.vacances" (ngModelChange)="newRes.vacances = $event" style="width:auto; margin:0;">
               Période de vacances / fermeture de la chambre
             </label>
-            <button type="submit" class="btn btn-block" [disabled]="busy()">{{ busy() ? 'Enregistrement…' : 'Enregistrer' }}</button>
+            <button type="submit" class="btn btn-block" [disabled]="busy()">{{ busy() ? 'Enregistrement…' : (editId() ? 'Enregistrer les modifications' : 'Enregistrer') }}</button>
+            @if (editId()) {
+              <button type="button" class="btn btn-outline btn-block" style="margin-top:0.5rem;" (click)="resetForm()">Annuler la modification</button>
+            }
             <p class="bo-note">Les jours réservés apparaissent en orange sur le calendrier de la chambre. Un chevauchement est refusé.</p>
           </form>
         </div>
@@ -112,7 +116,10 @@ interface LigneReservation extends Reservation {
                       @else { <span class="statut-passee">Passée</span> }
                     </td>
                     <td>{{ r.note || '—' }}</td>
-                    <td><button type="button" class="bo-del" (click)="deleteRes(r)">Supprimer</button></td>
+                    <td>
+                      <button type="button" class="bo-edit" (click)="editRes(r)">Modifier</button>
+                      <button type="button" class="bo-del" (click)="deleteRes(r)">Supprimer</button>
+                    </td>
                   </tr>
                 }
               </tbody>
@@ -131,6 +138,7 @@ export class BoReservationsComponent implements OnInit {
   readonly reservations = signal<Reservation[]>([]);
 
   newRes = { chambre: '', debut: '', fin: '', note: '', vacances: false };
+  readonly editId = signal<number | null>(null);
   filtreChambre = '';
   filtreStatut = '';
   readonly msg = signal<{ ok: boolean; text: string } | null>(null);
@@ -177,11 +185,15 @@ export class BoReservationsComponent implements OnInit {
       ? ('Vacances' + (this.newRes.note ? ' — ' + this.newRes.note : ''))
       : this.newRes.note;
     const payload = { chambre: this.newRes.chambre, debut: this.newRes.debut, fin: this.newRes.fin, note };
-    this.http.post<Reservation>('/api/admin/disponibilites', payload).subscribe({
+    const editId = this.editId();
+    const request = editId
+      ? this.http.put<Reservation>(`/api/admin/disponibilites/${editId}`, payload)
+      : this.http.post<Reservation>('/api/admin/disponibilites', payload);
+    request.subscribe({
       next: () => {
         this.busy.set(false);
-        this.msg.set({ ok: true, text: this.newRes.vacances ? '✅ Période de vacances enregistrée.' : '✅ Réservation enregistrée.' });
-        this.newRes = { chambre: this.newRes.chambre, debut: '', fin: '', note: '', vacances: false };
+        this.msg.set({ ok: true, text: editId ? '✅ Réservation modifiée.' : (this.newRes.vacances ? '✅ Période de vacances enregistrée.' : '✅ Réservation enregistrée.') });
+        this.resetForm();
         this.reload();
       },
       error: e => {
@@ -190,6 +202,17 @@ export class BoReservationsComponent implements OnInit {
         this.msg.set({ ok: false, text: '⚠ ' + detail });
       }
     });
+  }
+
+  editRes(r: LigneReservation): void {
+    this.editId.set(r.id);
+    this.newRes = { chambre: r.chambre, debut: r.debut, fin: r.fin, note: r.note ?? '', vacances: (r.note ?? '').startsWith('Vacances') };
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  resetForm(): void {
+    this.editId.set(null);
+    this.newRes = { chambre: this.newRes.chambre, debut: '', fin: '', note: '', vacances: false };
   }
 
   deleteRes(r: Reservation): void {

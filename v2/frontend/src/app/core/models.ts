@@ -79,3 +79,17 @@ export interface ContactPayload {
   depart?: string;
   message: string;
 }
+
+export interface MessageView {
+  id: number;
+  nom: string;
+  email: string;
+  tel: string | null;
+  chambre: string | null;
+  arrivee: string | null;
+  depart: string | null;
+  message: string;
+  createdAt: string;
+  mailEnvoye: boolean;
+  traite: boolean;
+}

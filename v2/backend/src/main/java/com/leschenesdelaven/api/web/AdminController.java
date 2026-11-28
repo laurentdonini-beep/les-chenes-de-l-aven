@@ -3,6 +3,10 @@ package com.leschenesdelaven.api.web;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.leschenesdelaven.api.dto.ChambreTarifsRequest;
+import com.leschenesdelaven.api.dto.MessageUpdateRequest;
+import com.leschenesdelaven.api.dto.MessageView;
+import com.leschenesdelaven.api.model.Message;
+import com.leschenesdelaven.api.repo.MessageRepository;
 import com.leschenesdelaven.api.dto.ReservationRequest;
 import com.leschenesdelaven.api.dto.ReservationView;
 import com.leschenesdelaven.api.dto.TarifPeriodeRequest;
@@ -20,6 +24,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -40,17 +45,20 @@ public class AdminController {
     private final ChambreRepository chambreRepository;
     private final SiteParamsRepository siteParamsRepository;
     private final TarifPeriodeRepository tarifPeriodeRepository;
+    private final MessageRepository messageRepository;
     private final ObjectMapper objectMapper;
 
     public AdminController(ReservationRepository reservationRepository,
                            ChambreRepository chambreRepository,
                            SiteParamsRepository siteParamsRepository,
                            TarifPeriodeRepository tarifPeriodeRepository,
+                           MessageRepository messageRepository,
                            ObjectMapper objectMapper) {
         this.reservationRepository = reservationRepository;
         this.chambreRepository = chambreRepository;
         this.siteParamsRepository = siteParamsRepository;
         this.tarifPeriodeRepository = tarifPeriodeRepository;
+        this.messageRepository = messageRepository;
         this.objectMapper = objectMapper;
     }
 
@@ -73,6 +81,30 @@ public class AdminController {
                     "Chevauchement avec une réservation existante pour cette chambre");
         }
         Reservation r = new Reservation();
+        r.setChambre(body.chambre());
+        r.setDebut(body.debut());
+        r.setFin(body.fin());
+        r.setNote(body.note() == null ? "" : body.note());
+        return ReservationView.of(reservationRepository.save(r));
+    }
+
+    /** Modifie une réservation existante (édition en place). */
+    @PutMapping("/disponibilites/{id}")
+    public ReservationView updateDisponibilite(@PathVariable long id, @Valid @RequestBody ReservationRequest body) {
+        Reservation r = reservationRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Réservation introuvable : " + id));
+        if (!body.debut().isBefore(body.fin())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "La date de début doit précéder la date de fin");
+        }
+        if (chambreRepository.findBySlug(body.chambre()).isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Chambre inconnue : " + body.chambre());
+        }
+        boolean chevauchement = reservationRepository.findOverlapping(body.chambre(), body.debut(), body.fin())
+                .stream().anyMatch(o -> !o.getId().equals(id));
+        if (chevauchement) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    "Chevauchement avec une autre réservation pour cette chambre");
+        }
         r.setChambre(body.chambre());
         r.setDebut(body.debut());
         r.setFin(body.fin());
@@ -172,6 +204,31 @@ public class AdminController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Période tarifaire introuvable : " + id);
         }
         tarifPeriodeRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    // ---------------- Messages de contact (boîte de réception) ----------------
+
+    @GetMapping("/messages")
+    public List<MessageView> listMessages() {
+        return messageRepository.findAllByOrderByCreatedAtDesc().stream()
+                .map(MessageView::of).toList();
+    }
+
+    @PatchMapping("/messages/{id}")
+    public MessageView updateMessage(@PathVariable long id, @RequestBody MessageUpdateRequest body) {
+        Message m = messageRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Message introuvable : " + id));
+        if (body.traite() != null) m.setTraite(body.traite());
+        return MessageView.of(messageRepository.save(m));
+    }
+
+    @DeleteMapping("/messages/{id}")
+    public ResponseEntity<Void> deleteMessage(@PathVariable long id) {
+        if (!messageRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Message introuvable : " + id);
+        }
+        messageRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
