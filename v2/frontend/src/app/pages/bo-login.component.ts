@@ -31,6 +31,8 @@ import { SiteService } from '../core/site.service';
           <button type="submit" class="btn btn-block" [disabled]="busy()">{{ busy() ? 'Connexion…' : 'Se connecter' }}</button>
         </form>
         <p class="bo-hint"><a routerLink="/">← Retour au site public</a></p>
+        <p class="bo-hint">En local : mot de passe = <code>ADMIN_PASSWORD</code> (défaut <code>change-me</code>), affiché dans la fenêtre PowerShell au démarrage.<br>
+        Pour changer : <code>set ADMIN_PASSWORD=tonmotdepasse</code> dans une <b>nouvelle</b> fenêtre PowerShell, puis relancer <code>start-local.ps1</code>.</p>
       </div>
     </section>
   `
@@ -40,7 +42,7 @@ export class BoLoginComponent implements OnInit {
   private router = inject(Router);
 
   readonly site = inject(SiteService).site;
-  email = '';
+  email = 'admin@leschenesdelaven.fr';
   password = '';
   readonly error = signal('');
   readonly busy = signal(false);
@@ -58,9 +60,11 @@ export class BoLoginComponent implements OnInit {
     this.error.set('');
     this.auth.login(this.email, this.password).subscribe({
       next: () => this.router.navigate(['/bo']),
-      error: () => {
+      error: (err: { status?: number }) => {
         this.busy.set(false);
-        this.error.set('Identifiants invalides.');
+        this.error.set(err?.status === 401
+          ? 'Identifiants invalides — vérifiez le mot de passe (ADMIN_PASSWORD, défaut « change-me »).'
+          : 'Serveur injoignable — vérifiez que la fenêtre start-local.ps1 tourne bien (http://localhost:8080).');
       }
     });
   }

@@ -1,14 +1,4 @@
-@if (isBo()) {
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" routerLink="/">
-        <img src="/assets/img/favicon.svg" alt="" class="brand-logo" loading="lazy" decoding="async">
-        <span class="brand-name">{{ site()?.nom }} — Backoffice</span>
-      </a>
-      <a routerLink="/" class="btn btn-outline btn-small">← Voir le site public</a>
-    </div>
-  </header>
-} @else {
+@if (!isBo()) {
 <header class="site-header" id="top">
   <div class="container header-inner">
     <a class="brand" routerLink="/">

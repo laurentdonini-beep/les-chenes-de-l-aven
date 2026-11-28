@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { ApiService } from '../core/api.service';
 import { SiteService } from '../core/site.service';
 import { ChambreSummary, Reservation, Site } from '../core/models';
-import { BoNavComponent } from '../shared/bo-nav.component';
 import { CalendarComponent } from '../shared/calendar.component';
 import { DateFRPipe } from '../shared/date-fr.pipe';
 import { DispoResume, resumeDispo } from '../shared/dispo-utils';
@@ -16,7 +15,7 @@ import { DispoResume, resumeDispo } from '../shared/dispo-utils';
  */
 @Component({
   selector: 'app-bo-calendars',
-  imports: [RouterLink, FormsModule, BoNavComponent, CalendarComponent, DateFRPipe],
+  imports: [RouterLink, FormsModule, CalendarComponent, DateFRPipe],
   styles: [`
     .bo-msg { border-radius: 8px; padding: 0.6rem 0.9rem; margin-bottom: 1rem; }
     .bo-msg.ok { background: #e6f2e8; color: #22392c; }
@@ -27,7 +26,6 @@ import { DispoResume, resumeDispo } from '../shared/dispo-utils';
   `],
   template: `
     <section class="container">
-      <app-bo-nav />
       <h1 style="font-size:1.7rem; margin-bottom:1.2rem;">Saison & calendriers</h1>
 
       @if (msg(); as m) { <p class="bo-msg" [class.ok]="m.ok" [class.err]="!m.ok">{{ m.text }}</p> }

@@ -77,35 +77,37 @@ export const routes: Routes = [
     data: { title: 'Connexion — Backoffice' }
   },
   {
+    // Layout du backoffice : menu latéral à gauche (bo-layout) + contenu (enfants)
     path: 'bo',
-    pathMatch: 'full',
-    loadComponent: () => import('./pages/bo-dashboard.component').then(m => m.BoDashboardComponent),
+    loadComponent: () => import('./shared/bo-layout.component').then(m => m.BoLayoutComponent),
     canActivate: [authGuard],
-    data: { title: 'Tableau de bord — Backoffice' }
-  },
-  {
-    path: 'bo/reservations',
-    loadComponent: () => import('./pages/bo-reservations.component').then(m => m.BoReservationsComponent),
-    canActivate: [authGuard],
-    data: { title: 'Réservations — Backoffice' }
-  },
-  {
-    path: 'bo/calendriers',
-    loadComponent: () => import('./pages/bo-calendars.component').then(m => m.BoCalendarsComponent),
-    canActivate: [authGuard],
-    data: { title: 'Saison & calendriers — Backoffice' }
-  },
-  {
-    path: 'bo/messages',
-    loadComponent: () => import('./pages/bo-messages.component').then(m => m.BoMessagesComponent),
-    canActivate: [authGuard],
-    data: { title: 'Messages — Backoffice' }
-  },
-  {
-    path: 'bo/tarifs',
-    loadComponent: () => import('./pages/bo-tarifs.component').then(m => m.BoTarifsComponent),
-    canActivate: [authGuard],
-    data: { title: 'Tarifs — Backoffice' }
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./pages/bo-dashboard.component').then(m => m.BoDashboardComponent),
+        data: { title: 'Tableau de bord — Backoffice' }
+      },
+      {
+        path: 'reservations',
+        loadComponent: () => import('./pages/bo-reservations.component').then(m => m.BoReservationsComponent),
+        data: { title: 'Réservations — Backoffice' }
+      },
+      {
+        path: 'calendriers',
+        loadComponent: () => import('./pages/bo-calendars.component').then(m => m.BoCalendarsComponent),
+        data: { title: 'Saison & calendriers — Backoffice' }
+      },
+      {
+        path: 'messages',
+        loadComponent: () => import('./pages/bo-messages.component').then(m => m.BoMessagesComponent),
+        data: { title: 'Messages — Backoffice' }
+      },
+      {
+        path: 'tarifs',
+        loadComponent: () => import('./pages/bo-tarifs.component').then(m => m.BoTarifsComponent),
+        data: { title: 'Tarifs — Backoffice' }
+      }
+    ]
   },
   {
     path: '**',

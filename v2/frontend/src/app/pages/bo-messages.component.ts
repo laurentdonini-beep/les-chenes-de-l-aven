@@ -2,7 +2,6 @@ import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { MessageView } from '../core/models';
-import { BoNavComponent } from '../shared/bo-nav.component';
 import { DateFRPipe } from '../shared/date-fr.pipe';
 
 /**
@@ -11,7 +10,7 @@ import { DateFRPipe } from '../shared/date-fr.pipe';
  */
 @Component({
   selector: 'app-bo-messages',
-  imports: [FormsModule, BoNavComponent, DateFRPipe],
+  imports: [FormsModule, DateFRPipe],
   styles: [`
     .bo-msg { border-radius: 8px; padding: 0.6rem 0.9rem; margin-bottom: 1rem; }
     .bo-msg.ok { background: #e6f2e8; color: #22392c; }
@@ -33,7 +32,6 @@ import { DateFRPipe } from '../shared/date-fr.pipe';
   `],
   template: `
     <section class="container">
-      <app-bo-nav />
       <h1 style="font-size:1.7rem; margin-bottom:0.4rem;">📨 Messages reçus</h1>
       <p class="bo-note" style="margin-bottom:1.2rem;">
         Demandes envoyées via le formulaire de contact du site.

@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../core/api.service';
 import { ChambreSummary, Reservation } from '../core/models';
-import { BoNavComponent } from '../shared/bo-nav.component';
 import { DateFRPipe } from '../shared/date-fr.pipe';
 
 interface LigneReservation extends Reservation {
@@ -17,7 +16,7 @@ interface LigneReservation extends Reservation {
  */
 @Component({
   selector: 'app-bo-reservations',
-  imports: [FormsModule, BoNavComponent, DateFRPipe],
+  imports: [FormsModule, DateFRPipe],
   styles: [`
     .bo-msg { border-radius: 8px; padding: 0.6rem 0.9rem; margin-bottom: 1rem; }
     .bo-msg.ok { background: #e6f2e8; color: #22392c; }
@@ -37,7 +36,6 @@ interface LigneReservation extends Reservation {
   `],
   template: `
     <section class="container">
-      <app-bo-nav />
       <h1 style="font-size:1.7rem; margin-bottom:1.2rem;">Réservations des chambres</h1>
 
       @if (msg(); as m) { <p class="bo-msg" [class.ok]="m.ok" [class.err]="!m.ok">{{ m.text }}</p> }

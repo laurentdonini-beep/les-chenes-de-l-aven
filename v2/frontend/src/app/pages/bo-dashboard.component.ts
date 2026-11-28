@@ -4,7 +4,6 @@ import { RouterLink } from '@angular/router';
 import { ApiService } from '../core/api.service';
 import { SiteService } from '../core/site.service';
 import { ChambreSummary, Reservation } from '../core/models';
-import { BoNavComponent } from '../shared/bo-nav.component';
 import { DateFRPipe } from '../shared/date-fr.pipe';
 import { StatsGlobal, computeStats } from '../shared/dispo-utils';
 
@@ -14,7 +13,7 @@ import { StatsGlobal, computeStats } from '../shared/dispo-utils';
  */
 @Component({
   selector: 'app-bo-dashboard',
-  imports: [RouterLink, BoNavComponent, DateFRPipe],
+  imports: [RouterLink, DateFRPipe],
   styles: [`
     .kpi .kpi-val { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--vert); line-height: 1.1; }
     .kpi .kpi-label { color: var(--texte-doux); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
@@ -33,7 +32,6 @@ import { StatsGlobal, computeStats } from '../shared/dispo-utils';
   `],
   template: `
     <section class="container">
-      <app-bo-nav />
       @if (site(); as s) {
         <h1 style="font-size:1.7rem; margin-bottom:0.2rem;">Tableau de bord</h1>
         <p class="bo-note" style="color:var(--texte-doux); margin-bottom:1.2rem;">

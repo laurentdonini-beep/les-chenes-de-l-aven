@@ -15,6 +15,7 @@ Navigateur ──► Angular 22 (SPA, dans v2/frontend)
 ```
 
 Le backoffice `/bo` (login + gestion des disponibilités + saison) remplace l'ancien `/bo/` statique et Decap CMS.
+Il a son **propre habillage** : menu latéral à **gauche** (tableau de bord, réservations, saison & calendriers, tarifs & promos, messages), sans le header/footer du site public. Sur mobile, ce menu devient une barre horizontale en haut.
 
 ## Lancer en local (le plus simple)
 
