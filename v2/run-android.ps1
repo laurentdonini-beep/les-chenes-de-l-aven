@@ -97,6 +97,16 @@ if ($LASTEXITCODE -ne 0) {
   }
 }
 
+# CLI Capacitor presente ? (si node_modules incomplet -> reinstall SANS scripts, donc sans esbuild)
+if (-not (Test-Path "node_modules\@capacitor\cli\bin\capacitor")) {
+  Write-Host "CLI Capacitor manquante -> npm install --ignore-scripts (aucun script execute, esbuild non touche)..."
+  npm install --ignore-scripts
+  if (-not (Test-Path "node_modules\@capacitor\cli\bin\capacitor")) {
+    Write-Host "ERREUR : CLI Capacitor toujours absente apres npm install --ignore-scripts"
+    Pop-Location; Read-Host "Entree"; exit 1
+  }
+}
+
 if (-not (Test-Path "android\app\build.gradle")) {
   Write-Host "Premiere fois : ajout de la plateforme Android (node node_modules/@capacitor/cli/bin/capacitor add android)..."
   node node_modules/@capacitor/cli/bin/capacitor add android
