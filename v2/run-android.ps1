@@ -59,7 +59,21 @@ if ($LASTEXITCODE -ne 0) {
   npm rebuild esbuild
   Start-Sleep -Seconds 2
   npx ng build --configuration capacitor
-  if ($LASTEXITCODE -ne 0) { Write-Host "ERREUR ng build"; Pop-Location; Read-Host "Entree"; exit 1 }
+  if ($LASTEXITCODE -ne 0) {
+    Write-Host ""
+    Write-Host "ERREUR ng build persistante (souvent 'spawn EPERM' = Windows Defender bloque esbuild)."
+    Write-Host "A faire UNE fois :"
+    Write-Host "  1) Parametres Windows -> Confidentialite et securite -> Securite Windows"
+    Write-Host "     -> Protection contre les virus et menaces -> Gerer les parametres -> Exclusions"
+    Write-Host "     -> Ajouter une exclusion -> Dossier -> C:\Users\admin\Documents\GitHub\les-chenes-de-l-aven"
+    Write-Host "     (optionnel: exclusion de Processus -> C:\Program Files\nodejs\node.exe)"
+    Write-Host "  2) Dans ce PowerShell : taskkill /F /IM node.exe"
+    Write-Host "  3) Puis : cd frontend ; npm rebuild esbuild"
+    Write-Host "  4) Verifier : node_modules\@esbuild\win32-x64\bin\esbuild.exe --version"
+    Write-Host "  5) Relancer ce script dans une NOUVELLE fenetre PowerShell."
+    Write-Host "  Details : v2\ANDROID.md (section Depannage)."
+    Pop-Location; Read-Host "Entree"; exit 1
+  }
 }
 
 if (-not (Test-Path "android\app\build.gradle")) {
